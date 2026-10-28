@@ -1,0 +1,47 @@
+[
+  {
+    "domain": "skillpilot-plan-v1",
+    "value": {
+      "b": 2,
+      "a": 1
+    },
+    "canonical": "{\"a\":1,\"b\":2}",
+    "digest": "sha256:22561f203dc486b60cec0a84324e1522f9cfadd0174605fac49699e3b3eba719"
+  },
+  {
+    "domain": "skillpilot-payload-v1",
+    "value": {
+      "source": {
+        "provider": "github",
+        "owner": "acme",
+        "repository": "kit",
+        "skillPath": "skills/x",
+        "commit": "cccccccccccccccccccccccccccccccccccccccc"
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "size": 1
+        }
+      ]
+    },
+    "canonical": "{\"files\":[{\"path\":\"SKILL.md\",\"sha256\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"size\":1}],\"source\":{\"commit\":\"cccccccccccccccccccccccccccccccccccccccc\",\"owner\":\"acme\",\"provider\":\"github\",\"repository\":\"kit\",\"skillPath\":\"skills/x\"}}",
+    "digest": "sha256:2a15ce307916aeed94c16bba6dc0457df9af53d103dceceb93d9e02da3bedeef"
+  },
+  {
+    "domain": "skillpilot-plan-v1",
+    "value": {
+      "unicode": "café ✓",
+      "nested": [
+        true,
+        false,
+        null,
+        0,
+        -1.5
+      ]
+    },
+    "canonical": "{\"nested\":[true,false,null,0,-1.5],\"unicode\":\"café ✓\"}",
+    "digest": "sha256:b43a6eb27ce0805de718f8841538059fc276b3d55fa8dba921c06de50630a3e1"
+  }
+]

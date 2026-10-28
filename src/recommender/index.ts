@@ -14,6 +14,7 @@ export type Candidate = Omit<CatalogEntry, "prerequisites"> & {
   annotationOrigin: "curated" | "derived-from-metadata";
   discoveredVia: string[];
   reviewState?: ReviewState;
+  reviewDecision?: "eligible" | "requires-acknowledgment" | "blocked";
 };
 
 export interface RecommendInput {
@@ -138,6 +139,7 @@ export function recommend(input: RecommendInput): RecommendResult {
       continue;
     }
     if (c.reviewState === "incomplete") { exclusions.push({ id: c.id, reason: "current review is incomplete" }); continue; }
+    if (c.reviewState === "reviewed" && c.reviewDecision === "blocked") { exclusions.push({ id: c.id, reason: "current review is blocked" }); continue; }
     const s = scoreCandidate(c, applicable, input);
     if (!s.rec.matchedStack.length && !s.rec.matchedGoals.length) { exclusions.push({ id: c.id, reason: "no stack or goal match" }); continue; }
     if (s.rec.score.base < ELIGIBILITY_THRESHOLD) { exclusions.push({ id: c.id, reason: `fit score below ${ELIGIBILITY_THRESHOLD}`, base: s.rec.score.base }); continue; }

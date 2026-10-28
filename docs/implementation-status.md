@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated 2026-10-28 (M2). Evidence = commands run locally on macOS (Darwin 25.4), Node 24.14.1.
+Updated 2026-10-28 (M3). Evidence = commands run locally on macOS (Darwin 25.4), Node 24.14.1.
 
 ## Milestones
 
@@ -9,7 +9,7 @@ Updated 2026-10-28 (M2). Evidence = commands run locally on macOS (Darwin 25.4),
 | M0 Foundations | Done, except CI matrix and draft JSON schema files | `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`; `docs/compatibility.md`; `docs/decisions.md` D-001–D-007 |
 | M1 Project intelligence | Done for FR-001–007 on macOS; Windows/Linux not yet run | `tests/unit/analyzer.test.ts`, `tests/unit/cli.test.ts` |
 | M2 Discovery and recommendations | Done on macOS; evaluation labels pending human review | `npm test` + `npm run test:integration` (103 passed), `npm run validate:catalog`, `npm run test:evaluation` → `docs/evaluation-report.md` |
-| M3 Immutable review and planning | Not started | — |
+| M3 Immutable review and planning | Done on macOS | `tests/unit/rules.test.ts`, `tests/unit/canonical.test.ts`, `tests/integration/review-plan.test.ts` (200 tests total); live review of 3 catalog skills + offline plan verification (below) |
 | M4 Approved lifecycle | Not started | — |
 | M5 Agent package and usability | Not started | — |
 | M6 Release readiness | Not started | — |
@@ -28,7 +28,7 @@ Updated 2026-10-28 (M2). Evidence = commands run locally on macOS (Darwin 25.4),
 | FR-050 | Partial | Strict config schema + field-level errors implemented; formal published JSON schema pending M5 |
 | FR-051 | Partial | `doctor` checks runtime, root, config, destinations, writable, lockfile (JSON + version only), cache path, sources, pending recovery. Full lock schema in M4; `--recover` in M4 |
 | FR-052 | Partial | Envelope, stable codes, exit codes implemented for `scan`/`doctor`; published per-command schemas pending |
-| FR-053 | Partial | `--offline` blocks the GitHub client (zero-request test); `--offline --refresh` rejected. Review/install paths come in M3/M4 |
+| FR-053 | Partial | `--offline` makes zero requests for discovery and for review/plan of cached pinned payloads (tests); install arrives in M4 |
 | FR-054 | Done | Config caps can only narrow scan limits (schema max = hard cap); tests |
 | FR-010 | Done | `search` is local; query text is never sent anywhere (no transport is used unless `--refresh`/`--repo`) |
 | FR-011 | Done | `src/sources/discovery.ts`; recorded supabase fixture; supported roots only; tests in `tests/integration/discovery.test.ts` |
@@ -42,11 +42,19 @@ Updated 2026-10-28 (M2). Evidence = commands run locally on macOS (Darwin 25.4),
 | FR-022 | Done | Score components, matched evidence/goals, source, license, prerequisites, caveats, review state in text and JSON |
 | FR-023 | Done | Agent exclusion, `requiresAnyStack`, unknown compatibility labelled; `--explain` lists exclusions |
 | FR-024 | Partial | Redundancy penalty and same-name unmanaged collision warnings are done. Exact managed-install exclusion is implemented in the scorer, but needs the M4 lockfile to supply the input |
-| FR-025 | Partial | Always `not-reviewed` until the M3 review cache exists |
+| FR-025 | Done | Cached review (same commit, rule set, and policy) gives reviewed/incomplete/stale; a blocked review excludes the candidate (test) |
 | FR-026 | Done | No popularity input exists in the candidate model |
-| FR-030–048 | Not started | — |
+| FR-030 | Done | Commit pinned (full ID); whole selected subtree fetched; per-file SHA-256 + Git object ID check |
+| FR-031 | Done | Manifest, path, cap, encoding, image-signature, LFS, symlink/submodule, and activation-descriptor checks; bytes stored unmodified |
+| FR-032 | Done | `rules-v1` with rule ID, severity, confidence, location, explanation, remediation; positive/benign/context fixtures for every rule |
+| FR-033 | Done | Plan with payload manifest, findings, targets, preconditions, lockfile changes, policy/config digests, 24 h expiry, `planDigest`; incomplete or blocked reviews produce no plan |
+| FR-034 | Done | Scripts, referenced domains, upstream compatibility notes, and mode normalization disclosed; nothing installed or granted |
+| FR-035 | Done | Existing/case-variant/redirected targets, reserved names, duplicate names, license evidence checked before approval |
+| FR-036 | Done | `verifyPlan` recomputes digest, targets, payload digest, cached bytes, fresh review, and lockfile proposals; edits, forged re-signed plans, tampered cache, expiry, and skew are tested |
+| FR-040–048 | Not started | M4 |
 | NFR-001 | Partial | Recording-transport test: only `api.github.com/repos/<owner>/<repo>/…` requested; no project data in requests |
 | NFR-002 | Partial | Secret canaries in analyzer tests |
+| NFR-003 | Partial | Golden canonical-JSON/digest vectors in `tests/fixtures/golden/` (independently checked with `shasum`); deterministic plan digest test |
 | NFR-006 | Partial | 15 s request timeout, 90 s command deadline, ≤2 retries with backoff, rate-limit handling. Concurrency is 1 (sequential) |
 | NFR-009 | Partial | No color used; `--no-color`/`NO_COLOR` honoured trivially; terminal escaping tested |
 | Others | Not started | — |
@@ -54,6 +62,11 @@ Updated 2026-10-28 (M2). Evidence = commands run locally on macOS (Darwin 25.4),
 ## Live evidence
 
 - 2026-10-28, `recommend --repo cloudflare/skills` through the production `fetch` transport: resolved repository, branch, and tree, and fetched 2 verified blobs, then received HTTP 403 with `x-ratelimit-remaining: 0`. The output was `RATE_LIMITED` with reset time, status `partial`, bundled results still shown, and no cache written. A 19-skill repository needs ~22 unauthenticated requests of the 60/hour budget (see D-007).
+
+- 2026-10-28, production transport (cache in a scratch directory):
+  - `obra/superpowers#skills/test-driven-development`: 3 files, MIT (root LICENSE mapped), no findings, eligible.
+  - `twostraws/SwiftUI-Agent-Skill#swiftui-pro`: 17 files including PNG under `payload-v2`, MIT, no findings, eligible.
+  - `anthropics/skills#skills/webapp-testing`: 6 files, Apache-2.0, one medium RUN-001 finding (4 bundled Python scripts), so it requires acknowledgment. With `--ack`, a both-agent plan was written to `.skillpilot/plans/install.json`, re-verified offline with `verifyPlan`, and no agent directory was created.
 
 ## Unresolved decisions
 

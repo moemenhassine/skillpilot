@@ -6,6 +6,9 @@ import { loadConfig, REPOSITORY_ID, type Config } from "../schemas/config.ts";
 import { loadBundledCatalog } from "../sources/catalog.ts";
 import { loadSources, type LoadedSources, type SourceStatus } from "../sources/discovery.ts";
 import { cacheDir } from "../storage/paths.ts";
+import { readCachedManifest } from "../storage/payload-cache.ts";
+import { RULE_SET_VERSION } from "../review/rules.ts";
+import { PAYLOAD_POLICY_VERSION } from "../review/policy.ts";
 
 export interface SourceOptions {
   offline?: boolean | undefined;
@@ -36,6 +39,16 @@ export async function loadProjectSources(projectRoot: string, opts: SourceOption
     client,
     now: opts.now ?? new Date(),
   });
+  // FR-025: attach cached review state; it applies only to the same commit and the installed rule set.
+  for (const c of loaded.candidates) {
+    const m = await readCachedManifest(opts.cacheRoot ?? cacheDir(), c.source);
+    if (!m?.review) continue;
+    if (m.review.ruleSet !== RULE_SET_VERSION || m.review.policyVersion !== PAYLOAD_POLICY_VERSION) c.reviewState = "stale";
+    else {
+      c.reviewState = m.review.coverage === "incomplete" ? "incomplete" : "reviewed";
+      c.reviewDecision = m.review.decision as NonNullable<typeof c.reviewDecision>;
+    }
+  }
   if (loaded.cacheWrites.length) loaded.warnings.push(`Cache updated: ${loaded.cacheWrites.length} source metadata file(s) under the SkillPilot cache.`);
   return { config, loaded };
 }

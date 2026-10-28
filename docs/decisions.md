@@ -43,3 +43,24 @@ Both Swift/iOS catalog entries contain PNG icons. Payload policy v1 (spec 10.3) 
 The 24 evaluation cases were drafted by the implementing agent in the same session that tuned the taxonomy, so 22/22 top-3 hits is a regression baseline, not an accuracy estimate. Precision@3 is not measurable on catalog 0.1.0 (no case has three eligible relevant entries). Labels need human maintainer review before release.
 
 **Resolution (maintainer, 2026-10-28):** option (b). `payload-v2` (`src/review/policy.ts`) accepts `.png`, `.jpg/.jpeg`, `.gif`, and `.webp` as inert binary assets. Each image must carry the magic-byte signature of its claimed format and be at most 1 MiB; it is copied as bytes and never decoded, rendered, or scanned as instructions. A mismatched signature is an `STR-003` incomplete-review blocker. `.ipynb`, `Dockerfile`, dotfiles, and other formats remain unsupported.
+
+## D-014 Static rules `rules-v1` (M3)
+Text rules live in `src/review/rules.ts`, with positive, benign, and context fixtures in `tests/unit/rules.test.ts`. Each rule variant emits one finding per file at its first occurrence, with an occurrence count. Findings store locations and rule text only, never matched excerpts, so a secret match can't leak through a report. DOC-001 lowers severity by one level (and confidence to low) only when *every* occurrence in the file sits on a clearly negative-example line ("never", "do not", "avoid", …); the evidence stays visible. Secret rules are never softened. A skill cannot suppress findings through comments or frontmatter.
+
+## D-015 Bundled scripts are one medium RUN-001 finding
+Following spec 11.2 ("medium disclosure"), any bundled script makes the payload require acknowledgment. Scripts are aggregated into a single finding per payload, with a stable ID over the script list, so one `--ack` covers the disclosure. Network destinations found in bundled code are a separate medium NET-001 finding.
+
+## D-016 License evidence
+LIC-001 is clear only when a bundled license text is identified by signature (MIT, Apache-2.0, BSD-2/3, ISC, MPL-2.0, CC-BY-4.0, CC-BY-SA-4.0, Unlicense) and does not contradict the manifest `license` field. A manifest declaration with no text blocks, because attribution needs the text. When the skill directory has no license file, the repository-root LICENSE/COPYING and NOTICE at the same commit are mapped into the payload as `role: license` / `notice`, hashed, scanned, and recorded with their source paths. Name collisions block.
+
+## D-017 Lockfile proposals and the plan digest
+`lockfileChanges` entries are derived from the planned skills and exclude `planDigest` and `installedAt`, which the executor adds when it commits (the digest cannot contain itself). `verifyPlan` re-derives the proposals and rejects any difference.
+
+## D-018 Unacknowledged medium findings produce no plan
+Instead of writing a non-executable plan, `plan` returns `POLICY_BLOCKED` with the exact finding IDs and the `--ack` flags to regenerate. Acknowledging an ID that is not a medium finding in the selection is `INVALID_ARGUMENT`.
+
+## D-019 Existing targets in M3
+Any existing destination, including a case-fold variant, is `TARGET_CONFLICT` at plan time. Treating an identical managed installation as a successful no-op needs the M4 lockfile.
+
+## D-020 Payload fetching
+Fetching pins a full commit, enforces count and byte caps from the tree *before* any blob request, fetches blobs sequentially, checks each against its Git object ID, and stores it under its SHA-256 in a per-source cache directory. Review is a pure function of the cached bytes plus the recorded excluded entries, so `verifyPlan` (and the M4 executor) can re-run it offline. A repository-root skill (`#.`) uses the whole repository as its payload. Cost: about `files + 3` unauthenticated requests per skill, so a 60-request hour covers roughly two or three average skills (see D-007).

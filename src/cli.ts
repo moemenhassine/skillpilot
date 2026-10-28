@@ -3,6 +3,7 @@ import { Command, CommanderError, Option } from "commander";
 import { resolveProjectRoot } from "./analyzer/index.ts";
 import { doctorCommand } from "./commands/doctor.ts";
 import { recommendCommand } from "./commands/recommend.ts";
+import { planCommand, reviewCommand } from "./commands/review.ts";
 import { searchCommand } from "./commands/search.ts";
 import { sourcesListCommand } from "./commands/sources.ts";
 import { scanCommand } from "./commands/scan.ts";
@@ -99,6 +100,22 @@ export function buildProgram(): Command {
     .addOption(repoOpt())
     .action(run("recommend", async (pathArg: string | undefined, opts: { project?: string; goal?: string; stack?: string[]; agent?: string; limit?: string; explain?: boolean; refresh?: boolean; repo?: string[]; offline?: boolean }) =>
       recommendCommand(await projectFrom(pathArg, opts.project), { ...opts, offline: Boolean(opts.offline || g().offline), verbose: g().verbose })));
+
+  program
+    .command("review <source>")
+    .description("Fetch a pinned skill payload and run static review (never installs)")
+    .action(run("review", async (source: string, opts: { offline?: boolean }) =>
+      reviewCommand(source, { offline: Boolean(opts.offline || g().offline), verbose: g().verbose })));
+
+  program
+    .command("plan <sources...>")
+    .description("Review a selection and produce an installation plan with its approval digest (never installs)")
+    .option("--project <path>", "project root (default: current directory)")
+    .option("--agent <target>", "claude-code, codex, or both (required)")
+    .addOption(new Option("--ack <finding-id>", "acknowledge a reviewed medium finding (repeatable)").argParser((v: string, prev: string[] = []) => [...prev, v]))
+    .option("--out <file>", "save as a new .json file inside .skillpilot/plans/")
+    .action(run("plan", async (sources: string[], opts: { project?: string; agent?: string; ack?: string[]; out?: string; offline?: boolean }) =>
+      planCommand(await projectFrom(undefined, opts.project), sources, { ...opts, offline: Boolean(opts.offline || g().offline), verbose: g().verbose })));
 
   const sources = program.command("sources").description("Inspect discovery sources");
   sources

@@ -83,3 +83,16 @@ describe("discovery commands (FR-010, FR-021, FR-053)", () => {
     expect(l.data.sources[0]).toMatchObject({ kind: "bundled", state: "loaded" });
   });
 });
+
+describe("review and plan CLI contracts", () => {
+  it.each([
+    [["review", "https://github.com/acme/kit", "--json"], 2, "INVALID_ARGUMENT"],
+    [["review", `acme/kit@${"e".repeat(40)}#skills/x`, "--offline", "--json"], 3, "SOURCE_UNAVAILABLE"],
+    [["plan", "acme/kit#skills/x", "--project", path.join(FIXTURES, "nextjs-ts"), "--json"], 2, "INVALID_ARGUMENT"],
+    [["plan", "acme/kit#skills/x", "--agent", "all", "--json"], 2, "INVALID_ARGUMENT"],
+  ])("%j exits %i with %s", (args, status, code) => {
+    const r = cli(...(args as string[]));
+    expect(r.status).toBe(status);
+    expect(JSON.parse(r.stdout).errors[0].code).toBe(code);
+  });
+});
