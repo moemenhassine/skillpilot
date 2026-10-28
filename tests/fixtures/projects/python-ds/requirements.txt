@@ -1,0 +1,5 @@
+# analysis
+pandas>=2
+numpy
+matplotlib==3.9
+-r other.txt

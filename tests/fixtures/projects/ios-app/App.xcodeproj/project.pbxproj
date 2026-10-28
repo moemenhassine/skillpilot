@@ -1,0 +1,2 @@
+// !$*UTF8*$!
+{ buildSettings = { SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 17.0; }; }

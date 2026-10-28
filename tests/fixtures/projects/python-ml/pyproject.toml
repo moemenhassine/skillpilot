@@ -1,0 +1,5 @@
+[project]
+name = "model"
+dependencies = ["torch>=2", "scikit-learn"]
+[project.optional-dependencies]
+dev = ["pytest"]

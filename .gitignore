@@ -1,0 +1,7 @@
+/node_modules/
+/dist/
+/coverage/
+# Local SkillPilot operation data (plans contain absolute local paths)
+.skillpilot/plans/
+.skillpilot/operations/
+.skillpilot/mutation.lock

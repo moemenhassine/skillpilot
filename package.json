@@ -1,0 +1,45 @@
+{
+  "name": "skillpilot",
+  "version": "0.1.0",
+  "description": "Project-aware agent skill recommendations, static review, and approved reproducible installation.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "skillpilot": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "skills",
+    "catalog",
+    "schemas",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "cli": "node src/cli.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration --passWithNoTests"
+  },
+  "dependencies": {
+    "commander": "15.0.0",
+    "ignore": "7.0.14",
+    "smol-toml": "1.9.1",
+    "yaml": "2.9.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.19.2",
+    "eslint": "10.13.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.72.1",
+    "vitest": "5.0.5"
+  }
+}
