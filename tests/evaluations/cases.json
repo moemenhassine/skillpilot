@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "0.1.0",
+  "scoringVersion": "fit-v1",
+  "labelStatus": "drafted by the implementing agent on 2026-10-28; pending human maintainer review",
+  "cases": [
+    {
+      "id": "nextjs-browser-tests",
+      "category": "react-web",
+      "project": "nextjs-ts",
+      "goal": "Improve accessibility and add browser tests",
+      "relevant": [
+        "anthropics/skills#skills/webapp-testing"
+      ],
+      "irrelevant": [
+        "expo/skills#plugins/expo/skills/expo-router",
+        "twostraws/swiftui-agent-skill#swiftui-pro",
+        "huggingface/skills#skills/huggingface-llm-trainer"
+      ],
+      "rationale": "Playwright-based web app testing fits a Next.js browser-testing goal; no accessibility entry exists in catalog 0.1.0."
+    },
+    {
+      "id": "nextjs-web-vitals",
+      "category": "react-web",
+      "project": "nextjs-ts",
+      "goal": "improve page load performance and core web vitals",
+      "relevant": [
+        "cloudflare/skills#skills/web-perf"
+      ],
+      "irrelevant": [
+        "avdlee/swift-concurrency-agent-skill#skills/swift-concurrency",
+        "huggingface/skills#skills/huggingface-llm-trainer"
+      ],
+      "rationale": "Web performance audit skill targets Core Web Vitals."
+    },
+    {
+      "id": "nextjs-cloudflare",
+      "category": "infra",
+      "project": "nextjs-ts",
+      "goal": "deploy to Cloudflare workers",
+      "relevant": [
+        "cloudflare/skills#skills/nextjs-on-cloudflare",
+        "cloudflare/skills#skills/wrangler"
+      ],
+      "irrelevant": [
+        "expo/skills#plugins/expo/skills/eas-app-stores"
+      ],
+      "rationale": "Next.js-on-Cloudflare and Wrangler both cover deploying to Workers."
+    },
+    {
+      "id": "vite-redesign",
+      "category": "react-web",
+      "project": "react-vite",
+      "goal": "redesign the UI and styling",
+      "relevant": [
+        "anthropics/skills#skills/frontend-design"
+      ],
+      "irrelevant": [
+        "expo/skills#plugins/expo/skills/expo-native-ui",
+        "twostraws/swiftui-agent-skill#swiftui-pro"
+      ],
+      "rationale": "Frontend design guidance fits a web UI redesign; Expo/SwiftUI UI skills do not apply."
+    },
+    {
+      "id": "node-security",
+      "category": "backend",
+      "project": "node-backend",
+      "goal": "review the code for security vulnerabilities",
+      "relevant": [
+        "openai/skills#skills/.curated/security-best-practices",
+        "getsentry/skills#skills/code-review"
+      ],
+      "irrelevant": [
+        "expo/skills#plugins/expo/skills/expo-router"
+      ],
+      "rationale": "Security best practices supports JS; code review covers security review."
+    },
+    {
+      "id": "node-postgres",
+      "category": "backend",
+      "project": "node-backend",
+      "goal": "design the postgres database schema",
+      "relevant": [
+        "supabase/agent-skills#skills/supabase-postgres-best-practices"
+      ],
+      "irrelevant": [
+        "huggingface/skills#skills/huggingface-datasets"
+      ],
+      "rationale": "Postgres best practices covers schema design."
+    },
+    {
+      "id": "expo-navigation",
+      "category": "react-native-expo",
+      "project": "expo-app",
+      "goal": "add tab navigation and deep links",
+      "relevant": [
+        "expo/skills#plugins/expo/skills/expo-router"
+      ],
+      "irrelevant": [
+        "anthropics/skills#skills/frontend-design",
+        "cloudflare/skills#skills/web-perf"
+      ],
+      "rationale": "Expo Router covers tabs and deep links."
+    },
+    {
+      "id": "expo-upgrade",
+      "category": "react-native-expo",
+      "project": "expo-app",
+      "goal": "upgrade to the latest Expo SDK",
+      "relevant": [
+        "expo/skills#plugins/expo/skills/expo-upgrade",
+        "callstackincubator/agent-skills#skills/upgrading-react-native"
+      ],
+      "irrelevant": [
+        "kotlin/kotlin-agent-skills#skills/kotlin-tooling-agp9-migration",
+        "kotlin/kotlin-agent-skills#skills/kotlin-tooling-java-to-kotlin"
+      ],
+      "rationale": "Expo upgrade guidance; React Native upgrade applies alongside."
+    },
+    {
+      "id": "expo-store",
+      "category": "react-native-expo",
+      "project": "expo-app",
+      "goal": "ship to the App Store and TestFlight",
+      "relevant": [
+        "expo/skills#plugins/expo/skills/eas-app-stores"
+      ],
+      "irrelevant": [
+        "cloudflare/skills#skills/nextjs-on-cloudflare",
+        "cloudflare/skills#skills/wrangler"
+      ],
+      "rationale": "EAS app store submission."
+    },
+    {
+      "id": "new-expo-offline",
+      "category": "react-native-expo",
+      "project": null,
+      "goal": "Build an offline habit tracker",
+      "relevant": [
+        "expo/skills#plugins/expo/skills/expo-data-fetching"
+      ],
+      "irrelevant": [
+        "huggingface/skills#skills/huggingface-datasets"
+      ],
+      "rationale": "Declared Expo stack; offline data fetching and caching.",
+      "stack": [
+        "expo",
+        "react-native",
+        "typescript"
+      ]
+    },
+    {
+      "id": "ios-data-races",
+      "category": "swift-ios",
+      "project": "ios-app",
+      "goal": "fix data races in async code",
+      "relevant": [
+        "avdlee/swift-concurrency-agent-skill#skills/swift-concurrency"
+      ],
+      "irrelevant": [
+        "callstackincubator/agent-skills#skills/upgrading-react-native",
+        "expo/skills#plugins/expo/skills/expo-router"
+      ],
+      "rationale": "Swift Concurrency skill targets data races."
+    },
+    {
+      "id": "ios-swiftui-review",
+      "category": "swift-ios",
+      "project": "ios-app",
+      "goal": "review my SwiftUI code",
+      "relevant": [
+        "twostraws/swiftui-agent-skill#swiftui-pro"
+      ],
+      "irrelevant": [
+        "anthropics/skills#skills/frontend-design",
+        "expo/skills#plugins/expo/skills/expo-native-ui"
+      ],
+      "rationale": "SwiftUI Pro reviews SwiftUI code."
+    },
+    {
+      "id": "android-agp",
+      "category": "android",
+      "project": "android-native",
+      "goal": "upgrade the Android Gradle Plugin",
+      "relevant": [
+        "kotlin/kotlin-agent-skills#skills/kotlin-tooling-agp9-migration"
+      ],
+      "irrelevant": [
+        "callstackincubator/agent-skills#skills/upgrading-react-native",
+        "expo/skills#plugins/expo/skills/expo-upgrade"
+      ],
+      "rationale": "AGP 9 migration skill."
+    },
+    {
+      "id": "kotlin-j2k",
+      "category": "jvm",
+      "project": "kotlin-jvm",
+      "goal": "convert java to kotlin",
+      "relevant": [
+        "kotlin/kotlin-agent-skills#skills/kotlin-tooling-java-to-kotlin"
+      ],
+      "irrelevant": [
+        "twostraws/swiftui-agent-skill#swiftui-pro"
+      ],
+      "rationale": "Java-to-Kotlin conversion."
+    },
+    {
+      "id": "python-hf-datasets",
+      "category": "data-science-ml",
+      "project": "python-ds",
+      "goal": "explore datasets on Hugging Face",
+      "relevant": [
+        "huggingface/skills#skills/huggingface-datasets"
+      ],
+      "irrelevant": [
+        "expo/skills#plugins/expo/skills/expo-router",
+        "expo/skills#plugins/expo/skills/eas-app-stores"
+      ],
+      "rationale": "HF Dataset Viewer workflows."
+    },
+    {
+      "id": "python-ml-finetune",
+      "category": "data-science-ml",
+      "project": "python-ml",
+      "goal": "fine-tune a model with LoRA",
+      "relevant": [
+        "huggingface/skills#skills/huggingface-llm-trainer"
+      ],
+      "irrelevant": [
+        "expo/skills#plugins/expo/skills/expo-router",
+        "anthropics/skills#skills/frontend-design"
+      ],
+      "rationale": "TRL/Unsloth fine-tuning."
+    },
+    {
+      "id": "python-gradio-demo",
+      "category": "data-science-ml",
+      "project": "python-ml",
+      "goal": "build a gradio demo for the model",
+      "relevant": [
+        "huggingface/skills#skills/huggingface-gradio"
+      ],
+      "irrelevant": [
+        "anthropics/skills#skills/frontend-design",
+        "expo/skills#plugins/expo/skills/expo-native-ui"
+      ],
+      "rationale": "Gradio app building."
+    },
+    {
+      "id": "ai-mcp-server",
+      "category": "ai-applications",
+      "project": "ai-sdk-app",
+      "goal": "build an MCP server",
+      "relevant": [
+        "anthropics/skills#skills/mcp-builder"
+      ],
+      "irrelevant": [
+        "expo/skills#plugins/expo/skills/expo-router"
+      ],
+      "rationale": "MCP server construction guide."
+    },
+    {
+      "id": "ai-cloudflare-agents",
+      "category": "ai-applications",
+      "project": "ai-sdk-app",
+      "goal": "build AI agents on Cloudflare",
+      "relevant": [
+        "cloudflare/skills#skills/agents-sdk"
+      ],
+      "irrelevant": [
+        "twostraws/swiftui-agent-skill#swiftui-pro"
+      ],
+      "rationale": "Cloudflare Agents SDK."
+    },
+    {
+      "id": "debug-failing-tests",
+      "category": "testing",
+      "project": null,
+      "goal": "debug failing tests",
+      "relevant": [
+        "obra/superpowers#skills/systematic-debugging",
+        "obra/superpowers#skills/test-driven-development"
+      ],
+      "irrelevant": [
+        "expo/skills#plugins/expo/skills/eas-app-stores",
+        "expo/skills#plugins/expo/skills/expo-router"
+      ],
+      "rationale": "No stack; generic debugging and TDD workflows."
+    },
+    {
+      "id": "python-tooling",
+      "category": "python",
+      "project": "python-ds",
+      "goal": "set up uv and ruff for the project",
+      "relevant": [
+        "trailofbits/skills#plugins/modern-python/skills/modern-python"
+      ],
+      "irrelevant": [
+        "expo/skills#plugins/expo/skills/expo-router"
+      ],
+      "rationale": "Modern Python tooling with uv and ruff."
+    },
+    {
+      "id": "monorepo-pbt",
+      "category": "testing",
+      "project": "monorepo",
+      "goal": "add property-based tests",
+      "relevant": [
+        "trailofbits/skills#plugins/property-based-testing/skills/property-based-testing"
+      ],
+      "irrelevant": [
+        "expo/skills#plugins/expo/skills/eas-app-stores"
+      ],
+      "rationale": "Property-based testing applies across Python/JS packages."
+    },
+    {
+      "id": "unsupported-unreal",
+      "category": "unsupported",
+      "project": null,
+      "goal": "write a mobile game in Unreal Engine",
+      "relevant": [],
+      "irrelevant": [],
+      "rationale": "No catalog coverage; an empty list is correct."
+    },
+    {
+      "id": "unsupported-a11y-swift-pkg",
+      "category": "unsupported",
+      "project": null,
+      "goal": "improve accessibility",
+      "relevant": [],
+      "irrelevant": [],
+      "rationale": "Catalog 0.1.0 has no accessibility skill; empty is correct."
+    }
+  ]
+}

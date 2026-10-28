@@ -2,6 +2,9 @@
 import { Command, CommanderError, Option } from "commander";
 import { resolveProjectRoot } from "./analyzer/index.ts";
 import { doctorCommand } from "./commands/doctor.ts";
+import { recommendCommand } from "./commands/recommend.ts";
+import { searchCommand } from "./commands/search.ts";
+import { sourcesListCommand } from "./commands/sources.ts";
 import { scanCommand } from "./commands/scan.ts";
 import { SkillpilotError } from "./errors.ts";
 import { emitError, emitResult, type CommandResult, type OutputOptions } from "./renderers/output.ts";
@@ -69,7 +72,43 @@ export function buildProgram(): Command {
     .action(run("doctor", async (pathArg: string | undefined, opts: { project?: string }) =>
       doctorCommand(await projectFrom(pathArg, opts.project))));
 
-  for (const c of program.commands) c.addOption(new Option("--json").hideHelp()).addOption(new Option("--offline").hideHelp());
+  const g = () => program.opts<GlobalOpts>();
+  const repoOpt = () => new Option("--repo <owner/repository>", "add a public GitHub repository for this invocation (repeatable)").argParser((v: string, prev: string[] = []) => [...prev, v]);
+
+  program
+    .command("search <query>")
+    .description("Search the local catalog (and cached/explicit repositories) by task and stack words")
+    .option("--project <path>", "project root for config and cache (default: current directory)")
+    .option("--stack <tokens>", "only entries matching these stack tokens", splitList)
+    .option("--agent <target>", "claude-code, codex, or both")
+    .option("--refresh", "refresh configured repository metadata from GitHub")
+    .addOption(repoOpt())
+    .action(run("search", async (query: string, opts: { project?: string; stack?: string[]; agent?: string; refresh?: boolean; repo?: string[]; offline?: boolean }) =>
+      searchCommand(await projectFrom(undefined, opts.project), query, { ...opts, offline: Boolean(opts.offline || g().offline), verbose: g().verbose })));
+
+  program
+    .command("recommend [path]")
+    .description("Analyze the project and rank candidate skills (never installs)")
+    .option("--project <path>", "project root (default: current directory)")
+    .option("--goal <text>", "what you want to accomplish")
+    .option("--stack <tokens>", "comma-separated planned stack; replaces detected stack", splitList)
+    .option("--agent <target>", "claude-code, codex, or both (default: rank for both)")
+    .option("--limit <n>", "number of recommendations, 1-20 (default 5)")
+    .option("--explain", "include excluded candidates and reasons")
+    .option("--refresh", "refresh configured repository metadata from GitHub")
+    .addOption(repoOpt())
+    .action(run("recommend", async (pathArg: string | undefined, opts: { project?: string; goal?: string; stack?: string[]; agent?: string; limit?: string; explain?: boolean; refresh?: boolean; repo?: string[]; offline?: boolean }) =>
+      recommendCommand(await projectFrom(pathArg, opts.project), { ...opts, offline: Boolean(opts.offline || g().offline), verbose: g().verbose })));
+
+  const sources = program.command("sources").description("Inspect discovery sources");
+  sources
+    .command("list")
+    .description("Show the bundled catalog and configured repositories with cache state")
+    .option("--project <path>", "project root (default: current directory)")
+    .action(run("sources list", async (opts: { project?: string }) => sourcesListCommand(await projectFrom(undefined, opts.project), { offline: true })));
+
+  const all = (c: Command): Command[] => [c, ...c.commands.flatMap(all)];
+  for (const c of all(program).slice(1)) c.addOption(new Option("--json").hideHelp()).addOption(new Option("--offline").hideHelp());
   return program;
 }
 
@@ -77,7 +116,8 @@ export async function main(argv: string[]): Promise<void> {
   const program = buildProgram();
   const json = argv.includes("--json");
   program.exitOverride();
-  for (const c of [program, ...program.commands]) {
+  const all = (c: Command): Command[] => [c, ...c.commands.flatMap(all)];
+  for (const c of all(program)) {
     c.exitOverride();
     if (json) c.configureOutput({ writeErr: () => {} });
   }

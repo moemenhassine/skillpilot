@@ -1,0 +1,542 @@
+{
+ "recordedAt": "2026-10-28",
+ "note": "Recorded from api.github.com and trimmed to fields SkillPilot reads. No auth headers were used.",
+ "responses": {
+  "/repos/supabase/agent-skills": {
+   "full_name": "supabase/agent-skills",
+   "private": false,
+   "default_branch": "main",
+   "license": {
+    "spdx_id": "MIT"
+   }
+  },
+  "/repos/supabase/agent-skills/branches/main": {
+   "commit": {
+    "sha": "c9be0e931b7930f7d02126d04774d904c381e7d7"
+   }
+  },
+  "/repos/supabase/agent-skills/git/trees/c9be0e931b7930f7d02126d04774d904c381e7d7?recursive=1": {
+   "sha": "c9be0e931b7930f7d02126d04774d904c381e7d7",
+   "truncated": false,
+   "tree": [
+    {
+     "path": ".claude-plugin",
+     "mode": "040000",
+     "type": "tree",
+     "sha": "cbfabf3996e38bc145f5fcfdf98546e176575d62"
+    },
+    {
+     "path": ".claude-plugin/marketplace.json",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "24c862a21fe3d98e941d998116f12bfe74ceb023",
+     "size": 1161
+    },
+    {
+     "path": ".github",
+     "mode": "040000",
+     "type": "tree",
+     "sha": "e57c9b37d350f7399bbb83fd6ed9ac42ba18d3e4"
+    },
+    {
+     "path": ".github/ISSUE_TEMPLATE",
+     "mode": "040000",
+     "type": "tree",
+     "sha": "432f586ee7e6fe38e3671b1cda0060497cb3acae"
+    },
+    {
+     "path": ".github/ISSUE_TEMPLATE/user-feedback.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "549be6950e0d3a0fd6b09e083ab8295542401c0a",
+     "size": 611
+    },
+    {
+     "path": ".github/workflows",
+     "mode": "040000",
+     "type": "tree",
+     "sha": "5f30dbd5e065a6169ffbddd2f508b99584042e13"
+    },
+    {
+     "path": ".github/workflows/ci.yml",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "c51c6d99fe33425ad815befee0ebe90d5614e33a",
+     "size": 565
+    },
+    {
+     "path": ".github/workflows/release.yml",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "679d863cd16cff55ff5d278a6566d3bdd67f3005",
+     "size": 2412
+    },
+    {
+     "path": ".gitignore",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "63d70a0f155c02f58321fba2f13cdce61348307d",
+     "size": 248
+    },
+    {
+     "path": ".mcp.json",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "2e80c185b56c154f1f8d25895a4ebf18dc374187",
+     "size": 118
+    },
+    {
+     "path": ".node-version",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "2bd5a0a98a36cc08ada88b804d3be047e6aa5b8a",
+     "size": 3
+    },
+    {
+     "path": ".release-please-manifest.json",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "0df7c25ec5001a0dbdedf873d1199842fa4c4567",
+     "size": 103
+    },
+    {
+     "path": "AGENTS.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "300b8a14c13d7780eaf292a0ea6ecb5ab11268f7",
+     "size": 6864
+    },
+    {
+     "path": "CHANGELOG.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "4319dfa3d25f1308fbbc560a28af7c5b15e6b965",
+     "size": 5119
+    },
+    {
+     "path": "CLAUDE.md",
+     "mode": "120000",
+     "type": "blob",
+     "sha": "47dc3e3d863cfb5727b87d785d09abf9743c0a72",
+     "size": 9
+    },
+    {
+     "path": "CONTRIBUTING.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "106ebe6c7fd7cfcddfe6b7fc1a17a1e8112784df",
+     "size": 5618
+    },
+    {
+     "path": "LICENSE",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "d3c9e94fbc6c28f66ecb5a01407d543c99c811b6",
+     "size": 1065
+    },
+    {
+     "path": "README.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "528beca0861b4a42368c87f8190d6fa96df44900",
+     "size": 4507
+    },
+    {
+     "path": "assets",
+     "mode": "040000",
+     "type": "tree",
+     "sha": "fa6000baffaef5f118f2c3d4f3c1285598327c34"
+    },
+    {
+     "path": "assets/og.png",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "c8d5a5a8488c82df3bf7c5cb653aee4ddaafde17",
+     "size": 70518
+    },
+    {
+     "path": "package.json",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "20f6a1b2858fb39bf216222f2c075f368d330a02",
+     "size": 515
+    },
+    {
+     "path": "pnpm-lock.yaml",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "542737a85ebe438499044bbc164037929e3cefdf",
+     "size": 33904
+    },
+    {
+     "path": "release-please-config.json",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "212844af8a5e641b64c7c21b8ad4a669c035a71f",
+     "size": 1124
+    },
+    {
+     "path": "scripts",
+     "mode": "040000",
+     "type": "tree",
+     "sha": "14454e2dc22dcb37d2f641f7849ee183bdb32001"
+    },
+    {
+     "path": "scripts/build-release.ts",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "3f89f294c225ed6c7bd8932a2bddda99841059a6",
+     "size": 2763
+    },
+    {
+     "path": "skills",
+     "mode": "040000",
+     "type": "tree",
+     "sha": "2835605fb50fb15d45dd1ab979c18e9315af5233"
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices",
+     "mode": "040000",
+     "type": "tree",
+     "sha": "27bde25111c4cd5e6f803fc9db5fbffe27bb26cf"
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/CHANGELOG.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "6d7d0d2acd380d09be9a4431037858149ce3496f",
+     "size": 5684
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/SKILL.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "6400792389dfcc82c81953054e546bd72ebcd259",
+     "size": 3231
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references",
+     "mode": "040000",
+     "type": "tree",
+     "sha": "d6203fa7cb81c4ea1b88a32bf9c6bae4ca02d9ab"
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/_contributing.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "1c055aff9ad2bf12cfe7edc0002f2f77fe6980d2",
+     "size": 4113
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/_sections.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "8ba57c23e8119e411fcc8a230cda08e695792cac",
+     "size": 1682
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/_template.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "91ace90e10a4d8ef354a82bb1994842e6979ebed",
+     "size": 1040
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/advanced-full-text-search.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "582cbeaada9378a280ad61f57e06c10d258e3c43",
+     "size": 1468
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/advanced-jsonb-indexing.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "e3d261ea117fd7b1ad9c4f0d45308407b898ed5a",
+     "size": 1444
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/conn-idle-timeout.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "40b9cc50dd12cf347ed189fac965673b533f3f99",
+     "size": 1282
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/conn-limits.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "cb3e400c0234e7e9196c1650423faad66375b70b",
+     "size": 1325
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/conn-pooling.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "e2ebd581d3c85bff0a077e8d9a2cb562d2513d03",
+     "size": 1382
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/conn-prepared-statements.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "555547d834e35b5059152dfb2288eca5e9838ea0",
+     "size": 1529
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/data-batch-inserts.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "997947cb17bfed67f29eaa8da2a58de2306cc2c1",
+     "size": 1287
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/data-n-plus-one.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "2109186ff88b3ba1cc32789f81e2a00d345c6e3f",
+     "size": 1361
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/data-pagination.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "633d839323612e212a833dd96828cb31fdfb39f8",
+     "size": 1358
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/data-upsert.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "bc95e2305d955679446c70854cb2b56b183aa56d",
+     "size": 1390
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/lock-advisory.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "572eaf0dcf518ac925c4cde41beb60b62852b79c",
+     "size": 1531
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/lock-deadlock-prevention.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "974da5edec32f79de0fcdc771d4ef759dc3e049d",
+     "size": 1855
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/lock-short-transactions.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "e6b8ef2633248a4aa4394628e48d8cb693e7e6ab",
+     "size": 1350
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/lock-skip-locked.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "77bdbb97045010ce2fdbd90733e8f764be82881a",
+     "size": 1353
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/monitor-explain-analyze.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "542978c3bafc510fa8d7a8864cff994ad40be4d7",
+     "size": 1441
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/monitor-pg-stat-statements.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "d7e82f1aacd105d53789eb6188d11e8ea39e7310",
+     "size": 1418
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/monitor-vacuum-analyze.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "e0e8ea0b7db8c1513a0d1605be477192bc21d91d",
+     "size": 1506
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/query-composite-indexes.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "fea64523fd5bb3696f943d486ccaf2aea75d27b8",
+     "size": 1454
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/query-covering-indexes.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "9d2a4947b94516dd975e1044d132bb007280f478",
+     "size": 1287
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/query-index-types.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "93b32590f4bfe377869274f45414ae6e43d168fa",
+     "size": 1521
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/query-missing-indexes.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "e6daace7dd368c75cdf87dc61be4afd6ff66cbbe",
+     "size": 1218
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/query-partial-indexes.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "3e61a3417b9cce3c8cee99b39b78b7ebf495dd1f",
+     "size": 1347
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/schema-constraints.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "1d2ef8f9a968cd6fa882c7299134c30ace06373c",
+     "size": 1880
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/schema-data-types.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "f253a5819d05531371e04485ab84f552fbb32fbe",
+     "size": 1453
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/schema-foreign-key-indexes.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "6c3d6ff622b8a9df358f6673f323292e682ce87c",
+     "size": 1679
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/schema-lowercase-identifiers.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "f0072940b159ff64e0c2d4fbb499133cb8f49a66",
+     "size": 1728
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/schema-partitioning.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "13137a03275fa45001c870a40b0069204d44e005",
+     "size": 1548
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/schema-primary-keys.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "fb0fbb166fac9ea38c127d807a263282acc2dc93",
+     "size": 1821
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/security-privileges.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "448ec345fab6c5a0116c584d65638b86d758c558",
+     "size": 1566
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/security-rls-basics.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "c61e1a8503de113be0981759b82f5e37090f344c",
+     "size": 1372
+    },
+    {
+     "path": "skills/supabase-postgres-best-practices/references/security-rls-performance.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "c3c7c416d57d9a46a9993f4e0c20f772fb64483d",
+     "size": 2103
+    },
+    {
+     "path": "skills/supabase",
+     "mode": "040000",
+     "type": "tree",
+     "sha": "57b975708a53ce7a56df25822871b71da6d9312a"
+    },
+    {
+     "path": "skills/supabase/CHANGELOG.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "16c4657c58336adeb579418cc0088c46cb83ee7b",
+     "size": 8345
+    },
+    {
+     "path": "skills/supabase/SKILL.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "66093e0a0f8d9268094c1a4b38c04419b787ca89",
+     "size": 14307
+    },
+    {
+     "path": "skills/supabase/assets",
+     "mode": "040000",
+     "type": "tree",
+     "sha": "b19a6baf3dd68fc911a059d8f2fab14c6b8b2ccd"
+    },
+    {
+     "path": "skills/supabase/assets/feedback-issue-template.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "e81082532d36309e11f2721e8380636329221525",
+     "size": 459
+    },
+    {
+     "path": "skills/supabase/references",
+     "mode": "040000",
+     "type": "tree",
+     "sha": "7d3d961ccf597360b1e25a10af08efb95da39393"
+    },
+    {
+     "path": "skills/supabase/references/skill-feedback.md",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "9c047d5a1775c0cf4b35d3687753d84b77b1cf0a",
+     "size": 1035
+    },
+    {
+     "path": "test",
+     "mode": "040000",
+     "type": "tree",
+     "sha": "41b2fcfe283a9aa1b903774fc1e640b0dc31682d"
+    },
+    {
+     "path": "test/sanity.test.ts",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "2a85c0d52871d5195e41aa2c4c7f4140576620f5",
+     "size": 4415
+    },
+    {
+     "path": "vitest.config.ts",
+     "mode": "100644",
+     "type": "blob",
+     "sha": "146dd0caa77863b6d8c9a9028ff3104a23b1fb5b",
+     "size": 177
+    }
+   ]
+  },
+  "/repos/supabase/agent-skills/git/blobs/6400792389dfcc82c81953054e546bd72ebcd259": {
+   "sha": "6400792389dfcc82c81953054e546bd72ebcd259",
+   "size": 3231,
+   "encoding": "base64",
+   "content": "LS0tCm5hbWU6IHN1cGFiYXNlLXBvc3RncmVzLWJlc3QtcHJhY3RpY2VzCmRl\nc2NyaXB0aW9uOiAiUG9zdGdyZXMgYmVzdCBwcmFjdGljZXMgbWFpbnRhaW5l\nZCBieSBTdXBhYmFzZSwgZm9yIFBvc3RncmVzIHJ1bm5pbmcgYW55d2hlcmUu\nIExvYWQgdGhpcyBza2lsbCBCRUZPUkUgd3JpdGluZyBvciBjaGFuZ2luZyBh\nbnl0aGluZyB0aGF0IGxpdmVzIGluIGEgUG9zdGdyZXMgZGF0YWJhc2U6IGNy\nZWF0aW5nIG9yIGFsdGVyaW5nIHRhYmxlcyBhbmQgY29sdW1ucyAoaW5jbHVk\naW5nIGNob29zaW5nIGNvbHVtbiB0eXBlcyksIHNjaGVtYSBkZXNpZ24sIG1p\nZ3JhdGlvbnMgYW5kIGRlY2xhcmF0aXZlIHNjaGVtYSBmaWxlcywgUkxTIHBv\nbGljaWVzIGFuZCB0aGUgdGVzdHMgdGhhdCB2ZXJpZnkgdGhlbSwgaW5kZXhl\ncywgdHJpZ2dlcnMsIGRhdGFiYXNlIGZ1bmN0aW9ucywgcXVldWVzIGFuZCBz\nY2hlZHVsZWQgam9icyAocGdfY3JvbiwgcGdtcSksIHZlY3Rvci9zZW1hbnRp\nYyBzZWFyY2ggKHBndmVjdG9yKSwgYW5kIHJlc3RvcmluZyBkdW1wcyAocGdf\ncmVzdG9yZSkgb3IgaW1wb3J0aW5nIGRhdGEuIEFsc28gbG9hZCBpdCB3aGVu\nIGRpYWdub3Npbmcgc2xvdyBxdWVyaWVzLCBoaWdoIENQVSwgdGltZW91dHMs\nIEVYUExBSU4gcGxhbnMsIGNvbm5lY3Rpb24gZXhoYXVzdGlvbiwgbG9ja2lu\nZywgYmxvYXQsIG9yIHJvd3MgdmlzaWJsZSB0byB0aGUgd3JvbmcgdXNlciBv\nciB0ZW5hbnQuIFRoaXMgaXMgbm90IGp1c3QgYSBwZXJmb3JtYW5jZSBndWlk\nZSDigJQgc2NoZW1hLCBtaWdyYXRpb24sIHNlY3VyaXR5LCBhbmQgU1FMIGF1\ndGhvcmluZyB0YXNrcyBuZWVkIHRoZXNlIHJ1bGVzIHRvbywgZXZlbiBmb3Ig\nYSBvbmUtY29sdW1uIGNoYW5nZSBvciBhIHNpbmdsZSBxdWVyeS4iCmxpY2Vu\nc2U6IE1JVAptZXRhZGF0YToKICBhdXRob3I6IHN1cGFiYXNlCiAgdmVyc2lv\nbjogIjEuMS4xIgogIG9yZ2FuaXphdGlvbjogU3VwYWJhc2UKICBkYXRlOiBK\nYW51YXJ5IDIwMjYKICBhYnN0cmFjdDogQ29tcHJlaGVuc2l2ZSBQb3N0Z3Jl\ncyBwZXJmb3JtYW5jZSBvcHRpbWl6YXRpb24gZ3VpZGUgZm9yIGRldmVsb3Bl\ncnMgdXNpbmcgU3VwYWJhc2UgYW5kIFBvc3RncmVzLiBDb250YWlucyBwZXJm\nb3JtYW5jZSBydWxlcyBhY3Jvc3MgOCBjYXRlZ29yaWVzLCBwcmlvcml0aXpl\nZCBieSBpbXBhY3QgZnJvbSBjcml0aWNhbCAocXVlcnkgcGVyZm9ybWFuY2Us\nIGNvbm5lY3Rpb24gbWFuYWdlbWVudCkgdG8gaW5jcmVtZW50YWwgKGFkdmFu\nY2VkIGZlYXR1cmVzKS4gRWFjaCBydWxlIGluY2x1ZGVzIGRldGFpbGVkIGV4\ncGxhbmF0aW9ucywgaW5jb3JyZWN0IHZzLiBjb3JyZWN0IFNRTCBleGFtcGxl\ncywgcXVlcnkgcGxhbiBhbmFseXNpcywgYW5kIHNwZWNpZmljIHBlcmZvcm1h\nbmNlIG1ldHJpY3MgdG8gZ3VpZGUgYXV0b21hdGVkIG9wdGltaXphdGlvbiBh\nbmQgY29kZSBnZW5lcmF0aW9uLgotLS0KCiMgU3VwYWJhc2UgUG9zdGdyZXMg\nQmVzdCBQcmFjdGljZXMKCkNvbXByZWhlbnNpdmUgcGVyZm9ybWFuY2Ugb3B0\naW1pemF0aW9uIGd1aWRlIGZvciBQb3N0Z3JlcywgbWFpbnRhaW5lZCBieSBT\ndXBhYmFzZS4gQ29udGFpbnMgcnVsZXMgYWNyb3NzIDggY2F0ZWdvcmllcywg\ncHJpb3JpdGl6ZWQgYnkgaW1wYWN0IHRvIGd1aWRlIGF1dG9tYXRlZCBxdWVy\neSBvcHRpbWl6YXRpb24gYW5kIHNjaGVtYSBkZXNpZ24uCgojIyBXaGVuIHRv\nIEFwcGx5CgpSZWZlcmVuY2UgdGhlc2UgZ3VpZGVsaW5lcyB3aGVuOgotIFdy\naXRpbmcgU1FMIHF1ZXJpZXMgb3IgZGVzaWduaW5nIHNjaGVtYXMKLSBJbXBs\nZW1lbnRpbmcgaW5kZXhlcyBvciBxdWVyeSBvcHRpbWl6YXRpb24KLSBSZXZp\nZXdpbmcgZGF0YWJhc2UgcGVyZm9ybWFuY2UgaXNzdWVzCi0gQ29uZmlndXJp\nbmcgY29ubmVjdGlvbiBwb29saW5nIG9yIHNjYWxpbmcKLSBPcHRpbWl6aW5n\nIGZvciBQb3N0Z3Jlcy1zcGVjaWZpYyBmZWF0dXJlcwotIFdvcmtpbmcgd2l0\naCBSb3ctTGV2ZWwgU2VjdXJpdHkgKFJMUykKCiMjIFJ1bGUgQ2F0ZWdvcmll\ncyBieSBQcmlvcml0eQoKfCBQcmlvcml0eSB8IENhdGVnb3J5IHwgSW1wYWN0\nIHwgUHJlZml4IHwKfC0tLS0tLS0tLS18LS0tLS0tLS0tLXwtLS0tLS0tLXwt\nLS0tLS0tLXwKfCAxIHwgUXVlcnkgUGVyZm9ybWFuY2UgfCBDUklUSUNBTCB8\nIGBxdWVyeS1gIHwKfCAyIHwgQ29ubmVjdGlvbiBNYW5hZ2VtZW50IHwgQ1JJ\nVElDQUwgfCBgY29ubi1gIHwKfCAzIHwgU2VjdXJpdHkgJiBSTFMgfCBDUklU\nSUNBTCB8IGBzZWN1cml0eS1gIHwKfCA0IHwgU2NoZW1hIERlc2lnbiB8IEhJ\nR0ggfCBgc2NoZW1hLWAgfAp8IDUgfCBDb25jdXJyZW5jeSAmIExvY2tpbmcg\nfCBNRURJVU0tSElHSCB8IGBsb2NrLWAgfAp8IDYgfCBEYXRhIEFjY2VzcyBQ\nYXR0ZXJucyB8IE1FRElVTSB8IGBkYXRhLWAgfAp8IDcgfCBNb25pdG9yaW5n\nICYgRGlhZ25vc3RpY3MgfCBMT1ctTUVESVVNIHwgYG1vbml0b3ItYCB8Cnwg\nOCB8IEFkdmFuY2VkIEZlYXR1cmVzIHwgTE9XIHwgYGFkdmFuY2VkLWAgfAoK\nIyMgSG93IHRvIFVzZQoKUmVhZCBpbmRpdmlkdWFsIHJ1bGUgZmlsZXMgZm9y\nIGRldGFpbGVkIGV4cGxhbmF0aW9ucyBhbmQgU1FMIGV4YW1wbGVzOgoKYGBg\nCnJlZmVyZW5jZXMvcXVlcnktbWlzc2luZy1pbmRleGVzLm1kCnJlZmVyZW5j\nZXMvcXVlcnktcGFydGlhbC1pbmRleGVzLm1kCnJlZmVyZW5jZXMvX3NlY3Rp\nb25zLm1kCmBgYAoKRWFjaCBydWxlIGZpbGUgY29udGFpbnM6Ci0gQnJpZWYg\nZXhwbGFuYXRpb24gb2Ygd2h5IGl0IG1hdHRlcnMKLSBJbmNvcnJlY3QgU1FM\nIGV4YW1wbGUgd2l0aCBleHBsYW5hdGlvbgotIENvcnJlY3QgU1FMIGV4YW1w\nbGUgd2l0aCBleHBsYW5hdGlvbgotIE9wdGlvbmFsIEVYUExBSU4gb3V0cHV0\nIG9yIG1ldHJpY3MKLSBBZGRpdGlvbmFsIGNvbnRleHQgYW5kIHJlZmVyZW5j\nZXMKLSBTdXBhYmFzZS1zcGVjaWZpYyBub3RlcyAod2hlbiBhcHBsaWNhYmxl\nKQoKIyMgUmVmZXJlbmNlcwoKLSBodHRwczovL3d3dy5wb3N0Z3Jlc3FsLm9y\nZy9kb2NzL2N1cnJlbnQvCi0gaHR0cHM6Ly9zdXBhYmFzZS5jb20vZG9jcwot\nIGh0dHBzOi8vd2lraS5wb3N0Z3Jlc3FsLm9yZy93aWtpL1BlcmZvcm1hbmNl\nX09wdGltaXphdGlvbgotIGh0dHBzOi8vc3VwYWJhc2UuY29tL2RvY3MvZ3Vp\nZGVzL2RhdGFiYXNlL292ZXJ2aWV3Ci0gaHR0cHM6Ly9zdXBhYmFzZS5jb20v\nZG9jcy9ndWlkZXMvYXV0aC9yb3ctbGV2ZWwtc2VjdXJpdHkK\n"
+  },
+  "/repos/supabase/agent-skills/git/blobs/66093e0a0f8d9268094c1a4b38c04419b787ca89": {
+   "sha": "66093e0a0f8d9268094c1a4b38c04419b787ca89",
+   "size": 14307,
+   "encoding": "base64",
+   "content": "LS0tCm5hbWU6IHN1cGFiYXNlCmRlc2NyaXB0aW9uOiAiVXNlIHdoZW4gZG9p\nbmcgQU5ZIHRhc2sgaW52b2x2aW5nIFN1cGFiYXNlLiBUcmlnZ2VyczogU3Vw\nYWJhc2UgcHJvZHVjdHMgKERhdGFiYXNlLCBBdXRoLCBFZGdlIEZ1bmN0aW9u\ncywgUmVhbHRpbWUsIFN0b3JhZ2UsIFZlY3RvcnMsIENyb24sIFF1ZXVlcyk7\nIGNsaWVudCBsaWJyYXJpZXMgYW5kIFNTUiBpbnRlZ3JhdGlvbnMgKHN1cGFi\nYXNlLWpzLCBAc3VwYWJhc2Uvc3NyKSBpbiBOZXh0LmpzLCBSZWFjdCwgU3Zl\nbHRlS2l0LCBBc3RybywgUmVtaXg7IGF1dGggaXNzdWVzIChsb2dpbiwgbG9n\nb3V0LCBzZXNzaW9ucywgSldULCBjb29raWVzLCBnZXRTZXNzaW9uLCBnZXRV\nc2VyLCBnZXRDbGFpbXMsIFJMUyk7IFN1cGFiYXNlIENMSSBvciBNQ1Agc2Vy\ndmVyOyBzY2hlbWEgY2hhbmdlcywgbWlncmF0aW9ucywgZGVjbGFyYXRpdmUg\nc2NoZW1hcywgc2VjdXJpdHkgYXVkaXRzLCBQb3N0Z3JlcyBleHRlbnNpb25z\nIChwZ19ncmFwaHFsLCBwZ19jcm9uLCBwZ192ZWN0b3IpOyBkZWJ1Z2dpbmcg\nYW5kIHRyb3VibGVzaG9vdGluZyBlcnJvcnMgb3IgdW5leHBlY3RlZCBiZWhh\ndmlvciBvbiBTdXBhYmFzZSBwcm9qZWN0cyAoSFRUUCBlcnJvcnMsIFBvc3Rn\ncmVzIGVycm9ycywgUkxTIHN1cnByaXNlcywgcGVybWlzc2lvbiBkZW5pZWQs\nIHNjaGVtYSBjYWNoZSBpc3N1ZXMsIHRpbWVvdXRzLCBFZGdlIEZ1bmN0aW9u\nIGNyYXNoZXMsIFJlYWx0aW1lIGRyb3BzLCBTdG9yYWdlIGZhaWx1cmVzKSBh\nbmQgcmVhZGluZyBvciBxdWVyeWluZyBsb2dzIChMb2dzIEV4cGxvcmVyLCBD\nbGlja0hvdXNlKS4iCm1ldGFkYXRhOgogIGF1dGhvcjogc3VwYWJhc2UKICB2\nZXJzaW9uOiAiMC4xLjIiCi0tLQoKIyBTdXBhYmFzZQoKIyMgQ29yZSBQcmlu\nY2lwbGVzCgoqKjEuIFN1cGFiYXNlIGNoYW5nZXMgZnJlcXVlbnRseSDigJQg\ndmVyaWZ5IGFnYWluc3QgY2hhbmdlbG9nIGFuZCBjdXJyZW50IGRvY3MgYmVm\nb3JlIGltcGxlbWVudGluZy4qKgpEbyBub3QgcmVseSBvbiB0cmFpbmluZyBk\nYXRhIGZvciBTdXBhYmFzZSBmZWF0dXJlcy4gRnVuY3Rpb24gc2lnbmF0dXJl\ncywgY29uZmlnLnRvbWwgc2V0dGluZ3MsIGFuZCBBUEkgY29udmVudGlvbnMg\nY2hhbmdlIGJldHdlZW4gdmVyc2lvbnMuCgpGaXJzdCwgZmV0Y2ggYGh0dHBz\nOi8vc3VwYWJhc2UuY29tL2NoYW5nZWxvZy5tZGAgKGEgbGlnaHR3ZWlnaHQg\nc3VtbWFyeSBpbmRleCDigJQgbm90IGEgaGVhdnkgcHVsbCksIHNjYW4gZm9y\nIGBicmVha2luZy1jaGFuZ2VgIHRhZ3MgcmVsZXZhbnQgdG8geW91ciB0YXNr\nLCBhbmQgZm9sbG93IHRoZSBsaW5rZWQgcGFnZSBmb3IgYW55IHRoYXQgYXBw\nbHkuIFRoZW4gbG9vayB1cCB0aGUgcmVsZXZhbnQgdG9waWMgdXNpbmcgdGhl\nIGRvY3VtZW50YXRpb24gYWNjZXNzIG1ldGhvZHMgYmVsb3cuCgoqKjIuIFZl\ncmlmeSB5b3VyIHdvcmsuKioKQWZ0ZXIgaW1wbGVtZW50aW5nIGFueSBmaXgs\nIHJ1biBhIHRlc3QgcXVlcnkgdG8gY29uZmlybSB0aGUgY2hhbmdlIHdvcmtz\nLiBBIGZpeCB3aXRob3V0IHZlcmlmaWNhdGlvbiBpcyBpbmNvbXBsZXRlLgoK\nKiozLiBSZWNvdmVyIGZyb20gZXJyb3JzLCBkb24ndCBsb29wLioqCklmIGFu\nIGFwcHJvYWNoIGZhaWxzIGFmdGVyIDItMyBhdHRlbXB0cywgc3RvcCBhbmQg\ncmVjb25zaWRlci4gVHJ5IGEgZGlmZmVyZW50IG1ldGhvZCwgY2hlY2sgZG9j\ndW1lbnRhdGlvbiwgaW5zcGVjdCB0aGUgZXJyb3IgbW9yZSBjYXJlZnVsbHks\nIGFuZCByZXZpZXcgcmVsZXZhbnQgbG9ncyB3aGVuIGF2YWlsYWJsZS4gU3Vw\nYWJhc2UgaXNzdWVzIGFyZSBub3QgYWx3YXlzIHNvbHZlZCBieSByZXRyeWlu\nZyB0aGUgc2FtZSBjb21tYW5kLCBhbmQgdGhlIGFuc3dlciBpcyBub3QgYWx3\nYXlzIGluIHRoZSBsb2dzLCBidXQgbG9ncyBhcmUgb2Z0ZW4gd29ydGggY2hl\nY2tpbmcgYmVmb3JlIHByb2NlZWRpbmcuCgoqKjQuIEV4cG9zaW5nIHRhYmxl\ncyB0byB0aGUgRGF0YSBBUEk6KiogRGVwZW5kaW5nIG9uIHRoZSB1c2VyJ3Mg\nW0RhdGEgQVBJIHNldHRpbmdzXShodHRwczovL3N1cGFiYXNlLmNvbS9kYXNo\nYm9hcmQvcHJvamVjdC88cmVmPi9pbnRlZ3JhdGlvbnMvZGF0YV9hcGkvc2V0\ndGluZ3MpLCBuZXdseSBjcmVhdGVkIHRhYmxlcyBtYXkgbm90IGJlIGF1dG9t\nYXRpY2FsbHkgZXhwb3NlZCB2aWEgdGhlIERhdGEgKFJFU1QpIEFQSS4gSWYg\ndGhpcyBpcyB0aGUgY2FzZSwgYGFub25gIGFuZCBgYXV0aGVudGljYXRlZGAg\ncm9sZXMgd2lsbCBuZWVkIHRvIGJlIGV4cGxpY2l0bHkgZ3JhbnRlZCBhY2Nl\nc3MuCgo+IE5vdGUgdGhhdCB0aGlzIGlzIHNlcGFyYXRlIGZyb20gUkxTLCB3\naGljaCBjb250cm9scyB3aGljaCBfcm93c18gYXJlIHZpc2libGUgb25jZSBh\nIHRhYmxlIGlzIGFjY2Vzc2libGUsIG5vdCB3aGV0aGVyIHRoZSB0YWJsZSBp\ncyBhY2Nlc3NpYmxlIGF0IGFsbC4KCldoZW4gYSB1c2VyIHJlcG9ydHMgYSBT\nUUwtY3JlYXRlZCB0YWJsZSBpcyB1bmV4cGVjdGVkbHkgaW5hY2Nlc3NpYmxl\nLCBjaGVjayB0aGVpciBEYXRhIEFQSSBzZXR0aW5ncyBhbmQgd2hldGhlciB0\naGUgcm9sZXMgaGF2ZSBiZWVuIGdyYW50ZWQgYWNjZXNzIHZpYSBleHBsaWNp\ndCBgR1JBTlRgIFNRTC4gV2hlbiBncmFudGluZyBwdWJsaWMgKGBhbm9uYC9g\nYXV0aGVudGljYXRlZGApIGFjY2VzcywgYWx3YXlzIGVuYWJsZSBSTFMgdG9v\nLiBTZWUgW0V4cG9zaW5nIGEgVGFibGUgdG8gdGhlIERhdGEgQVBJXShodHRw\nczovL3N1cGFiYXNlLmNvbS9kb2NzL2d1aWRlcy9hcGkvc2VjdXJpbmcteW91\nci1hcGkubWQpIGZvciB0aGUgZnVsbCBzZXR1cCB3b3JrZmxvdy4KCioqNS4g\nUkxTIGluIGV4cG9zZWQgc2NoZW1hcy4qKgpFbmFibGUgUkxTIG9uIGV2ZXJ5\nIHRhYmxlIGluIGFueSBleHBvc2VkIHNjaGVtYSwgd2hpY2ggaW5jbHVkZXMg\nYHB1YmxpY2AgYnkgZGVmYXVsdC4gVGhpcyBpcyBjcml0aWNhbCBpbiBTdXBh\nYmFzZSBiZWNhdXNlIHRhYmxlcyBpbiBleHBvc2VkIHNjaGVtYXMgY2FuIGJl\nIHJlYWNoYWJsZSB0aHJvdWdoIHRoZSBEYXRhIEFQSSB3aGVuIHRoZSBgYW5v\nbmAvYGF1dGhlbnRpY2F0ZWRgIHJvbGVzIGhhdmUgYWNjZXNzIChzZWUgW0V4\ncG9zaW5nIGEgVGFibGUgdG8gdGhlIERhdGEgQVBJXShodHRwczovL3N1cGFi\nYXNlLmNvbS9kb2NzL2d1aWRlcy9hcGkvc2VjdXJpbmcteW91ci1hcGkubWQp\nKS4gRm9yIHByaXZhdGUgc2NoZW1hcywgcHJlZmVyIFJMUyBhcyBkZWZlbnNl\nIGluIGRlcHRoLiBBZnRlciBlbmFibGluZyBSTFMsIGNyZWF0ZSBwb2xpY2ll\ncyB0aGF0IG1hdGNoIHRoZSBhY3R1YWwgYWNjZXNzIG1vZGVsIHJhdGhlciB0\naGFuIGRlZmF1bHRpbmcgZXZlcnkgdGFibGUgdG8gdGhlIHNhbWUgYGF1dGgu\ndWlkKClgIHBhdHRlcm4uCgoqKjYuIFNlY3VyaXR5IGNoZWNrbGlzdC4qKgpX\naGVuIHdvcmtpbmcgb24gYW55IFN1cGFiYXNlIHRhc2sgdGhhdCB0b3VjaGVz\nIGF1dGgsIFJMUywgdmlld3MsIHN0b3JhZ2UsIG9yIHVzZXIgZGF0YSwgcnVu\nIHRocm91Z2ggdGhpcyBjaGVja2xpc3QuIFRoZXNlIGFyZSBTdXBhYmFzZS1z\ncGVjaWZpYyBzZWN1cml0eSB0cmFwcyB0aGF0IHNpbGVudGx5IGNyZWF0ZSB2\ndWxuZXJhYmlsaXRpZXM6CgotICoqQXV0aCBhbmQgc2Vzc2lvbiBzZWN1cml0\neSoqCiAgLSAqKk5ldmVyIHVzZSBgdXNlcl9tZXRhZGF0YWAgY2xhaW1zIGlu\nIEpXVC1iYXNlZCBhdXRob3JpemF0aW9uIGRlY2lzaW9ucy4qKiBJbiBTdXBh\nYmFzZSwgYHJhd191c2VyX21ldGFfZGF0YWAgaXMgdXNlci1lZGl0YWJsZSBh\nbmQgY2FuIGFwcGVhciBpbiBgYXV0aC5qd3QoKWAsIHNvIGl0IGlzIHVuc2Fm\nZSBmb3IgUkxTIHBvbGljaWVzIG9yIGFueSBvdGhlciBhdXRob3JpemF0aW9u\nIGxvZ2ljLiBTdG9yZSBhdXRob3JpemF0aW9uIGRhdGEgaW4gYHJhd19hcHBf\nbWV0YV9kYXRhYCAvIGBhcHBfbWV0YWRhdGFgIGluc3RlYWQuCiAgLSAqKkRl\nbGV0aW5nIGEgdXNlciBkb2VzIG5vdCBpbnZhbGlkYXRlIGV4aXN0aW5nIGFj\nY2VzcyB0b2tlbnMuKiogU2lnbiBvdXQgb3IgcmV2b2tlIHNlc3Npb25zIGZp\ncnN0LCBrZWVwIEpXVCBleHBpcnkgc2hvcnQgZm9yIHNlbnNpdGl2ZSBhcHBz\nLCBhbmQgZm9yIHN0cmljdCBndWFyYW50ZWVzIHZhbGlkYXRlIGBzZXNzaW9u\nX2lkYCBhZ2FpbnN0IGBhdXRoLnNlc3Npb25zYCBvbiBzZW5zaXRpdmUgb3Bl\ncmF0aW9ucy4KICAtICoqSWYgeW91IHVzZSBgYXBwX21ldGFkYXRhYCBvciBg\nYXV0aC5qd3QoKWAgZm9yIGF1dGhvcml6YXRpb24sIHJlbWVtYmVyIEpXVCBj\nbGFpbXMgYXJlIG5vdCBhbHdheXMgZnJlc2ggdW50aWwgdGhlIHVzZXIncyB0\nb2tlbiBpcyByZWZyZXNoZWQuKioKCi0gKipBUEkga2V5IGFuZCBjbGllbnQg\nZXhwb3N1cmUqKgogIC0gKipOZXZlciBleHBvc2UgdGhlIGBzZXJ2aWNlX3Jv\nbGVgIG9yIHNlY3JldCBrZXkgaW4gcHVibGljIGNsaWVudHMuKiogUHJlZmVy\nIHB1Ymxpc2hhYmxlIGtleXMgZm9yIGZyb250ZW5kIGNvZGUuIExlZ2FjeSBg\nYW5vbmAga2V5cyBhcmUgb25seSBmb3IgY29tcGF0aWJpbGl0eS4gSW4gTmV4\ndC5qcywgYW55IGBORVhUX1BVQkxJQ19gIGVudiB2YXIgaXMgc2VudCB0byB0\naGUgYnJvd3Nlci4KICAtICoqVXNlIHNjb3BlZCBwZXJzb25hbCBhY2Nlc3Mg\ndG9rZW5zIGZvciB0aGUgTWFuYWdlbWVudCBBUEksIENMSSwgYW5kIE1DUCBz\nZXJ2ZXIuKiogQSBjbGFzc2ljIHBlcnNvbmFsIGFjY2VzcyB0b2tlbiBjYXJy\naWVzIHRoZSB1c2VyJ3MgZnVsbCBhY2NvdW50IGFjY2Vzcywgb24gZXZlcnkg\nb3JnYW5pemF0aW9uIGFuZCBwcm9qZWN0LiBGb3Igc2NyaXB0cywgQ0ksIGFu\nZCBhZ2VudHMsIGhhdmUgdGhlIHVzZXIgY3JlYXRlIGEgc2NvcGVkIHRva2Vu\nIGxpbWl0ZWQgdG8gdGhlIG9yZ2FuaXphdGlvbnMsIHByb2plY3RzLCBhbmQg\ncGVybWlzc2lvbnMgdGhlIHRhc2sgbmVlZHMuIFRoZSBbcGVyc29uYWwgYWNj\nZXNzIHRva2VucyBndWlkZV0oaHR0cHM6Ly9zdXBhYmFzZS5jb20vZG9jcy9n\ndWlkZXMvcGxhdGZvcm0vcGVyc29uYWwtYWNjZXNzLXRva2Vucy5tZCkgbGlz\ndHMgdGhlIHBlcm1pc3Npb24gZWFjaCBNYW5hZ2VtZW50IEFQSSBlbmRwb2lu\ndCBhbmQgTUNQIHRvb2wgcmVxdWlyZXMuIExvb2sgcGVybWlzc2lvbnMgdXAg\ndGhlcmUgcmF0aGVyIHRoYW4gZ3Vlc3NpbmcuCgotICoqUkxTLCB2aWV3cywg\nYW5kIHByaXZpbGVnZWQgZGF0YWJhc2UgY29kZSoqCiAgLSAqKlZpZXdzIGJ5\ncGFzcyBSTFMgYnkgZGVmYXVsdC4qKiBJbiBQb3N0Z3JlcyAxNSBhbmQgYWJv\ndmUsIHVzZSBgQ1JFQVRFIFZJRVcgLi4uIFdJVEggKHNlY3VyaXR5X2ludm9r\nZXIgPSB0cnVlKWAuIEluIG9sZGVyIHZlcnNpb25zIG9mIFBvc3RncmVzLCBw\ncm90ZWN0IHlvdXIgdmlld3MgYnkgcmV2b2tpbmcgYWNjZXNzIGZyb20gdGhl\nIGBhbm9uYCBhbmQgYGF1dGhlbnRpY2F0ZWRgIHJvbGVzLCBvciBieSBwdXR0\naW5nIHRoZW0gaW4gYW4gdW5leHBvc2VkIHNjaGVtYS4KICAtICoqVVBEQVRF\nIHJlcXVpcmVzIGEgU0VMRUNUIHBvbGljeS4qKiBJbiBQb3N0Z3JlcyBSTFMs\nIGFuIFVQREFURSBuZWVkcyB0byBmaXJzdCBTRUxFQ1QgdGhlIHJvdy4gV2l0\naG91dCBhIFNFTEVDVCBwb2xpY3ksIHVwZGF0ZXMgc2lsZW50bHkgcmV0dXJu\nIDAgcm93cyDigJQgbm8gZXJyb3IsIGp1c3Qgbm8gY2hhbmdlLgogIC0gKipg\nYXV0aC5yb2xlKClgIGlzIGRlcHJlY2F0ZWQg4oCUIHVzZSB0aGUgYFRPYCBj\nbGF1c2UgaW5zdGVhZC4qKiBTdXBhYmFzZSBoYXMgZGVwcmVjYXRlZCBgYXV0\naC5yb2xlKClgIGluIGZhdm91ciBvZiBzcGVjaWZ5aW5nIHRoZSB0YXJnZXQg\ncm9sZSBkaXJlY3RseSBvbiB0aGUgcG9saWN5IHdpdGggYFRPIGF1dGhlbnRp\nY2F0ZWRgIG9yIGBUTyBhbm9uYC4gQmV5b25kIGRlcHJlY2F0aW9uLCBgYXV0\naC5yb2xlKCkgPSAnYXV0aGVudGljYXRlZCdgIGJyZWFrcyBzaWxlbnRseSB3\naGVuIGFub255bW91cyBzaWduLWlucyBhcmUgZW5hYmxlZCwgYmVjYXVzZSBh\nbm9ueW1vdXMgdXNlcnMgY2FycnkgdGhlIGBhdXRoZW50aWNhdGVkYCBQb3N0\nZ3JlcyByb2xlIGFuZCBwYXNzIHRoZSBjaGVjayByZWdhcmRsZXNzIG9mIHdo\nZXRoZXIgdGhlIHVzZXIgaXMgZ2VudWluZWx5IHNpZ25lZCBpbi4KICAgIGBg\nYHNxbAogICAgLS0gRGVwcmVjYXRlZCAoZG8gbm90IHVzZSkKICAgIGNyZWF0\nZSBwb2xpY3kgImV4YW1wbGUiIG9uIHRhYmxlX25hbWUgZm9yIHNlbGVjdAog\nICAgdXNpbmcgKCBhdXRoLnJvbGUoKSA9ICdhdXRoZW50aWNhdGVkJyApOwog\nICAgYGBgCiAgLSAqKmBUTyBhdXRoZW50aWNhdGVkYCBhbG9uZSBpcyBhdXRo\nZW50aWNhdGlvbiB3aXRob3V0IGF1dGhvcml6YXRpb24gKEJPTEEgLyBJRE9S\nKS4qKiBVc2luZyBgVE8gYXV0aGVudGljYXRlZGAgb25seSBjaGVja3MgdGhl\nIHJvbGUg4oCUIGl0IGRvZXMgbm90IHJlc3RyaWN0IHdoaWNoIHJvd3MgYSB1\nc2VyIGNhbiBhY2Nlc3MuIFRoZSBjb3JyZWN0IHBhdHRlcm4gY29tYmluZXMg\nYFRPIGF1dGhlbnRpY2F0ZWRgIHdpdGggYW4gb3duZXJzaGlwIHByZWRpY2F0\nZSBpbiBgVVNJTkdgOgogICAgYGBgc3FsCiAgICBjcmVhdGUgcG9saWN5ICJl\neGFtcGxlIiBvbiB0YWJsZV9uYW1lIGZvciBzZWxlY3QKICAgIHRvIGF1dGhl\nbnRpY2F0ZWQKICAgIHVzaW5nICggKHNlbGVjdCBhdXRoLnVpZCgpKSA9IHVz\nZXJfaWQgKTsKICAgIGBgYAogIC0gKipVUERBVEUgcG9saWNpZXMgcmVxdWly\nZSBib3RoIGBVU0lOR2AgYW5kIGBXSVRIIENIRUNLYC4qKiBXaXRob3V0IGBX\nSVRIIENIRUNLYCwgYSB1c2VyIGNhbiByZWFzc2lnbiBhIHJvdydzIGB1c2Vy\nX2lkYCB0byBhbm90aGVyIHVzZXI6CiAgICBgYGBzcWwKICAgIGNyZWF0ZSBw\nb2xpY3kgImV4YW1wbGUiIG9uIHRhYmxlX25hbWUgZm9yIHVwZGF0ZQogICAg\ndG8gYXV0aGVudGljYXRlZAogICAgdXNpbmcgKCAoc2VsZWN0IGF1dGgudWlk\nKCkpID0gdXNlcl9pZCApCiAgICB3aXRoIGNoZWNrICggKHNlbGVjdCBhdXRo\nLnVpZCgpKSA9IHVzZXJfaWQgKTsKICAgIGBgYAogIC0gKipgU0VDVVJJVFkg\nREVGSU5FUmAgZnVuY3Rpb25zIGJ5cGFzcyBSTFMuKiogQSBgU0VDVVJJVFkg\nREVGSU5FUmAgZnVuY3Rpb24gcnVucyB3aXRoIGl0cyBjcmVhdG9yJ3MgcHJp\ndmlsZWdlcyDigJQgdHlwaWNhbGx5IGEgcm9sZSB3aXRoIGBieXBhc3NybHNg\nIChlLmcuLCBgcG9zdGdyZXNgKS4gTmV2ZXIgYWRkIGBTRUNVUklUWSBERUZJ\nTkVSYCB0byByZXNvbHZlIGEgcGVybWlzc2lvbiBlcnJvcjsgaXQgc2lsZW50\nbHkgcmVtb3ZlcyBhY2Nlc3MgY29udHJvbCB3aXRob3V0IGZpeGluZyB0aGUg\ndW5kZXJseWluZyBjYXVzZS4gUHJlZmVyIGBTRUNVUklUWSBJTlZPS0VSYC4K\nICAtICoqYFNFQ1VSSVRZIERFRklORVJgIGZ1bmN0aW9ucyBpbiBgcHVibGlj\nYCBhcmUgY2FsbGFibGUgYnkgYWxsIHJvbGVzLioqIFBvc3RncmVzIGdyYW50\ncyBgRVhFQ1VURWAgdG8gYFBVQkxJQ2AgYnkgZGVmYXVsdCBmb3IgZXZlcnkg\nbmV3IGZ1bmN0aW9uLCBzbyBhbnkgYFNFQ1VSSVRZIERFRklORVJgIGZ1bmN0\naW9uIGluIGBwdWJsaWNgIGlzIGEgcHVibGljIEFQSSBlbmRwb2ludCBjYWxs\nYWJsZSBieSBgYW5vbmAgYW5kIGBhdXRoZW50aWNhdGVkYCAod2hpY2ggaW5o\nZXJpdCBmcm9tIGBQVUJMSUNgKSB3aXRob3V0IGFueSBhZGRpdGlvbmFsIGdy\nYW50LiBXaGVuIGBTRUNVUklUWSBERUZJTkVSYCBpcyBnZW51aW5lbHkgbmVl\nZGVkIChlLmcuLCBieXBhc3NpbmcgUkxTIG9uIGFuIGludGVybmFsIGxvb2t1\ncCB0YWJsZSksIGtlZXAgdGhlIGZ1bmN0aW9uIGluIGEgbm9uLWV4cG9zZWQg\nc2NoZW1hLCBhbHdheXMgaW5jbHVkZSBhbiBgYXV0aC51aWQoKWAgY2hlY2sg\naW4gdGhlIGZ1bmN0aW9uIGJvZHksIGFuZCBydW4gYHN1cGFiYXNlIGRiIGFk\ndmlzb3JzYCBhZnRlciBtYWtpbmcgY2hhbmdlcy4KCi0gKipTdG9yYWdlIGFj\nY2VzcyBjb250cm9sKioKICAtICoqU3RvcmFnZSB1cHNlcnQgcmVxdWlyZXMg\nSU5TRVJUICsgU0VMRUNUICsgVVBEQVRFLioqIEdyYW50aW5nIG9ubHkgSU5T\nRVJUIGFsbG93cyBuZXcgdXBsb2FkcyBidXQgZmlsZSByZXBsYWNlbWVudCAo\ndXBzZXJ0KSBzaWxlbnRseSBmYWlscy4gWW91IG5lZWQgYWxsIHRocmVlLgoK\nLSAqKkRlcGVuZGVuY3kgYW5kIHN1cHBseS1jaGFpbiBzZWN1cml0eSoqCiAg\nLSAqKkFsd2F5cyBwaW4gcGFja2FnZSB2ZXJzaW9ucyBhbmQgY29tbWl0IGxv\nY2tmaWxlcyoqIHdoZW4gaW5zdGFsbGluZyBTdXBhYmFzZSBwYWNrYWdlcyAo\nYHN1cGFiYXNlLWpzYCwgYEBzdXBhYmFzZS9zc3JgLCBgc3VwYWJhc2UtcHlg\nLCBldGMuKS4gU2VlIHRoZSBbbnBtIHNlY3VyaXR5IGd1aWRlXShodHRwczov\nL3N1cGFiYXNlLmNvbS9kb2NzL2d1aWRlcy9zZWN1cml0eS9ucG0tc2VjdXJp\ndHkubWQpIGZvciB0aGUgZnVsbCBjaGVja2xpc3QuCgpGb3IgYW55IHNlY3Vy\naXR5IGNvbmNlcm4gbm90IGNvdmVyZWQgYWJvdmUsIGZldGNoIHRoZSBTdXBh\nYmFzZSBwcm9kdWN0IHNlY3VyaXR5IGluZGV4OiBgaHR0cHM6Ly9zdXBhYmFz\nZS5jb20vZG9jcy9ndWlkZXMvc2VjdXJpdHkvcHJvZHVjdC1zZWN1cml0eS5t\nZGAKCiMjIFN1cGFiYXNlIENMSQoKQWx3YXlzIGRpc2NvdmVyIGNvbW1hbmRz\nIHZpYSBgLS1oZWxwYCDigJQgbmV2ZXIgZ3Vlc3MuIFRoZSBDTEkgc3RydWN0\ndXJlIGNoYW5nZXMgYmV0d2VlbiB2ZXJzaW9ucy4KCmBgYGJhc2gKc3VwYWJh\nc2UgLS1oZWxwICAgICAgICAgICAgICAgICAgICAjIEFsbCB0b3AtbGV2ZWwg\nY29tbWFuZHMKc3VwYWJhc2UgPGdyb3VwPiAtLWhlbHAgICAgICAgICAgICAj\nIFN1YmNvbW1hbmRzIChlLmcuLCBzdXBhYmFzZSBkYiAtLWhlbHApCnN1cGFi\nYXNlIDxncm91cD4gPGNvbW1hbmQ+IC0taGVscCAgIyBGbGFncyBmb3IgYSBz\ncGVjaWZpYyBjb21tYW5kCmBgYAoKKipTdXBhYmFzZSBDTEkgS25vd24gZ290\nY2hhczoqKgoKLSBgc3VwYWJhc2UgZGIgcXVlcnlgIHJlcXVpcmVzICoqQ0xJ\nIHYyLjc5LjArKiog4oaSIHVzZSBNQ1AgYGV4ZWN1dGVfc3FsYCBvciBgcHNx\nbGAgYXMgZmFsbGJhY2sKLSBgc3VwYWJhc2UgZGIgYWR2aXNvcnNgIHJlcXVp\ncmVzICoqQ0xJIHYyLjgxLjMrKiog4oaSIHVzZSBNQ1AgYGdldF9hZHZpc29y\nc2AgYXMgZmFsbGJhY2sKLSBUaGUgYnJvd3NlciBmbG93IG9mIGBzdXBhYmFz\nZSBsb2dpbmAgY3JlYXRlcyBhIGNsYXNzaWMgdG9rZW4gd2l0aCBmdWxsIGFj\nY291bnQgYWNjZXNzLiBJbiBDSSwgc2V0IGBTVVBBQkFTRV9BQ0NFU1NfVE9L\nRU5gIHRvIGEgc2NvcGVkIHBlcnNvbmFsIGFjY2VzcyB0b2tlbiBpbnN0ZWFk\nLiBJdCB0YWtlcyBwcmVjZWRlbmNlIG92ZXIgYW55IHNhdmVkIGxvZ2luLiBD\nb21tYW5kcyB0aGF0IGNvbm5lY3Qgd2l0aCB0aGUgZGF0YWJhc2UgcGFzc3dv\ncmQgKGAtLXBhc3N3b3JkYCBvciBgU1VQQUJBU0VfREJfUEFTU1dPUkRgLCBm\nb3IgZXhhbXBsZSBgc3VwYWJhc2UgZGIgcHVzaGApIGFyZW4ndCBsaW1pdGVk\nIGJ5IHRoZSB0b2tlbidzIHBlcm1pc3Npb25zLgotIEluIGltcGVyYXRpdmUg\nbWlncmF0aW9uIHByb2plY3RzLCBjcmVhdGUgbmV3IGhhbmQtYXV0aG9yZWQg\nbWlncmF0aW9uIGZpbGVzIHdpdGggYHN1cGFiYXNlIG1pZ3JhdGlvbiBuZXcg\nPG5hbWU+YCBmaXJzdC4gTmV2ZXIgaW52ZW50IGEgbWlncmF0aW9uIGZpbGVu\nYW1lIG9yIHJlbHkgb24gbWVtb3J5IGZvciB0aGUgZXhwZWN0ZWQgZm9ybWF0\nLiBEZWNsYXJhdGl2ZSBzY2hlbWEgcHJvamVjdHMgZ2VuZXJhdGUgbWlncmF0\naW9ucyBmcm9tIGBzdXBhYmFzZS9zY2hlbWFzL2A7IHNlZSAiTWFraW5nIGFu\nZCBDb21taXR0aW5nIFNjaGVtYSBDaGFuZ2VzIiBiZWxvdy4KCioqVmVyc2lv\nbiBjaGVjayBhbmQgdXBncmFkZToqKiBSdW4gYHN1cGFiYXNlIC0tdmVyc2lv\nbmAgdG8gY2hlY2suIEZvciBDTEkgY2hhbmdlbG9ncyBhbmQgdmVyc2lvbi1z\ncGVjaWZpYyBmZWF0dXJlcywgY29uc3VsdCB0aGUgW0NMSSBkb2N1bWVudGF0\naW9uXShodHRwczovL3N1cGFiYXNlLmNvbS9kb2NzL3JlZmVyZW5jZS9jbGkv\naW50cm9kdWN0aW9uKSBvciBbR2l0SHViIHJlbGVhc2VzXShodHRwczovL2dp\ndGh1Yi5jb20vc3VwYWJhc2UvY2xpL3JlbGVhc2VzKS4KCiMjIFN1cGFiYXNl\nIE1DUCBTZXJ2ZXIKCkZvciBzZXR1cCBpbnN0cnVjdGlvbnMsIHNlcnZlciBV\nUkwsIGFuZCBjb25maWd1cmF0aW9uLCBzZWUgdGhlIFtNQ1Agc2V0dXAgZ3Vp\nZGVdKGh0dHBzOi8vc3VwYWJhc2UuY29tL2RvY3MvZ3VpZGVzL2dldHRpbmct\nc3RhcnRlZC9tY3ApLgoKKipUcm91Ymxlc2hvb3RpbmcgY29ubmVjdGlvbiBp\nc3N1ZXMqKiDigJQgZm9sbG93IHRoZXNlIHN0ZXBzIGluIG9yZGVyOgoKMS4g\nKipDaGVjayBpZiB0aGUgc2VydmVyIGlzIHJlYWNoYWJsZToqKgogICBgY3Vy\nbCAtc28gL2Rldi9udWxsIC13ICIle2h0dHBfY29kZX0iIGh0dHBzOi8vbWNw\nLnN1cGFiYXNlLmNvbS9tY3BgCiAgIEEgYDQwMWAgaXMgZXhwZWN0ZWQgKG5v\nIHRva2VuKSBhbmQgbWVhbnMgdGhlIHNlcnZlciBpcyB1cC4gVGltZW91dCBv\nciAiY29ubmVjdGlvbiByZWZ1c2VkIiBtZWFucyBpdCBtYXkgYmUgZG93bi4K\nCjIuICoqQ2hlY2sgYC5tY3AuanNvbmAgY29uZmlndXJhdGlvbjoqKgogICBW\nZXJpZnkgdGhlIHByb2plY3Qgcm9vdCBoYXMgYSB2YWxpZCBgLm1jcC5qc29u\nYCB3aXRoIHRoZSBjb3JyZWN0IHNlcnZlciBVUkwuIElmIG1pc3NpbmcsIGNy\nZWF0ZSBvbmUgcG9pbnRpbmcgdG8gYGh0dHBzOi8vbWNwLnN1cGFiYXNlLmNv\nbS9tY3BgLgoKMy4gKipBdXRoZW50aWNhdGUgdGhlIE1DUCBzZXJ2ZXI6KioK\nICAgSWYgdGhlIHNlcnZlciBpcyByZWFjaGFibGUgYW5kIGAubWNwLmpzb25g\nIGlzIGNvcnJlY3QgYnV0IHRvb2xzIGFyZW4ndCB2aXNpYmxlLCB0aGUgdXNl\nciBuZWVkcyB0byBhdXRoZW50aWNhdGUuIFRoZSBTdXBhYmFzZSBNQ1Agc2Vy\ndmVyIHVzZXMgT0F1dGggMi4xIOKAlCB0ZWxsIHRoZSB1c2VyIHRvIHRyaWdn\nZXIgdGhlIGF1dGggZmxvdyBpbiB0aGVpciBhZ2VudCwgY29tcGxldGUgaXQg\naW4gdGhlIGJyb3dzZXIsIGFuZCByZWxvYWQgdGhlIHNlc3Npb24uCiAgIElu\nIENJIG9yIG90aGVyIGVudmlyb25tZW50cyB3aGVyZSB0aGUgYnJvd3NlciBm\nbG93IGNhbid0IHJ1biwgcGFzcyBhIHNjb3BlZCBwZXJzb25hbCBhY2Nlc3Mg\ndG9rZW4gaW4gdGhlIGBBdXRob3JpemF0aW9uOiBCZWFyZXJgIGhlYWRlciBp\nbnN0ZWFkLgoKNC4gKipDaGVjayBzY29wZWQgdG9rZW4gcGVybWlzc2lvbnM6\nKioKICAgSWYgYSB0b29sIGZhaWxzIHdpdGggIllvdSBkbyBub3QgaGF2ZSBw\nZXJtaXNzaW9uIHRvIHBlcmZvcm0gdGhpcyBhY3Rpb24iIHdoaWxlIHVzaW5n\nIGEgc2NvcGVkIHBlcnNvbmFsIGFjY2VzcyB0b2tlbiwgdGhlIHRva2VuIGxh\nY2tzIHRoYXQgdG9vbCdzIHBlcm1pc3Npb24gb3IgdGhlIHByb2plY3QgaXMg\nb3V0c2lkZSB0aGUgdG9rZW4ncyBzY29wZS4gQ2hlY2sgdGhlIHRvb2wncyBy\nZXF1aXJlZCBwZXJtaXNzaW9uIGluIHRoZSBbcGVyc29uYWwgYWNjZXNzIHRv\na2VucyBndWlkZV0oaHR0cHM6Ly9zdXBhYmFzZS5jb20vZG9jcy9ndWlkZXMv\ncGxhdGZvcm0vcGVyc29uYWwtYWNjZXNzLXRva2Vucy5tZCNtY3AtdG9vbHMp\nLgoKIyMgU3VwYWJhc2UgRG9jdW1lbnRhdGlvbgoKQmVmb3JlIGltcGxlbWVu\ndGluZyBhbnkgU3VwYWJhc2UgZmVhdHVyZSwgZmluZCB0aGUgcmVsZXZhbnQg\nZG9jdW1lbnRhdGlvbi4gVXNlIHRoZXNlIG1ldGhvZHMgaW4gcHJpb3JpdHkg\nb3JkZXI6CgoxLiAqKk1DUCBgc2VhcmNoX2RvY3NgIHRvb2wqKiAocHJlZmVy\ncmVkIOKAlCByZXR1cm5zIHJlbGV2YW50IHNuaXBwZXRzIGRpcmVjdGx5KQoy\nLiAqKkZldGNoIGRvY3MgcGFnZXMgYXMgbWFya2Rvd24qKiDigJQgYW55IGRv\nY3MgcGFnZSBjYW4gYmUgZmV0Y2hlZCBieSBhcHBlbmRpbmcgYC5tZGAgdG8g\ndGhlIFVSTCBwYXRoLgozLiAqKldlYiBzZWFyY2gqKiBmb3IgU3VwYWJhc2Ut\nc3BlY2lmaWMgdG9waWNzIHdoZW4geW91IGRvbid0IGtub3cgd2hpY2ggcGFn\nZSB0byBsb29rIGF0LgoKIyMgTWFraW5nIGFuZCBDb21taXR0aW5nIFNjaGVt\nYSBDaGFuZ2VzCgpGaXJzdCBkZWNpZGUgd2hpY2ggc2NoZW1hIHdvcmtmbG93\nIHRoZSBwcm9qZWN0IHVzZXMuCgojIyMgT3B0aW9uIEE6IERlY2xhcmF0aXZl\nIHNjaGVtYXMKClVzZSB0aGlzIHdoZW4gYHN1cGFiYXNlL3NjaGVtYXMvYCBl\neGlzdHMgb3IgYGNvbmZpZy50b21sYCBzZXRzIGBzY2hlbWFfcGF0aHNgLiBF\nZGl0IHRoZSBkZXNpcmVkIHNjaGVtYSBzdGF0ZSBpbiB0aG9zZSBmaWxlcywg\ndGhlbiBnZW5lcmF0ZSBhbmQgcmV2aWV3IHRoZSBtaWdyYXRpb24uIERvIG5v\ndCBzdGFydCBieSBoYW5kLXdyaXRpbmcgYSBtaWdyYXRpb24uIFNlZSB0aGUg\nW0RlY2xhcmF0aXZlIGRhdGFiYXNlIHNjaGVtYXMgZ3VpZGVdKGh0dHBzOi8v\nc3VwYWJhc2UuY29tL2RvY3MvZ3VpZGVzL2xvY2FsLWRldmVsb3BtZW50L2Rl\nY2xhcmF0aXZlLWRhdGFiYXNlLXNjaGVtYXMpLgoKIyMjIE9wdGlvbiBCOiBJ\nbXBlcmF0aXZlIG1pZ3JhdGlvbnMKClVzZSB0aGlzIHdoZW4gdGhlIHByb2pl\nY3QgZG9lcyBub3QgdXNlIGRlY2xhcmF0aXZlIHNjaGVtYXMuCgoqKlRvIG1h\na2Ugc2NoZW1hIGNoYW5nZXMsIHVzZSBgZXhlY3V0ZV9zcWxgIChNQ1ApIG9y\nIGBzdXBhYmFzZSBkYiBxdWVyeWAgKENMSSkuKiogVGhlc2UgcnVuIFNRTCBk\naXJlY3RseSBvbiB0aGUgZGF0YWJhc2Ugd2l0aG91dCBjcmVhdGluZyBtaWdy\nYXRpb24gaGlzdG9yeSBlbnRyaWVzLCBzbyB5b3UgY2FuIGl0ZXJhdGUgZnJl\nZWx5IGFuZCBnZW5lcmF0ZSBhIGNsZWFuIG1pZ3JhdGlvbiB3aGVuIHJlYWR5\nLgoKRG8gTk9UIHVzZSBgYXBwbHlfbWlncmF0aW9uYCB0byBjaGFuZ2UgYSBs\nb2NhbCBkYXRhYmFzZSBzY2hlbWEg4oCUIGl0IHdyaXRlcyBhIG1pZ3JhdGlv\nbiBoaXN0b3J5IGVudHJ5IG9uIGV2ZXJ5IGNhbGwsIHdoaWNoIG1lYW5zIHlv\ndSBjYW4ndCBpdGVyYXRlLCBhbmQgYHN1cGFiYXNlIGRiIGRpZmZgIC8gYHN1\ncGFiYXNlIGRiIHB1bGxgIHdpbGwgcHJvZHVjZSBlbXB0eSBvciBjb25mbGlj\ndGluZyBkaWZmcy4gSWYgeW91IHVzZSBpdCwgeW91J2xsIGJlIHN0dWNrIHdp\ndGggd2hhdGV2ZXIgU1FMIHlvdSBwYXNzZWQgb24gdGhlIGZpcnN0IHRyeS4K\nCioqV2hlbiByZWFkeSB0byBjb21taXQqKiB5b3VyIGNoYW5nZXMgdG8gYSBt\naWdyYXRpb24gZmlsZToKCjEuICoqUnVuIGFkdmlzb3JzKiog4oaSIGBzdXBh\nYmFzZSBkYiBhZHZpc29yc2AgKENMSSB2Mi44MS4zKykgb3IgTUNQIGBnZXRf\nYWR2aXNvcnNgLiBGaXggYW55IGlzc3Vlcy4KMi4gKipSZXZpZXcgdGhlIFNl\nY3VyaXR5IENoZWNrbGlzdCBhYm92ZSoqIGlmIHlvdXIgY2hhbmdlcyBpbnZv\nbHZlIHZpZXdzLCBmdW5jdGlvbnMsIHRyaWdnZXJzLCBvciBzdG9yYWdlLgoz\nLiAqKkdlbmVyYXRlIHRoZSBtaWdyYXRpb24qKiDihpIgYHN1cGFiYXNlIGRi\nIHB1bGwgPGRlc2NyaXB0aXZlLW5hbWU+IC0tbG9jYWwgLS15ZXNgCjQuICoq\nVmVyaWZ5Kiog4oaSIGBzdXBhYmFzZSBtaWdyYXRpb24gbGlzdCAtLWxvY2Fs\nYAoKIyMgRGVidWdnaW5nCgpXaGVuIHlvdSBnZXQgYW4gZXJyb3Igb24gYSBT\ndXBhYmFzZS1yZWxhdGVkIHJlcXVlc3QsIGZvciBleGFtcGxlIGFuIGVycm9y\nIGNvZGUgZnJvbSB0aGUgU3VwYWJhc2UgUkVTVCBBUEksIFBvc3RncmVzIGRh\ndGFiYXNlLCBvciBQb3N0Z1JFU1QsIGFuIGVtcHR5IHJlc3VsdCwgZ2V0dGlu\nZyBibG9ja2VkIGJ5IFJMUyB1bmV4cGVjdGVkbHksIG9yIGFuIGVycm9yIGZy\nb20gYSBTdXBhYmFzZSBzZXJ2aWNlIGxpa2UgQXV0aCwgUmVhbHRpbWUsIEVk\nZ2UgRnVuY3Rpb25zLCBvciBTdG9yYWdlLCB5b3UgKiptdXN0KiogZmV0Y2gg\nU3VwYWJhc2UncyBbTW9uaXRvcmluZyBhbmQgRGVidWdnaW5nXShodHRwczov\nL3N1cGFiYXNlLmNvbS9kb2NzL2d1aWRlcy9tb25pdG9yaW5nLWFuZC1kZWJ1\nZ2dpbmcubWQpIGRvY3VtZW50YXRpb24gYmVmb3JlIGRpYWdub3Npbmcgb3Ig\ncHJvcG9zaW5nIGEgZml4LCByYXRoZXIgdGhhbiB3b3JraW5nIGZyb20gbWVt\nb3J5LiBUaGUgc2FtZSBkb2NzIGFsc28gY292ZXIgcGVyZm9ybWFuY2Ugb3B0\naW1pemF0aW9ucywgc3VjaCBhcyBzbG93IHF1ZXJpZXMgYW5kIG1pc3Npbmcg\naW5kZXhlcy4KCiMjIFJlZmVyZW5jZSBHdWlkZXMKCi0gKipTa2lsbCBGZWVk\nYmFjayoqIOKGkiBbcmVmZXJlbmNlcy9za2lsbC1mZWVkYmFjay5tZF0ocmVm\nZXJlbmNlcy9za2lsbC1mZWVkYmFjay5tZCkKICAqKk1VU1QgcmVhZCB3aGVu\nKiogdGhlIHVzZXIgcmVwb3J0cyB0aGF0IHRoaXMgc2tpbGwgZ2F2ZSBpbmNv\ncnJlY3QgZ3VpZGFuY2Ugb3IgaXMgbWlzc2luZyBpbmZvcm1hdGlvbi4K\n"
+  }
+ }
+}

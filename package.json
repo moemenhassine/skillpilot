@@ -25,7 +25,9 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest run tests/unit",
-    "test:integration": "vitest run tests/integration --passWithNoTests"
+    "test:integration": "vitest run tests/integration",
+    "validate:catalog": "node scripts/validate-catalog.ts",
+    "test:evaluation": "node scripts/evaluate.ts"
   },
   "dependencies": {
     "commander": "15.0.0",

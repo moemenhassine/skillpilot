@@ -1,0 +1,1189 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "0.1.0",
+  "generatedAt": "2026-10-28",
+  "entries": [
+    {
+      "id": "anthropics/skills#skills/frontend-design",
+      "name": "frontend-design",
+      "description": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.",
+      "source": {
+        "provider": "github",
+        "owner": "anthropics",
+        "repository": "skills",
+        "skillPath": "skills/frontend-design",
+        "commit": "ca45fc496a3436251f191354091d557da31c15b5"
+      },
+      "categories": [
+        "web"
+      ],
+      "stack": [
+        "web"
+      ],
+      "requiresAnyStack": [],
+      "tasks": [
+        "ui-design"
+      ],
+      "prerequisites": [],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "scope": "skill",
+        "evidencePath": "skills/frontend-design/LICENSE.txt"
+      },
+      "payload": {
+        "files": 2,
+        "bytes": 19564,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "anthropics/skills#skills/mcp-builder",
+      "name": "mcp-builder",
+      "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
+      "source": {
+        "provider": "github",
+        "owner": "anthropics",
+        "repository": "skills",
+        "skillPath": "skills/mcp-builder",
+        "commit": "ca45fc496a3436251f191354091d557da31c15b5"
+      },
+      "categories": [
+        "ai"
+      ],
+      "stack": [
+        "ai"
+      ],
+      "requiresAnyStack": [],
+      "tasks": [
+        "mcp",
+        "ai-integration"
+      ],
+      "prerequisites": [
+        "Python or Node.js MCP SDK"
+      ],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "scope": "skill",
+        "evidencePath": "skills/mcp-builder/LICENSE.txt"
+      },
+      "payload": {
+        "files": 11,
+        "bytes": 159159,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "anthropics/skills#skills/webapp-testing",
+      "name": "webapp-testing",
+      "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
+      "source": {
+        "provider": "github",
+        "owner": "anthropics",
+        "repository": "skills",
+        "skillPath": "skills/webapp-testing",
+        "commit": "ca45fc496a3436251f191354091d557da31c15b5"
+      },
+      "categories": [
+        "web",
+        "testing"
+      ],
+      "stack": [
+        "web"
+      ],
+      "requiresAnyStack": [],
+      "tasks": [
+        "browser-testing",
+        "testing",
+        "debugging"
+      ],
+      "prerequisites": [
+        "Python and Playwright for bundled helper scripts"
+      ],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "scope": "skill",
+        "evidencePath": "skills/webapp-testing/LICENSE.txt"
+      },
+      "payload": {
+        "files": 6,
+        "bytes": 22394,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "avdlee/swift-concurrency-agent-skill#skills/swift-concurrency",
+      "name": "swift-concurrency",
+      "description": "Diagnose Swift Concurrency issues, refactor callback-based code to async/await, and guide Swift 6 migration when working with tasks, actors, @MainActor, Sendable, data races, thread safety, or concurrency-related compiler and linter warnings.",
+      "source": {
+        "provider": "github",
+        "owner": "AvdLee",
+        "repository": "Swift-Concurrency-Agent-Skill",
+        "skillPath": "skills/swift-concurrency",
+        "commit": "d5770817d2622e1585b1f7eaebc791a9cb0959c8"
+      },
+      "categories": [
+        "ios"
+      ],
+      "stack": [
+        "swift"
+      ],
+      "requiresAnyStack": [
+        "swift",
+        "ios"
+      ],
+      "tasks": [
+        "concurrency"
+      ],
+      "prerequisites": [],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "MIT",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 20,
+        "bytes": 272953,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "callstackincubator/agent-skills#skills/upgrading-react-native",
+      "name": "upgrading-react-native",
+      "description": "Upgrades React Native apps to newer versions by applying rn-diff-purge template diffs, updating package.json dependencies, migrating native iOS and Android configuration, resolving CocoaPods and Gradle changes, and handling breaking API updates. Use when upgrading React Native, bumping RN version, updating from RN 0.x to 0.y, or migrating Expo SDK alongside a React Native upgrade.",
+      "source": {
+        "provider": "github",
+        "owner": "callstackincubator",
+        "repository": "agent-skills",
+        "skillPath": "skills/upgrading-react-native",
+        "commit": "59e9d17446a248b21d86f078fcd0bd2d36db1ca4"
+      },
+      "categories": [
+        "mobile"
+      ],
+      "stack": [
+        "react-native"
+      ],
+      "requiresAnyStack": [
+        "react-native"
+      ],
+      "tasks": [
+        "upgrade"
+      ],
+      "prerequisites": [
+        "React Native project with iOS/Android native folders"
+      ],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "MIT",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 9,
+        "bytes": 23837,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "cloudflare/skills#skills/agents-sdk",
+      "name": "agents-sdk",
+      "description": "Build, debug, or review Cloudflare Agents SDK applications using the agents package.",
+      "source": {
+        "provider": "github",
+        "owner": "cloudflare",
+        "repository": "skills",
+        "skillPath": "skills/agents-sdk",
+        "commit": "49a31e0b3229ccdffe4944be9c61bc7481d1d432"
+      },
+      "categories": [
+        "ai",
+        "backend"
+      ],
+      "stack": [
+        "ai",
+        "cloudflare"
+      ],
+      "requiresAnyStack": [],
+      "tasks": [
+        "ai-integration",
+        "cloud-workers"
+      ],
+      "prerequisites": [
+        "Cloudflare Agents SDK (agents package)"
+      ],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 21,
+        "bytes": 50553,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "cloudflare/skills#skills/nextjs-on-cloudflare",
+      "name": "nextjs-on-cloudflare",
+      "description": "Build, migrate, and deploy Next.js apps on Cloudflare Workers with vinext. Use when starting a Next.js project on Cloudflare, moving an existing app to Workers, choosing between vinext and OpenNext, or setting up vinext for Workers. For setup, migration, or deployment, install vinext's upstream skills with `npx skills add cloudflare/vinext` if missing, then read and follow the applicable skill and docs.",
+      "source": {
+        "provider": "github",
+        "owner": "cloudflare",
+        "repository": "skills",
+        "skillPath": "skills/nextjs-on-cloudflare",
+        "commit": "49a31e0b3229ccdffe4944be9c61bc7481d1d432"
+      },
+      "categories": [
+        "web",
+        "infra"
+      ],
+      "stack": [
+        "nextjs"
+      ],
+      "requiresAnyStack": [
+        "nextjs"
+      ],
+      "tasks": [
+        "deployment",
+        "cloud-workers"
+      ],
+      "prerequisites": [
+        "Cloudflare account; vinext upstream skills (installed separately)"
+      ],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 2,
+        "bytes": 5715,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "cloudflare/skills#skills/web-perf",
+      "name": "web-perf",
+      "description": "Audit, diagnose, or optimize website loading and interaction performance, Core Web Vitals, and Lighthouse performance scores.",
+      "source": {
+        "provider": "github",
+        "owner": "cloudflare",
+        "repository": "skills",
+        "skillPath": "skills/web-perf",
+        "commit": "49a31e0b3229ccdffe4944be9c61bc7481d1d432"
+      },
+      "categories": [
+        "web"
+      ],
+      "stack": [
+        "web"
+      ],
+      "requiresAnyStack": [],
+      "tasks": [
+        "performance"
+      ],
+      "prerequisites": [],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 2,
+        "bytes": 11227,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "cloudflare/skills#skills/wrangler",
+      "name": "wrangler",
+      "description": "Run or troubleshoot Wrangler CLI commands in projects that have a wrangler.jsonc, wrangler.json, or wrangler.toml file, including local development, Previews, deployment, and resource management. For new projects and projects without a Wrangler configuration file, use the cf CLI instead.",
+      "source": {
+        "provider": "github",
+        "owner": "cloudflare",
+        "repository": "skills",
+        "skillPath": "skills/wrangler",
+        "commit": "49a31e0b3229ccdffe4944be9c61bc7481d1d432"
+      },
+      "categories": [
+        "infra",
+        "backend"
+      ],
+      "stack": [
+        "cloudflare"
+      ],
+      "requiresAnyStack": [],
+      "tasks": [
+        "cloud-workers",
+        "deployment"
+      ],
+      "prerequisites": [
+        "Wrangler CLI"
+      ],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 2,
+        "bytes": 14594,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "expo/skills#plugins/expo/skills/eas-app-stores",
+      "name": "eas-app-stores",
+      "description": "Build and submit iOS and Android apps with EAS to TestFlight, the App Store, or Google Play. Supports Expo and other React Native projects, plus existing native apps. Use for eas.json setup, release pipelines, signing, app versions and build numbers, store submissions, and listing metadata. For Expo websites and API routes, use eas-hosting; for adding React Native screens to a native app, use expo-brownfield.",
+      "source": {
+        "provider": "github",
+        "owner": "expo",
+        "repository": "skills",
+        "skillPath": "plugins/expo/skills/eas-app-stores",
+        "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c"
+      },
+      "categories": [
+        "mobile",
+        "infra"
+      ],
+      "stack": [
+        "expo",
+        "react-native"
+      ],
+      "requiresAnyStack": [
+        "expo",
+        "react-native"
+      ],
+      "tasks": [
+        "deployment"
+      ],
+      "prerequisites": [
+        "Expo account and EAS CLI; store developer accounts"
+      ],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "MIT",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 8,
+        "bytes": 57365,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "expo/skills#plugins/expo/skills/expo-data-fetching",
+      "name": "expo-data-fetching",
+      "description": "Use when implementing or debugging ANY network request, API call, or data fetching. Covers fetch API, React Query, SWR, error handling, caching, offline support, loading/empty/error screen states, and Expo Router data loaders (`useLoaderData`).",
+      "source": {
+        "provider": "github",
+        "owner": "expo",
+        "repository": "skills",
+        "skillPath": "plugins/expo/skills/expo-data-fetching",
+        "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c"
+      },
+      "categories": [
+        "mobile"
+      ],
+      "stack": [
+        "expo"
+      ],
+      "requiresAnyStack": [
+        "expo"
+      ],
+      "tasks": [
+        "data-fetching"
+      ],
+      "prerequisites": [],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "MIT",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 4,
+        "bytes": 25306,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "expo/skills#plugins/expo/skills/expo-native-ui",
+      "name": "expo-native-ui",
+      "description": "Build beautiful, native-feeling Expo screens. Covers Apple HIG styling, semantic colors, native controls, SF Symbols, media, visual effects, gradients, storage, and responsive layout. For routing and navigation, use the expo-router skill; for motion and animation, use the expo-animation skill.",
+      "source": {
+        "provider": "github",
+        "owner": "expo",
+        "repository": "skills",
+        "skillPath": "plugins/expo/skills/expo-native-ui",
+        "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c"
+      },
+      "categories": [
+        "mobile"
+      ],
+      "stack": [
+        "expo"
+      ],
+      "requiresAnyStack": [
+        "expo"
+      ],
+      "tasks": [
+        "ui-design"
+      ],
+      "prerequisites": [],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "MIT",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 9,
+        "bytes": 55412,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "expo/skills#plugins/expo/skills/expo-router",
+      "name": "expo-router",
+      "description": "Navigation and routing for Expo Router. Covers file-based routes, groups and dynamic routes, folder organization, Link with previews and context menus, native Stack, page titles, modals and form sheets, NativeTabs, headers and toolbars, and header search bars.",
+      "source": {
+        "provider": "github",
+        "owner": "expo",
+        "repository": "skills",
+        "skillPath": "plugins/expo/skills/expo-router",
+        "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c"
+      },
+      "categories": [
+        "mobile"
+      ],
+      "stack": [
+        "expo"
+      ],
+      "requiresAnyStack": [
+        "expo"
+      ],
+      "tasks": [
+        "navigation"
+      ],
+      "prerequisites": [],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "MIT",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 8,
+        "bytes": 50303,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "expo/skills#plugins/expo/skills/expo-upgrade",
+      "name": "expo-upgrade",
+      "description": "Guidelines for upgrading Expo SDK versions and fixing dependency issues",
+      "source": {
+        "provider": "github",
+        "owner": "expo",
+        "repository": "skills",
+        "skillPath": "plugins/expo/skills/expo-upgrade",
+        "commit": "05754e71d02abe0d2d7a2fb5259ccac41f5ea59c"
+      },
+      "categories": [
+        "mobile"
+      ],
+      "stack": [
+        "expo"
+      ],
+      "requiresAnyStack": [
+        "expo"
+      ],
+      "tasks": [
+        "upgrade"
+      ],
+      "prerequisites": [],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "MIT",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 9,
+        "bytes": 29407,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "getsentry/skills#skills/code-review",
+      "name": "code-review",
+      "description": "Perform code reviews following Sentry engineering practices. Use when reviewing pull requests, examining code changes, or providing feedback on code quality. Covers security, performance, testing, and design review.",
+      "source": {
+        "provider": "github",
+        "owner": "getsentry",
+        "repository": "skills",
+        "skillPath": "skills/code-review",
+        "commit": "d12f250460ffd961f549dbebf7eeb0cf4afd4c2e"
+      },
+      "categories": [
+        "workflow"
+      ],
+      "stack": [],
+      "requiresAnyStack": [],
+      "tasks": [
+        "code-review"
+      ],
+      "prerequisites": [],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 1,
+        "bytes": 2768,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "huggingface/skills#skills/huggingface-datasets",
+      "name": "huggingface-datasets",
+      "description": "Use this skill for Hugging Face Dataset Viewer API workflows that fetch subset/split metadata, paginate rows, search text, apply filters, download parquet URLs, and read size or statistics.",
+      "source": {
+        "provider": "github",
+        "owner": "huggingface",
+        "repository": "skills",
+        "skillPath": "skills/huggingface-datasets",
+        "commit": "fabc634a893f62ad5c2039830397efa35fa62715"
+      },
+      "categories": [
+        "data-science"
+      ],
+      "stack": [
+        "data-science",
+        "ml"
+      ],
+      "requiresAnyStack": [],
+      "tasks": [
+        "datasets"
+      ],
+      "prerequisites": [
+        "Network access to the Hugging Face Dataset Viewer API"
+      ],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 1,
+        "bytes": 4671,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "huggingface/skills#skills/huggingface-gradio",
+      "name": "huggingface-gradio",
+      "description": "Build Gradio web UIs and demos in Python. Use when creating or editing Gradio apps, components, event listeners, layouts, or chatbots.",
+      "source": {
+        "provider": "github",
+        "owner": "huggingface",
+        "repository": "skills",
+        "skillPath": "skills/huggingface-gradio",
+        "commit": "fabc634a893f62ad5c2039830397efa35fa62715"
+      },
+      "categories": [
+        "ml",
+        "python"
+      ],
+      "stack": [
+        "python"
+      ],
+      "requiresAnyStack": [],
+      "tasks": [
+        "demo-ui",
+        "ui-design"
+      ],
+      "prerequisites": [
+        "gradio Python package"
+      ],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 2,
+        "bytes": 39222,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "huggingface/skills#skills/huggingface-llm-trainer",
+      "name": "huggingface-llm-trainer",
+      "description": "Train or fine-tune language and vision models using TRL (Transformer Reinforcement Learning) or Unsloth with Hugging Face Jobs infrastructure. Covers SFT, DPO, GRPO and reward modeling training methods, plus GGUF conversion for local deployment. Includes guidance on the TRL Jobs package, UV scripts with PEP 723 format, dataset preparation and validation, hardware selection, cost estimation, Trackio monitoring, Hub authentication, model selection/leaderboards and model persistence. Use for tasks involving cloud GPU training, GGUF conversion, or when users mention training on Hugging Face Jobs without local GPU setup.",
+      "source": {
+        "provider": "github",
+        "owner": "huggingface",
+        "repository": "skills",
+        "skillPath": "skills/huggingface-llm-trainer",
+        "commit": "fabc634a893f62ad5c2039830397efa35fa62715"
+      },
+      "categories": [
+        "ml",
+        "ai"
+      ],
+      "stack": [
+        "ml"
+      ],
+      "requiresAnyStack": [],
+      "tasks": [
+        "ml-training"
+      ],
+      "prerequisites": [
+        "Hugging Face account and Jobs (paid GPU)"
+      ],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 19,
+        "bytes": 186439,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "kotlin/kotlin-agent-skills#skills/kotlin-backend-jpa-entity-mapping",
+      "name": "kotlin-backend-jpa-entity-mapping",
+      "description": "Model Kotlin persistence code correctly for Spring Data JPA and Hibernate. Covers entity design, identity and equality, uniqueness constraints, relationships, fetch plans, and common ORM (Object-Relational Mapping) traps  specific to Kotlin. Use when creating or reviewing JPA (Java Persistence API)  entities, diagnosing N+1 or LazyInitializationException, placing indexes and  uniqueness rules, or preventing Kotlin-specific bugs such as data class  entities and broken equals/hashCode.",
+      "source": {
+        "provider": "github",
+        "owner": "Kotlin",
+        "repository": "kotlin-agent-skills",
+        "skillPath": "skills/kotlin-backend-jpa-entity-mapping",
+        "commit": "c2f90697bf71966a117a13340d5fff787f004140"
+      },
+      "categories": [
+        "jvm",
+        "backend"
+      ],
+      "stack": [
+        "kotlin"
+      ],
+      "requiresAnyStack": [
+        "kotlin",
+        "java"
+      ],
+      "tasks": [
+        "database"
+      ],
+      "prerequisites": [
+        "Spring Data JPA / Hibernate"
+      ],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 1,
+        "bytes": 7439,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "kotlin/kotlin-agent-skills#skills/kotlin-tooling-agp9-migration",
+      "name": "kotlin-tooling-agp9-migration",
+      "description": "Migrates Kotlin Multiplatform (KMP) projects to Android Gradle Plugin 9.0+. Handles plugin replacement (com.android.kotlin.multiplatform.library), module splitting, DSL migration, and the new default project structure. Use when upgrading AGP, when build fails due to KMP+AGP incompatibility, or when the user mentions AGP 9.0, android multiplatform plugin, KMP migration, or com.android.kotlin.multiplatform.library.",
+      "source": {
+        "provider": "github",
+        "owner": "Kotlin",
+        "repository": "kotlin-agent-skills",
+        "skillPath": "skills/kotlin-tooling-agp9-migration",
+        "commit": "c2f90697bf71966a117a13340d5fff787f004140"
+      },
+      "categories": [
+        "android"
+      ],
+      "stack": [
+        "android",
+        "kotlin",
+        "gradle"
+      ],
+      "requiresAnyStack": [
+        "android",
+        "gradle",
+        "kotlin"
+      ],
+      "tasks": [
+        "upgrade",
+        "build-tooling"
+      ],
+      "prerequisites": [
+        "Kotlin Multiplatform project using Android Gradle Plugin"
+      ],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 10,
+        "bytes": 125365,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "kotlin/kotlin-agent-skills#skills/kotlin-tooling-java-to-kotlin",
+      "name": "kotlin-tooling-java-to-kotlin",
+      "description": "Use when converting Java source files to idiomatic Kotlin, when user mentions \"java to kotlin\", \"j2k\", \"convert java\", \"migrate java to kotlin\", or when working with .java files that need to become .kt files. Handles framework-aware conversion for Spring, Lombok, Hibernate, Jackson, Micronaut, Quarkus, Dagger/Hilt, RxJava, JUnit, Guice, Retrofit, and Mockito.",
+      "source": {
+        "provider": "github",
+        "owner": "Kotlin",
+        "repository": "kotlin-agent-skills",
+        "skillPath": "skills/kotlin-tooling-java-to-kotlin",
+        "commit": "c2f90697bf71966a117a13340d5fff787f004140"
+      },
+      "categories": [
+        "jvm"
+      ],
+      "stack": [
+        "java",
+        "kotlin"
+      ],
+      "requiresAnyStack": [
+        "java",
+        "kotlin"
+      ],
+      "tasks": [
+        "kotlin-migration"
+      ],
+      "prerequisites": [],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 16,
+        "bytes": 93848,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "obra/superpowers#skills/systematic-debugging",
+      "name": "systematic-debugging",
+      "description": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes",
+      "source": {
+        "provider": "github",
+        "owner": "obra",
+        "repository": "superpowers",
+        "skillPath": "skills/systematic-debugging",
+        "commit": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b"
+      },
+      "categories": [
+        "workflow"
+      ],
+      "stack": [],
+      "requiresAnyStack": [],
+      "tasks": [
+        "debugging"
+      ],
+      "prerequisites": [],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "MIT",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 11,
+        "bytes": 40842,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "obra/superpowers#skills/test-driven-development",
+      "name": "test-driven-development",
+      "description": "Use when implementing any feature or bugfix, before writing implementation code",
+      "source": {
+        "provider": "github",
+        "owner": "obra",
+        "repository": "superpowers",
+        "skillPath": "skills/test-driven-development",
+        "commit": "2ce8aa15d05bd57213e6f746f953aafb7ded7a8b"
+      },
+      "categories": [
+        "testing",
+        "workflow"
+      ],
+      "stack": [],
+      "requiresAnyStack": [],
+      "tasks": [
+        "testing"
+      ],
+      "prerequisites": [],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "MIT",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 2,
+        "bytes": 17846,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "openai/skills#skills/.curated/security-best-practices",
+      "name": "security-best-practices",
+      "description": "Perform language and framework specific security best-practice reviews and suggest improvements. Trigger only when the user explicitly requests security best practices guidance, a security review/report, or secure-by-default coding help. Trigger only for supported languages (python, javascript/typescript, go). Do not trigger for general code review, debugging, or non-security tasks.",
+      "source": {
+        "provider": "github",
+        "owner": "openai",
+        "repository": "skills",
+        "skillPath": "skills/.curated/security-best-practices",
+        "commit": "49f948faa9258a0c61caceaf225e179651397431"
+      },
+      "categories": [
+        "security"
+      ],
+      "stack": [
+        "python",
+        "javascript"
+      ],
+      "requiresAnyStack": [],
+      "tasks": [
+        "security"
+      ],
+      "prerequisites": [],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "scope": "skill",
+        "evidencePath": "skills/.curated/security-best-practices/LICENSE.txt"
+      },
+      "payload": {
+        "files": 13,
+        "bytes": 411749,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "supabase/agent-skills#skills/supabase-postgres-best-practices",
+      "name": "supabase-postgres-best-practices",
+      "description": "Postgres best practices maintained by Supabase, for Postgres running anywhere. Load this skill BEFORE writing or changing anything that lives in a Postgres database: creating or altering tables and columns (including choosing column types), schema design, migrations and declarative schema files, RLS policies and the tests that verify them, indexes, triggers, database functions, queues and scheduled jobs (pg_cron, pgmq), vector/semantic search (pgvector), and restoring dumps (pg_restore) or importing data. Also load it when diagnosing slow queries, high CPU, timeouts, EXPLAIN plans, connection exhaustion, locking, bloat, or rows visible to the wrong user or tenant. This is not just a performance guide — schema, migration, security, and SQL authoring tasks need these rules too, even for a one-column change or a single query.",
+      "source": {
+        "provider": "github",
+        "owner": "supabase",
+        "repository": "agent-skills",
+        "skillPath": "skills/supabase-postgres-best-practices",
+        "commit": "c9be0e931b7930f7d02126d04774d904c381e7d7"
+      },
+      "categories": [
+        "backend",
+        "database"
+      ],
+      "stack": [
+        "database"
+      ],
+      "requiresAnyStack": [],
+      "tasks": [
+        "database",
+        "performance"
+      ],
+      "prerequisites": [
+        "PostgreSQL"
+      ],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "MIT",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 36,
+        "bytes": 62007,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "trailofbits/skills#plugins/modern-python/skills/modern-python",
+      "name": "modern-python",
+      "description": "Configures Python projects with modern tooling (uv, ruff, ty). Use when creating projects, writing standalone scripts, or migrating from pip/Poetry/mypy/black.",
+      "source": {
+        "provider": "github",
+        "owner": "trailofbits",
+        "repository": "skills",
+        "skillPath": "plugins/modern-python/skills/modern-python",
+        "commit": "2be6433b39e009cd2b6fd3be1895f6b1faa5af9a"
+      },
+      "categories": [
+        "python"
+      ],
+      "stack": [
+        "python"
+      ],
+      "requiresAnyStack": [
+        "python"
+      ],
+      "tasks": [
+        "python-tooling"
+      ],
+      "prerequisites": [
+        "uv, ruff, ty"
+      ],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "CC-BY-SA-4.0",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 14,
+        "bytes": 60039,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "trailofbits/skills#plugins/property-based-testing/skills/property-based-testing",
+      "name": "property-based-testing",
+      "description": "Writes, reviews, and debugs property-based tests — Hypothesis, fast-check, proptest, jqwik, rapid, and Echidna or Medusa for Solidity invariants. Use whenever tests should cover a whole input domain instead of a hand-picked list of examples: encode/decode and serialize/deserialize pairs, parsers, canonicalizers and normalizers, validators, numeric and Decimal types, comparators and sort order, data structures, and smart-contract state invariants. Also use when adding cases to an existing @given, fast-check, or proptest suite, when judging whether existing property tests assert anything real, and when a generator has shrunk a counterexample and you need to tell a wrong property from a genuine bug. Not for coverage-guided binary fuzzing (libFuzzer, AFL), mutation-testing campaigns, static analysis, benchmarking, or end-to-end UI tests.",
+      "source": {
+        "provider": "github",
+        "owner": "trailofbits",
+        "repository": "skills",
+        "skillPath": "plugins/property-based-testing/skills/property-based-testing",
+        "commit": "2be6433b39e009cd2b6fd3be1895f6b1faa5af9a"
+      },
+      "categories": [
+        "testing"
+      ],
+      "stack": [
+        "python",
+        "javascript"
+      ],
+      "requiresAnyStack": [],
+      "tasks": [
+        "property-testing",
+        "testing"
+      ],
+      "prerequisites": [
+        "A property-based testing library (Hypothesis, fast-check, proptest, …)"
+      ],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "CC-BY-SA-4.0",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 9,
+        "bytes": 39701,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [
+        "effort"
+      ],
+      "verifiedAt": "2026-10-28"
+    },
+    {
+      "id": "twostraws/swiftui-agent-skill#swiftui-pro",
+      "name": "swiftui-pro",
+      "description": "Comprehensively reviews SwiftUI code for best practices on modern APIs, maintainability, and performance. Use when reading, writing, or reviewing SwiftUI projects.",
+      "source": {
+        "provider": "github",
+        "owner": "twostraws",
+        "repository": "SwiftUI-Agent-Skill",
+        "skillPath": "swiftui-pro",
+        "commit": "f2920b63995263f57b3e198674e89a602efba6d2"
+      },
+      "categories": [
+        "ios"
+      ],
+      "stack": [
+        "ios",
+        "swift"
+      ],
+      "requiresAnyStack": [
+        "swift",
+        "ios"
+      ],
+      "tasks": [
+        "code-review",
+        "ui-design",
+        "performance"
+      ],
+      "prerequisites": [],
+      "agents": {
+        "claude-code": "portable",
+        "codex": "portable"
+      },
+      "license": {
+        "spdx": "MIT",
+        "scope": "repository",
+        "evidencePath": "LICENSE"
+      },
+      "payload": {
+        "files": 16,
+        "bytes": 73205,
+        "unsupportedFiles": []
+      },
+      "targetSpecificFrontmatter": [],
+      "verifiedAt": "2026-10-28"
+    }
+  ]
+}

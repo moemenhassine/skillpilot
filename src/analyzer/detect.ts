@@ -77,6 +77,7 @@ const EXISTENCE: [RegExp, Tokens, Confidence][] = [
   [/^cypress\.config\.(js|mjs|cjs|ts)$/, ["cypress", "testing"], "medium"],
   [/^(Dockerfile|Containerfile|(docker-)?compose\.ya?ml)$/, ["docker"], "medium"],
   [/^vercel\.json$/, ["vercel"], "medium"],
+  [/^wrangler\.(toml|json|jsonc)$/, ["cloudflare"], "medium"],
   [/^netlify\.toml$/, ["netlify"], "medium"],
   [/^setup\.(py|cfg)$/, ["python"], "medium"],
   [/^AndroidManifest\.xml$/, ["android"], "medium"],
