@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 import { Command, CommanderError, Option } from "commander";
 import { resolveProjectRoot } from "./analyzer/index.ts";
+import { createInterface } from "node:readline";
 import { doctorCommand } from "./commands/doctor.ts";
+import { installCommand, listCommand, removeCommand, type Prompt } from "./commands/lifecycle.ts";
 import { recommendCommand } from "./commands/recommend.ts";
 import { planCommand, reviewCommand } from "./commands/review.ts";
 import { searchCommand } from "./commands/search.ts";
@@ -47,6 +49,16 @@ function run<A extends unknown[], T>(name: string, handler: (...args: A) => Prom
 
 const splitList = (v: string) => v.split(",");
 
+/** Interactive confirmation on the controlling terminal; EOF resolves null, Ctrl-C is a structured cancellation. */
+const ttyPrompt: Prompt = (question) =>
+  new Promise((resolve, reject) => {
+    const rl = createInterface({ input: process.stdin, output: process.stdout });
+    let answered = false;
+    rl.on("SIGINT", () => { answered = true; rl.close(); reject(new SkillpilotError("CANCELLED", "Cancelled; nothing was changed.", "Rerun when ready.")); });
+    rl.on("close", () => { if (!answered) resolve(null); });
+    rl.question(question, (a) => { answered = true; rl.close(); resolve(a); });
+  });
+
 export function buildProgram(): Command {
   const program = new Command("skillpilot")
     .description("Project-aware agent skill recommendations with reviewed, approved installation.")
@@ -70,8 +82,9 @@ export function buildProgram(): Command {
     .command("doctor [path]")
     .description("Validate runtime, project destinations, config, lockfile, cache, and pending recovery")
     .option("--project <path>", "project root (default: current directory)")
-    .action(run("doctor", async (pathArg: string | undefined, opts: { project?: string }) =>
-      doctorCommand(await projectFrom(pathArg, opts.project))));
+    .option("--recover", "roll back or finish an interrupted, already-approved operation")
+    .action(run("doctor", async (pathArg: string | undefined, opts: { project?: string; recover?: boolean }) =>
+      doctorCommand(await projectFrom(pathArg, opts.project), { recover: Boolean(opts.recover) })));
 
   const g = () => program.opts<GlobalOpts>();
   const repoOpt = () => new Option("--repo <owner/repository>", "add a public GitHub repository for this invocation (repeatable)").argParser((v: string, prev: string[] = []) => [...prev, v]);
@@ -116,6 +129,34 @@ export function buildProgram(): Command {
     .option("--out <file>", "save as a new .json file inside .skillpilot/plans/")
     .action(run("plan", async (sources: string[], opts: { project?: string; agent?: string; ack?: string[]; out?: string; offline?: boolean }) =>
       planCommand(await projectFrom(undefined, opts.project), sources, { ...opts, offline: Boolean(opts.offline || g().offline), verbose: g().verbose })));
+
+  program
+    .command("install")
+    .description("Apply an approved install or removal plan (the only command that changes agent skill directories)")
+    .option("--project <path>", "project root (default: current directory)")
+    .option("--plan <file>", "plan file from skillpilot plan --out or skillpilot remove --out")
+    .option("--approve <digest>", "complete sha256: plan digest the user approved (noninteractive)")
+    .action(run("install", async (opts: { project?: string; plan?: string; approve?: string; json?: boolean }) =>
+      installCommand(await projectFrom(undefined, opts.project), {
+        plan: opts.plan, approve: opts.approve, json: Boolean(opts.json || g().json),
+        interactive: Boolean(process.stdin.isTTY && process.stdout.isTTY), prompt: ttyPrompt,
+        display: (lines) => process.stdout.write(lines.join("\n") + "\n"),
+      })));
+
+  program
+    .command("list [path]")
+    .description("Show managed, modified, missing, unmanaged, and agent-incompatible skills (never changes files)")
+    .option("--project <path>", "project root (default: current directory)")
+    .action(run("list", async (pathArg: string | undefined, opts: { project?: string }) => listCommand(await projectFrom(pathArg, opts.project))));
+
+  program
+    .command("remove <installed-id>")
+    .description("Create a removal plan for a managed skill (apply it with skillpilot install --plan)")
+    .option("--project <path>", "project root (default: current directory)")
+    .option("--agent <target>", "claude-code, codex, or both (required)")
+    .option("--out <file>", "new .json file inside .skillpilot/plans/ (required)")
+    .action(run("remove", async (installedId: string, opts: { project?: string; agent?: string; out?: string }) =>
+      removeCommand(await projectFrom(undefined, opts.project), installedId, opts)));
 
   const sources = program.command("sources").description("Inspect discovery sources");
   sources

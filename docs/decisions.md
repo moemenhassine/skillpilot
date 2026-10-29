@@ -59,8 +59,26 @@ LIC-001 is clear only when a bundled license text is identified by signature (MI
 ## D-018 Unacknowledged medium findings produce no plan
 Instead of writing a non-executable plan, `plan` returns `POLICY_BLOCKED` with the exact finding IDs and the `--ack` flags to regenerate. Acknowledging an ID that is not a medium finding in the selection is `INVALID_ARGUMENT`.
 
-## D-019 Existing targets in M3
+## D-019 Existing targets in M3 — superseded by D-022
 Any existing destination, including a case-fold variant, is `TARGET_CONFLICT` at plan time. Treating an identical managed installation as a successful no-op needs the M4 lockfile.
 
 ## D-020 Payload fetching
 Fetching pins a full commit, enforces count and byte caps from the tree *before* any blob request, fetches blobs sequentially, checks each against its Git object ID, and stores it under its SHA-256 in a per-source cache directory. Review is a pure function of the cached bytes plus the recorded excluded entries, so `verifyPlan` (and the M4 executor) can re-run it offline. A repository-root skill (`#.`) uses the whole repository as its payload. Cost: about `files + 3` unauthenticated requests per skill, so a 60-request hour covers roughly two or three average skills (see D-007).
+
+## D-021 Transaction design (M4)
+`install --plan` runs, in order: plan validation and fresh offline review, project identity (the plan's real project root must equal the resolved `--project`), approval, the mutation lock, a check for unfinished operations, live preconditions, staging, journal, promotion, lockfile, commit, and cleanup. Staging lives in `.skillpilot/operations/<id>/`, which is on the project's filesystem and outside every agent discovery root. Each promotion or removal is one directory `rename`, so an owned tree is always in exactly one of two journaled places. Recovery first checks every step (hashes of the moved tree, absence at the other location, lockfile hash equal to the journaled "after" or "before" value) and acts only if all checks pass. Otherwise it changes nothing and returns `RECOVERY_REQUIRED` with the conflicts. Uncommitted operations are always rolled back, never rolled forward. Committed ones only finish cleanup. Agent-root parent directories created by an install are left in place.
+
+## D-022 Managed no-op and partial overlap
+At plan time a target is `absent`, or `managed` when the lockfile records this exact source and payload there and every owned file is byte- and mode-identical. Managed targets get no lockfile change and no write, so adding Codex to a Claude-only install leaves the Claude copy and its provenance untouched. Applying an already-applied plan, or a plan whose targets are all managed, returns `no-op` without touching the lockfile. Any other existing state conflicts. Updates (another revision at the same path) need remove, then install, as the spec requires.
+
+## D-023 Stale locks
+The mutation lock records PID, hostname, operation ID, and time. Process start time is not available portably from Node, so liveness is a PID check. A reused PID reads as alive, which blocks conservatively. A lock from another host, or an unreadable one, is never broken automatically. `install` never clears a stale lock itself: it returns `RECOVERY_REQUIRED` and points to `doctor --recover`, which handles the journal and then removes the lock. Two concurrent `doctor --recover` runs are not serialized (shortcut). Every recovery step re-checks state, so a second run finds nothing to do or a conflict.
+
+## D-024 Approval prompt
+The TTY phrase is `install <first 12 hex>` or `remove <first 12 hex>`, so typing the phrase for an install plan cannot approve a removal plan. EOF and any other answer are `APPROVAL_DECLINED` (exit 5). Ctrl-C is `CANCELLED` (130). Interactive mode needs both stdin and stdout to be TTYs, and `--json` is never interactive. `APPROVAL_REQUIRED` includes the full digest in `details` so an agent wrapper can show it to the user. The digest proves only that the approval value matches the plan, not who supplied it (spec 13.2).
+
+## D-025 Fault injection
+`executePlan` accepts a `hooks` callback, called after every durable transition (`locked`, `staged`, `journaled`, `moved:<i>`, `lockfile`, `committed`, `cleaned`). Only tests pass it; the CLI has no flag or environment variable that reaches it. Throwing `SimulatedCrash` skips rollback and lock release, as a process kill would.
+
+## D-026 Removal plans
+Removal plans share the plan envelope (`operation: "remove"`) and the executor. They list the exact lockfile-owned files per target. Planning and execution both require every owned file present and identical, with no added files or directories. Removed trees are moved into the operation directory as journaled backups, and deleted only after the lockfile commit. The installed ID is the lockfile source ID (`owner/repo#path`), shown by `list`.

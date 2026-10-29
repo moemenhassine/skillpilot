@@ -1,11 +1,13 @@
-import { access, constants, lstat, readdir, readFile } from "node:fs/promises";
+import { access, constants, lstat } from "node:fs/promises";
 import path from "node:path";
 import { AGENT_TARGETS, PROJECT_SKILL_ROOTS } from "../agents/index.ts";
 import { SkillpilotError, toErrorObject, type ErrorObject } from "../errors.ts";
 import { loadConfig } from "../schemas/config.ts";
 import { escapeText as e } from "../renderers/escape.ts";
 import type { CommandResult } from "../renderers/output.ts";
-import { cacheDir, LOCKFILE_PATH, MUTATION_LOCK_PATH, OPERATIONS_DIR } from "../storage/paths.ts";
+import { pendingState, recoverProject, type RecoveryResult } from "../installer/index.ts";
+import { readLockfile } from "../storage/lockfile.ts";
+import { cacheDir, MUTATION_LOCK_PATH, OPERATIONS_DIR } from "../storage/paths.ts";
 
 export interface Check {
   id: string;
@@ -18,11 +20,14 @@ export interface DoctorData {
   cacheDir: string;
   repositories: string[];
   checks: Check[];
+  recovery: RecoveryResult | null;
 }
 
 export const SUPPORTED_NODE_MAJOR = 24;
 
-export async function doctorCommand(projectRoot: string): Promise<CommandResult<DoctorData>> {
+/** Plain doctor never repairs; `recover` runs only journaled recovery for already-approved operations. */
+export async function doctorCommand(projectRoot: string, opts: { recover?: boolean } = {}): Promise<CommandResult<DoctorData>> {
+  const recovery = opts.recover ? await recoverProject(projectRoot) : null;
   const checks: Check[] = [];
   const errors: ErrorObject[] = [];
   const add = (id: string, status: Check["status"], message: string) => checks.push({ id, status, message });
@@ -58,35 +63,29 @@ export async function doctorCommand(projectRoot: string): Promise<CommandResult<
   add("writable", writable ? "pass" : "fail", writable ? "Project root is writable." : "Project root is not writable.");
   if (!writable) errors.push({ code: "IO_ERROR", message: "Project root is not writable.", nextAction: "Fix directory permissions before installing." });
 
-  const lockRaw = await readFile(path.join(projectRoot, LOCKFILE_PATH), "utf8").catch(() => null);
-  if (lockRaw === null) add("lockfile", "pass", "No lockfile; no managed skills recorded.");
-  else {
-    let version: unknown;
-    try {
-      version = (JSON.parse(lockRaw) as { schemaVersion?: unknown }).schemaVersion;
-    } catch {
-      version = undefined;
-    }
-    if (version === 1) add("lockfile", "pass", "Lockfile is JSON with schemaVersion 1.");
-    else {
-      add("lockfile", "fail", "Lockfile is malformed or has an unknown schema; mutations are blocked.");
-      errors.push({ code: "INVALID_SCHEMA", message: "Malformed or unsupported lockfile.", nextAction: `Restore ${LOCKFILE_PATH} from version control.` });
-    }
+  try {
+    const lock = await readLockfile(projectRoot);
+    add("lockfile", "pass", lock.state === "absent" ? "No lockfile; no managed skills recorded." : `Lockfile is valid (schema 1, ${lock.lock.entries.length} entr${lock.lock.entries.length === 1 ? "y" : "ies"}).`);
+  } catch (err) {
+    add("lockfile", "fail", err instanceof SkillpilotError ? err.message : "Lockfile could not be read.");
+    errors.push(toErrorObject(err));
   }
 
   const dir = cacheDir();
   const cacheExists = await lstat(dir).then(() => true, () => false);
   add("cache", "pass", cacheExists ? `Cache at ${dir}.` : `Cache location ${dir} (not created yet).`);
 
-  const journals = (await readdir(path.join(projectRoot, OPERATIONS_DIR)).catch(() => [])).filter((f) => f.endsWith(".json"));
-  const locked = await lstat(path.join(projectRoot, MUTATION_LOCK_PATH)).then(() => true, () => false);
-  if (journals.length || locked) {
-    add("recovery", "warn", `Pending operation state found (${journals.length} journal(s)${locked ? ", mutation lock present" : ""}).`);
+  const pending = await pendingState(projectRoot);
+  if (pending.operations.length || pending.lock) {
+    const what = `${pending.operations.length} unfinished operation(s) in ${OPERATIONS_DIR}/${pending.lock ? `, mutation lock ${pending.lock.alive ? "held by a running process" : "stale"}` : ""}`;
+    add("recovery", pending.lock?.alive ? "warn" : "fail", `${what}.`);
+    if (!pending.lock?.alive) errors.push({ code: "RECOVERY_REQUIRED", message: `Pending operation state: ${what}.`, nextAction: `Run skillpilot doctor --recover (it only rolls back or finishes journaled operations; ${MUTATION_LOCK_PATH} is removed afterwards).` });
   } else add("recovery", "pass", "No pending operations.");
 
-  return { data: { projectRoot, cacheDir: dir, repositories, checks }, errors, text: renderDoctor };
+  return { data: { projectRoot, cacheDir: dir, repositories, checks, recovery }, errors, text: renderDoctor };
 }
 
 function renderDoctor(d: DoctorData): string[] {
-  return d.checks.map((c) => `${c.status.toUpperCase().padEnd(5)} ${c.id.padEnd(22)} ${e(c.message)}`);
+  const rec = d.recovery ? [d.recovery.operations.length || d.recovery.staleLockRemoved ? `Recovered: ${d.recovery.operations.map((o) => `${o.operationId} ${o.action}`).join(", ") || "no journals"}${d.recovery.staleLockRemoved ? "; stale mutation lock removed" : ""}` : "Recovery: nothing to recover."] : [];
+  return [...rec, ...d.checks.map((c) => `${c.status.toUpperCase().padEnd(5)} ${c.id.padEnd(22)} ${e(c.message)}`)];
 }

@@ -2,9 +2,10 @@ import type { AgentTarget } from "../agents/index.ts";
 import { SkillpilotError, type ErrorObject } from "../errors.ts";
 import { fetchTransport, GitHubClient, type Transport } from "../fetcher/github.ts";
 import { fetchPayload } from "../fetcher/payload.ts";
-import { buildPlan, writePlanFile, type Plan } from "../planner/index.ts";
+import { buildPlan, writePlanFile, type InstallPlan } from "../planner/index.ts";
 import { escapeText as e } from "../renderers/escape.ts";
 import type { CommandResult } from "../renderers/output.ts";
+import { confirmPhrase, renderPlan } from "../renderers/plan.ts";
 import { reviewPayload, STATIC_LIMITATION, type ReviewResult } from "../review/index.ts";
 import { RULE_SET_VERSION } from "../review/rules.ts";
 import { parseSource } from "../sources/grammar.ts";
@@ -76,7 +77,7 @@ export interface PlanOptions extends FetchOptions {
   out?: string | undefined;
 }
 
-export async function planCommand(projectRoot: string, sources: string[], opts: PlanOptions): Promise<CommandResult<{ plan: Plan; path: string | null }>> {
+export async function planCommand(projectRoot: string, sources: string[], opts: PlanOptions): Promise<CommandResult<{ plan: InstallPlan; path: string | null }>> {
   if (!opts.agent) throw new SkillpilotError("INVALID_ARGUMENT", "--agent is required for planning.", "Pass --agent claude-code, --agent codex, or --agent both.");
   const agents: AgentTarget[] = parseAgents(opts.agent);
   if (!sources.length) throw new SkillpilotError("INVALID_ARGUMENT", "Select at least one source.", "Example: skillpilot plan owner/repo#skills/name --agent codex");
@@ -89,17 +90,11 @@ export async function planCommand(projectRoot: string, sources: string[], opts: 
     data: { plan, path: written },
     warnings: written ? [`Created ${written}. Plans contain this machine's absolute project path; keep .skillpilot/plans/ out of version control.`] : [],
     text: (d) => [
-      `Install plan for ${d.plan.agents.join(" + ")} (${d.plan.skills.length} skill${d.plan.skills.length > 1 ? "s" : ""}), expires ${d.plan.expiresAt}`,
-      ...d.plan.skills.flatMap((s) => [
-        `  ${e(s.name)}  ${e(`${s.source.owner}/${s.source.repository}`)}@${s.source.commit.slice(0, 12)}  ${s.files.length} files  ${e(s.license.spdx)}`,
-        ...s.targets.map((t) => `    → ${t.path}/`),
-        ...(s.review.acknowledged.length ? [`    acknowledged: ${s.review.acknowledged.join(", ")}`] : []),
-      ]),
-      `Lockfile: ${d.plan.preconditions.lockfile.state === "absent" ? "will be created" : "will be updated"} with ${d.plan.lockfileChanges.length} entr${d.plan.lockfileChanges.length === 1 ? "y" : "ies"} (.skillpilot/lock.json)`,
-      ...d.plan.disclosures.map((x) => `Note: ${e(x)}`),
-      `Plan digest: ${d.plan.planDigest}`,
+      ...renderPlan(d.plan),
       d.path ? `Saved: ${d.path}` : "Plan not saved (pass --out .skillpilot/plans/<name>.json to save it).",
-      "Nothing has been installed. Approval and installation (skillpilot install) arrive in milestone M4.",
+      d.path
+        ? `Nothing has been installed. To approve: skillpilot install --plan ${d.path} (type "${confirmPhrase(d.plan)}"), or --approve ${d.plan.planDigest}`
+        : "Nothing has been installed.",
     ],
   };
 }

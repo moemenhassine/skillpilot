@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { planCommand, reviewCommand } from "../../src/commands/review.ts";
-import { computePlanDigest, verifyPlan, type Plan } from "../../src/planner/index.ts";
+import { computePlanDigest, verifyPlan, type InstallPlan as Plan } from "../../src/planner/index.ts";
 import { payloadDir } from "../../src/storage/payload-cache.ts";
 import { fixtureTransport, MIT, PNG, skillMd, syntheticRepo, type Responses } from "../helpers/github.ts";
 

@@ -1,3 +1,6 @@
+import path from "node:path";
+import { compareDir } from "../installer/snapshot.ts";
+import { readLockfile } from "../storage/lockfile.ts";
 import { analyzeProject } from "../analyzer/index.ts";
 import { SkillpilotError } from "../errors.ts";
 import { recommend, type RecommendResult } from "../recommender/index.ts";
@@ -26,6 +29,25 @@ export interface RecommendData extends Omit<RecommendResult, "exclusions"> {
   exclusions?: RecommendResult["exclusions"];
 }
 
+/** `${id}@${commit}` for payloads installed, managed, and byte-identical for every selected agent (FR-024). */
+async function managedExact(projectRoot: string, agents: string[]): Promise<{ keys: Set<string>; paths: Set<string>; warnings: string[] }> {
+  let lock: Awaited<ReturnType<typeof readLockfile>>;
+  try {
+    lock = await readLockfile(projectRoot);
+  } catch {
+    return { keys: new Set(), paths: new Set(), warnings: ["The lockfile is unreadable; installed skills were not excluded."] };
+  }
+  const byKey = new Map<string, Set<string>>();
+  const paths = new Set<string>();
+  for (const e of lock.state === "present" ? lock.lock.entries : []) {
+    paths.add(e.installPath);
+    if ((await compareDir(path.join(projectRoot, e.installPath), e.files)).state !== "identical") continue;
+    const key = `${e.sourceId}@${e.source.commit}`;
+    byKey.set(key, (byKey.get(key) ?? new Set()).add(e.agent));
+  }
+  return { keys: new Set([...byKey].filter(([, set]) => agents.every((a) => set.has(a))).map(([k]) => k)), paths, warnings: [] };
+}
+
 export async function recommendCommand(projectRoot: string, opts: RecommendOptions): Promise<CommandResult<RecommendData>> {
   const agents = parseAgents(opts.agent);
   const { config, loaded } = await loadProjectSources(projectRoot, opts);
@@ -35,6 +57,7 @@ export async function recommendCommand(projectRoot: string, opts: RecommendOptio
     if (!Number.isInteger(limit) || limit < 1 || limit > 20) throw new SkillpilotError("INVALID_ARGUMENT", "--limit must be an integer from 1 to 20.", "Pass --limit 5, for example.");
   }
   const analysis = await analyzeProject(projectRoot, { stack: opts.stack, goal: opts.goal, config });
+  const managed = await managedExact(projectRoot, agents);
   const result = recommend({
     candidates: loaded.candidates,
     stack: analysis.effectiveStack,
@@ -42,10 +65,11 @@ export async function recommendCommand(projectRoot: string, opts: RecommendOptio
     agents,
     limit,
     excludeIds: new Set(config?.excludeSkillIds ?? []),
+    installedExact: managed.keys,
   });
-  const warnings = [...loaded.warnings, ...analysis.inventory.warnings];
+  const warnings = [...loaded.warnings, ...analysis.inventory.warnings, ...managed.warnings];
   for (const r of result.recommendations) {
-    for (const s of analysis.inventory.skills) {
+    for (const s of analysis.inventory.skills.filter((s) => !managed.paths.has(s.path))) {
       const name = s.manifest.valid ? s.manifest.name : s.directoryName;
       if (name === r.name) warnings.push(`${r.name}: a same-name unmanaged skill already exists at ${s.path}; installing would conflict.`);
     }
