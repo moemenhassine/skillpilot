@@ -15,7 +15,7 @@ Status as of 2026-10-29 for version 0.1.0. Items marked **maintainer** need a de
 | CI passing on Linux, macOS, and Windows with Node 24 | **partial**: macOS local and Linux container pass; Windows waits for the first CI run | `.github/workflows/ci.yml` |
 | Package built and tested from its packed tarball | done on macOS and Linux | `npm run test:package` |
 | Portable skill included; wrapper vs. CLI installation documented | done | `skills/skillpilot/`, README |
-| README: purpose, fixture quickstart, complete workflow, prior art, honest support matrix | done | `README.md` |
+| README: purpose, fixture quickstart, complete workflow, prior art, honest support matrix | done | `README.md` (support status summarized, full matrix in `docs/compatibility.md`) |
 | Architecture, CLI, JSON schemas, security model, compatibility, decisions, release checklist | done | `docs/`, `schemas/` |
 | MIT license; upstream notices preserved; catalog not assumed MIT | done | `LICENSE`, `THIRD_PARTY_NOTICES.md` (`npm run check:notices`), catalog license evidence |
 | `SECURITY.md` with a real private reporting channel | **maintainer**: placeholder present, no address invented | `SECURITY.md` |
