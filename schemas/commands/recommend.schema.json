@@ -1,0 +1,564 @@
+{
+  "title": "skillpilot recommend --json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "command": {
+      "type": "string",
+      "const": "recommend"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "partial",
+        "error"
+      ]
+    },
+    "data": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "scoringVersion": {
+              "type": "string",
+              "const": "fit-v1"
+            },
+            "applicableStack": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "goalTags": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "accessibility",
+                  "ai-integration",
+                  "browser-testing",
+                  "build-tooling",
+                  "cloud-workers",
+                  "code-review",
+                  "concurrency",
+                  "data-analysis",
+                  "data-fetching",
+                  "database",
+                  "datasets",
+                  "debugging",
+                  "demo-ui",
+                  "deployment",
+                  "kotlin-migration",
+                  "mcp",
+                  "ml-training",
+                  "navigation",
+                  "performance",
+                  "property-testing",
+                  "python-tooling",
+                  "security",
+                  "testing",
+                  "ui-design",
+                  "upgrade"
+                ]
+              }
+            },
+            "recommendations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rank": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "object",
+                    "properties": {
+                      "provider": {
+                        "type": "string",
+                        "const": "github"
+                      },
+                      "owner": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 39
+                      },
+                      "repository": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                      },
+                      "skillPath": {
+                        "type": "string",
+                        "pattern": "^(\\.|(?!\\/)(?!.*\\/\\/)(?!.*(^|\\/)\\.\\.?(\\/|$))[A-Za-z0-9._\\-/]{1,240}(?<!\\/))$"
+                      },
+                      "commit": {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{40}$"
+                      }
+                    },
+                    "required": [
+                      "provider",
+                      "owner",
+                      "repository",
+                      "skillPath",
+                      "commit"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "score": {
+                    "type": "object",
+                    "properties": {
+                      "stackFit": {
+                        "type": "number"
+                      },
+                      "goalFit": {
+                        "type": "number"
+                      },
+                      "compatibility": {
+                        "type": "number"
+                      },
+                      "metadataCompleteness": {
+                        "type": "number"
+                      },
+                      "base": {
+                        "type": "number"
+                      },
+                      "redundancyPenalty": {
+                        "type": "number"
+                      },
+                      "final": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "stackFit",
+                      "goalFit",
+                      "compatibility",
+                      "metadataCompleteness",
+                      "base",
+                      "redundancyPenalty",
+                      "final"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "matchedStack": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "projectToken": {
+                          "type": "string"
+                        },
+                        "candidateTag": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "projectToken",
+                        "candidateTag"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "matchedGoals": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "accessibility",
+                        "ai-integration",
+                        "browser-testing",
+                        "build-tooling",
+                        "cloud-workers",
+                        "code-review",
+                        "concurrency",
+                        "data-analysis",
+                        "data-fetching",
+                        "database",
+                        "datasets",
+                        "debugging",
+                        "demo-ui",
+                        "deployment",
+                        "kotlin-migration",
+                        "mcp",
+                        "ml-training",
+                        "navigation",
+                        "performance",
+                        "property-testing",
+                        "python-tooling",
+                        "security",
+                        "testing",
+                        "ui-design",
+                        "upgrade"
+                      ]
+                    }
+                  },
+                  "compatibility": {
+                    "type": "object",
+                    "properties": {
+                      "claude-code": {
+                        "type": "string",
+                        "enum": [
+                          "verified",
+                          "portable",
+                          "unknown",
+                          "excluded"
+                        ]
+                      },
+                      "codex": {
+                        "type": "string",
+                        "enum": [
+                          "verified",
+                          "portable",
+                          "unknown",
+                          "excluded"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "claude-code",
+                      "codex"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "license": {
+                    "type": "object",
+                    "properties": {
+                      "spdx": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 64
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "scope": {
+                        "type": "string",
+                        "enum": [
+                          "skill",
+                          "repository"
+                        ]
+                      },
+                      "evidencePath": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 240
+                      }
+                    },
+                    "required": [
+                      "spdx",
+                      "scope",
+                      "evidencePath"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "prerequisites": {
+                    "anyOf": [
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "limitations": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "reviewState": {
+                    "type": "string",
+                    "enum": [
+                      "not-reviewed",
+                      "reviewed",
+                      "incomplete",
+                      "stale"
+                    ]
+                  },
+                  "discoveredVia": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "rank",
+                  "id",
+                  "name",
+                  "description",
+                  "source",
+                  "score",
+                  "matchedStack",
+                  "matchedGoals",
+                  "compatibility",
+                  "license",
+                  "prerequisites",
+                  "limitations",
+                  "reviewState",
+                  "discoveredVia"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "notes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "project": {
+              "type": "object",
+              "properties": {
+                "root": {
+                  "type": "string"
+                },
+                "effectiveStack": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "stackOrigin": {
+                  "type": "string"
+                },
+                "evidence": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "path": {
+                        "type": "string"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "token": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "path",
+                      "key",
+                      "token"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "root",
+                "effectiveStack",
+                "stackOrigin",
+                "evidence"
+              ],
+              "additionalProperties": false
+            },
+            "goal": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "agents": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "agentAssumption": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "sources": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "bundled",
+                      "repository"
+                    ]
+                  },
+                  "state": {
+                    "type": "string",
+                    "enum": [
+                      "loaded",
+                      "cached",
+                      "refreshed",
+                      "not-cached",
+                      "failed"
+                    ]
+                  },
+                  "commit": {
+                    "type": "string"
+                  },
+                  "fetchedAt": {
+                    "type": "string"
+                  },
+                  "skills": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "invalid": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "id",
+                  "kind",
+                  "state",
+                  "skills"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "searched": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "exclusions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "reason": {
+                    "type": "string"
+                  },
+                  "base": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "id",
+                  "reason"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "scoringVersion",
+            "applicableStack",
+            "goalTags",
+            "recommendations",
+            "notes",
+            "project",
+            "goal",
+            "agents",
+            "agentAssumption",
+            "sources",
+            "searched"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "INTERNAL_ERROR",
+              "INVALID_ARGUMENT",
+              "INVALID_SCHEMA",
+              "SOURCE_UNAVAILABLE",
+              "RATE_LIMITED",
+              "POLICY_BLOCKED",
+              "REVIEW_INCOMPLETE",
+              "APPROVAL_REQUIRED",
+              "APPROVAL_MISMATCH",
+              "APPROVAL_DECLINED",
+              "TARGET_CONFLICT",
+              "PLAN_STALE",
+              "PLAN_EXPIRED",
+              "IO_ERROR",
+              "MUTATION_LOCKED",
+              "RECOVERY_REQUIRED",
+              "CANCELLED"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "nextAction": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "nextAction"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "command",
+    "status",
+    "data",
+    "warnings",
+    "errors"
+  ],
+  "additionalProperties": false
+}

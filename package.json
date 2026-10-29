@@ -27,7 +27,12 @@
     "test": "vitest run tests/unit",
     "test:integration": "vitest run tests/integration",
     "validate:catalog": "node scripts/validate-catalog.ts",
-    "test:evaluation": "node scripts/evaluate.ts"
+    "test:evaluation": "node scripts/evaluate.ts",
+    "test:package": "npm run build && node scripts/test-package.ts",
+    "smoke:public-source": "node scripts/smoke-public-source.ts",
+    "schemas": "node scripts/generate-schemas.ts",
+    "check:schemas": "node scripts/generate-schemas.ts --check",
+    "demo": "node scripts/demo.ts"
   },
   "dependencies": {
     "commander": "15.0.0",

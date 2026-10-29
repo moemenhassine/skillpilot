@@ -1,0 +1,172 @@
+{
+  "title": "skillpilot install --json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "command": {
+      "type": "string",
+      "const": "install"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "partial",
+        "error"
+      ]
+    },
+    "data": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "type": "string",
+              "enum": [
+                "install",
+                "remove"
+              ]
+            },
+            "planDigest": {
+              "type": "string"
+            },
+            "outcome": {
+              "type": "string",
+              "enum": [
+                "installed",
+                "removed",
+                "no-op"
+              ]
+            },
+            "changed": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "agent": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "agent",
+                  "path"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "unchanged": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "agent": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "agent",
+                  "path"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "lockfile": {
+              "type": "string",
+              "enum": [
+                "created",
+                "updated",
+                "unchanged"
+              ]
+            }
+          },
+          "required": [
+            "operation",
+            "planDigest",
+            "outcome",
+            "changed",
+            "unchanged",
+            "lockfile"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "INTERNAL_ERROR",
+              "INVALID_ARGUMENT",
+              "INVALID_SCHEMA",
+              "SOURCE_UNAVAILABLE",
+              "RATE_LIMITED",
+              "POLICY_BLOCKED",
+              "REVIEW_INCOMPLETE",
+              "APPROVAL_REQUIRED",
+              "APPROVAL_MISMATCH",
+              "APPROVAL_DECLINED",
+              "TARGET_CONFLICT",
+              "PLAN_STALE",
+              "PLAN_EXPIRED",
+              "IO_ERROR",
+              "MUTATION_LOCKED",
+              "RECOVERY_REQUIRED",
+              "CANCELLED"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "nextAction": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "nextAction"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "command",
+    "status",
+    "data",
+    "warnings",
+    "errors"
+  ],
+  "additionalProperties": false
+}

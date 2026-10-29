@@ -1,0 +1,191 @@
+{
+  "title": "skillpilot doctor --json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "command": {
+      "type": "string",
+      "const": "doctor"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "partial",
+        "error"
+      ]
+    },
+    "data": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "projectRoot": {
+              "type": "string"
+            },
+            "cacheDir": {
+              "type": "string"
+            },
+            "repositories": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "checks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "pass",
+                      "warn",
+                      "fail"
+                    ]
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "status",
+                  "message"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "recovery": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "operations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "operationId": {
+                            "type": "string"
+                          },
+                          "action": {
+                            "type": "string",
+                            "enum": [
+                              "rolled-back",
+                              "completed-cleanup",
+                              "discarded-staging"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "operationId",
+                          "action"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "staleLockRemoved": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "operations",
+                    "staleLockRemoved"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "projectRoot",
+            "cacheDir",
+            "repositories",
+            "checks",
+            "recovery"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "INTERNAL_ERROR",
+              "INVALID_ARGUMENT",
+              "INVALID_SCHEMA",
+              "SOURCE_UNAVAILABLE",
+              "RATE_LIMITED",
+              "POLICY_BLOCKED",
+              "REVIEW_INCOMPLETE",
+              "APPROVAL_REQUIRED",
+              "APPROVAL_MISMATCH",
+              "APPROVAL_DECLINED",
+              "TARGET_CONFLICT",
+              "PLAN_STALE",
+              "PLAN_EXPIRED",
+              "IO_ERROR",
+              "MUTATION_LOCKED",
+              "RECOVERY_REQUIRED",
+              "CANCELLED"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "nextAction": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "nextAction"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "command",
+    "status",
+    "data",
+    "warnings",
+    "errors"
+  ],
+  "additionalProperties": false
+}

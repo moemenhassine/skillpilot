@@ -1,0 +1,157 @@
+{
+  "title": "skillpilot list --json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "command": {
+      "type": "string",
+      "const": "list"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "partial",
+        "error"
+      ]
+    },
+    "data": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "lockfile": {
+              "type": "string",
+              "enum": [
+                "absent",
+                "present",
+                "invalid"
+              ]
+            },
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "agent": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string",
+                    "enum": [
+                      "managed",
+                      "modified",
+                      "missing",
+                      "unmanaged",
+                      "agent-incompatible"
+                    ]
+                  },
+                  "details": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
+                    "additionalProperties": {}
+                  }
+                },
+                "required": [
+                  "id",
+                  "name",
+                  "agent",
+                  "path",
+                  "state"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "lockfile",
+            "entries"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "INTERNAL_ERROR",
+              "INVALID_ARGUMENT",
+              "INVALID_SCHEMA",
+              "SOURCE_UNAVAILABLE",
+              "RATE_LIMITED",
+              "POLICY_BLOCKED",
+              "REVIEW_INCOMPLETE",
+              "APPROVAL_REQUIRED",
+              "APPROVAL_MISMATCH",
+              "APPROVAL_DECLINED",
+              "TARGET_CONFLICT",
+              "PLAN_STALE",
+              "PLAN_EXPIRED",
+              "IO_ERROR",
+              "MUTATION_LOCKED",
+              "RECOVERY_REQUIRED",
+              "CANCELLED"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "nextAction": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "nextAction"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "command",
+    "status",
+    "data",
+    "warnings",
+    "errors"
+  ],
+  "additionalProperties": false
+}

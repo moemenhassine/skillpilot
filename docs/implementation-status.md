@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated 2026-10-29 (M4). Evidence = commands run locally on macOS (Darwin 25.4), Node 24.14.1.
+Updated 2026-10-29 (M5). Evidence = commands run locally on macOS (Darwin 25.4), Node 24.14.1.
 
 ## Milestones
 
@@ -11,7 +11,7 @@ Updated 2026-10-29 (M4). Evidence = commands run locally on macOS (Darwin 25.4),
 | M2 Discovery and recommendations | Done on macOS; evaluation labels pending human review | `npm test` + `npm run test:integration` (103 passed), `npm run validate:catalog`, `npm run test:evaluation` → `docs/evaluation-report.md` |
 | M3 Immutable review and planning | Done on macOS | `tests/unit/rules.test.ts`, `tests/unit/canonical.test.ts`, `tests/integration/review-plan.test.ts` (200 tests total); live review of 3 catalog skills + offline plan verification (below) |
 | M4 Approved lifecycle | Done on macOS; Linux/Windows runs pending (M6 CI) | `tests/integration/lifecycle.test.ts` (52 tests incl. crash injection at every journal transition), `tests/unit/lockfile.test.ts`; 254 tests total; real pseudo-TTY prompt smoke test (below) |
-| M5 Agent package and usability | Not started | — |
+| M5 Agent package and usability | Done on macOS. Claude Code smoke test passed (discovery, invocation, declined install); Codex not run (CLI not installed) | `skills/skillpilot/`, `schemas/`, `README.md`, `docs/cli.md`, `docs/architecture.md`; `tests/unit/skill-package.test.ts`, `tests/integration/contracts.test.ts`; `npm run test:package`, `npm run demo`, `npm run smoke:public-source` (live, below) |
 | M6 Release readiness | Not started | — |
 
 ## Requirements
@@ -25,9 +25,9 @@ Updated 2026-10-29 (M4). Evidence = commands run locally on macOS (Darwin 25.4),
 | FR-005 | Done | Monorepo fixture reports child packages; no recursive action |
 | FR-006 | Done | Both project roots inventoried (manifest only), user-level same-name check; managed/modified/missing state via `list` against the lockfile |
 | FR-007 | Done | Secret canary fixture never read or echoed; symlinks skipped; mandatory exclusions not negatable; limit tests |
-| FR-050 | Partial | Strict config schema + field-level errors implemented; formal published JSON schema pending M5 |
+| FR-050 | Done | Strict config schema with field-level errors; published as `schemas/config.schema.json` |
 | FR-051 | Done | `doctor` checks runtime, root, config, destinations, writable, full lockfile schema, cache path, sources, pending journals and mutation-lock liveness; `doctor --recover` runs journaled recovery only |
-| FR-052 | Partial | Envelope, stable codes, exit codes implemented for `scan`/`doctor`; published per-command schemas pending |
+| FR-052 | Done | One envelope per `--json` command with stable codes; `schemas/` publishes the envelope, every command's data, config, catalog, plan, lockfile, journal, and mutation lock. Generated from zod schemas that are compile-time checked against the command types; a contract test validates real CLI output of all 10 commands, including error envelopes |
 | FR-053 | Done | `--offline` makes zero requests for discovery and for review/plan of cached pinned payloads; `install` has no network path at all (test: zero transport calls after the branch moves) |
 | FR-054 | Done | Config caps can only narrow scan limits (schema max = hard cap); tests |
 | FR-010 | Done | `search` is local; query text is never sent anywhere (no transport is used unless `--refresh`/`--repo`) |
@@ -65,6 +65,8 @@ Updated 2026-10-29 (M4). Evidence = commands run locally on macOS (Darwin 25.4),
 | NFR-003 | Partial | Golden canonical-JSON/digest vectors in `tests/fixtures/golden/` (independently checked with `shasum`); deterministic plan digest test |
 | NFR-006 | Partial | 15 s request timeout, 90 s command deadline, ≤2 retries with backoff, rate-limit handling. Concurrency is 1 (sequential) |
 | NFR-009 | Partial | No color used; `--no-color`/`NO_COLOR` honoured trivially; terminal escaping tested |
+| NFR-007 | Done | Scan, search, ranking, cached review and planning, and install run with `--offline` and no transport (tests, `npm run demo`, package smoke test) |
+| NFR-014 | Partial | README quickstart (`npm ci`, `npm run build`, `npm run demo`) verified from this checkout on macOS; states working features, deferred features, static-review limits, and unverified agent tests. Clean-checkout run on Linux/Windows pending CI |
 | Others | Not started | — |
 
 ## Live evidence
@@ -78,9 +80,13 @@ Updated 2026-10-29 (M4). Evidence = commands run locally on macOS (Darwin 25.4),
 
 - 2026-10-29, pseudo-terminal smoke test (`script -q /dev/null node src/cli.ts install --plan …`, scratch HOME, fixture payload): a wrong phrase returned `APPROVAL_DECLINED`, Ctrl-C returned `CANCELLED`, and typing `install <12 hex>` installed the skill. No directory was created in the first two runs.
 
+- 2026-10-29, `npm run smoke:public-source` through the production transport: `obra/superpowers@2ce8aa15…#skills/test-driven-development` reviewed (3 files, MIT, 0 findings, eligible), planned offline for Codex, installed with `--approve` into a temporary project, and `list` reported it `managed`.
+
 ## Unresolved decisions
 
 - Evaluation labels need human maintainer review (D-013).
 
-- GitHub unauthenticated rate limit vs. 200-file payload cap (D-007) — must be settled in M3.
+- GitHub unauthenticated rate limit vs. 200-file payload cap (D-007): accepted for MVP and disclosed (D-020).
+- Codex real-agent smoke test (no Codex CLI available; `docs/compatibility.md`).
+- LICENSE copyright holder (D-028).
 - Package name, LICENSE copyright holder, security reporting channel — user/maintainer (publication only).

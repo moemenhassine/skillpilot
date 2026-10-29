@@ -82,3 +82,12 @@ The TTY phrase is `install <first 12 hex>` or `remove <first 12 hex>`, so typing
 
 ## D-026 Removal plans
 Removal plans share the plan envelope (`operation: "remove"`) and the executor. They list the exact lockfile-owned files per target. Planning and execution both require every owned file present and identical, with no added files or directories. Removed trees are moved into the operation directory as journaled backups, and deleted only after the lockfile commit. The installed ID is the lockfile source ID (`owner/repo#path`), shown by `list`.
+
+## D-027 Published JSON contracts
+Command outputs are TypeScript interfaces, so `src/schemas/contracts.ts` defines a zod schema for each command's `data`, with a compile-time check that the schema and the interface are mutually assignable (optional keys normalized). `schemas/*.schema.json` is generated from these and from the existing persisted-format schemas by `npm run schemas` (`z.toJSONSchema`, draft 2020-12, output types). A test fails if the checked-in files differ, and another validates the real `--json` output of all ten commands. The schemas carry no `$id` until a canonical repository URL exists.
+
+## D-028 Skill package license file
+The spec frontmatter declares `license: MIT`, but no license text ships with `skills/skillpilot/` (or the repository) yet: the copyright holder has not been named, and SkillPilot does not invent one. SkillPilot's own review therefore reports `LIC-001` for its package, and that finding is the only one the self-review test allows. The maintainer must name the copyright holder for the M6 LICENSE; the same text must then be copied into `skills/skillpilot/LICENSE`.
+
+## D-029 Demo and package smoke tests
+`npm run demo` reuses the recorded-transport test helper to put a fixture skill in a temporary cache, then runs the real CLI offline in a temporary project. It is a development script and is not shipped. `npm run test:package` installs the packed tarball with `npm install --offline` from the local npm cache, so it needs the dependencies cached (true after `npm ci`) but no network. `npm run smoke:public-source` is the only network-dependent script and is never part of `npm test`.

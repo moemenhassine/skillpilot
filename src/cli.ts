@@ -11,8 +11,10 @@ import { sourcesListCommand } from "./commands/sources.ts";
 import { scanCommand } from "./commands/scan.ts";
 import { SkillpilotError } from "./errors.ts";
 import { emitError, emitResult, type CommandResult, type OutputOptions } from "./renderers/output.ts";
+import { VERSION } from "./version.ts";
 
-export const VERSION = "0.1.0";
+export { VERSION };
+
 
 interface GlobalOpts {
   json?: boolean;

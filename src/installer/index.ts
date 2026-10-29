@@ -18,11 +18,11 @@ export class SimulatedCrash extends Error {}
 /** Called after every durable transition. Only tests pass hooks; the CLI never exposes them. */
 export type FaultHook = (point: string) => void | Promise<void>;
 
-const MutationLockSchema = z.object({ pid: z.number().int(), hostname: z.string(), operationId: z.string(), createdAt: z.string() }).strict();
+export const MutationLockSchema = z.object({ pid: z.number().int(), hostname: z.string(), operationId: z.string(), createdAt: z.string() }).strict();
 type MutationLock = z.infer<typeof MutationLockSchema>;
 
 const StepSchema = z.object({ kind: z.enum(["promote", "demote"]), from: z.string(), to: z.string(), files: z.array(PayloadFileSchema) }).strict();
-const JournalSchema = z
+export const JournalSchema = z
   .object({
     schemaVersion: z.literal(1),
     operationId: z.string(),

@@ -13,8 +13,8 @@ import { confirmPhrase, renderPlan } from "../renderers/plan.ts";
 import { readLockfile } from "../storage/lockfile.ts";
 import { cacheDir } from "../storage/paths.ts";
 import { parseAgents } from "./search.ts";
+import { VERSION } from "../version.ts";
 
-const VERSION = "0.1.0";
 const MAX_PLAN_BYTES = 4 * 1024 * 1024;
 
 /** Reads one line from the user; resolves null on EOF. Rejects with CANCELLED on interrupt. */

@@ -1,0 +1,94 @@
+{
+  "title": "SkillPilot JSON envelope (any command)",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "command": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "partial",
+        "error"
+      ]
+    },
+    "data": {
+      "anyOf": [
+        {},
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "INTERNAL_ERROR",
+              "INVALID_ARGUMENT",
+              "INVALID_SCHEMA",
+              "SOURCE_UNAVAILABLE",
+              "RATE_LIMITED",
+              "POLICY_BLOCKED",
+              "REVIEW_INCOMPLETE",
+              "APPROVAL_REQUIRED",
+              "APPROVAL_MISMATCH",
+              "APPROVAL_DECLINED",
+              "TARGET_CONFLICT",
+              "PLAN_STALE",
+              "PLAN_EXPIRED",
+              "IO_ERROR",
+              "MUTATION_LOCKED",
+              "RECOVERY_REQUIRED",
+              "CANCELLED"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "nextAction": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "nextAction"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "command",
+    "status",
+    "data",
+    "warnings",
+    "errors"
+  ],
+  "additionalProperties": false
+}

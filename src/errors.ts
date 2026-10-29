@@ -20,6 +20,7 @@ export const EXIT_CODES = {
 } as const;
 
 export type ErrorCode = keyof typeof EXIT_CODES;
+export const ERROR_CODES = Object.keys(EXIT_CODES) as [ErrorCode, ...ErrorCode[]];
 
 export interface ErrorObject {
   code: ErrorCode;

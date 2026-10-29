@@ -12,6 +12,7 @@ import { parseSource } from "../sources/grammar.ts";
 import { updateManifest } from "../storage/payload-cache.ts";
 import { cacheDir } from "../storage/paths.ts";
 import { parseAgents } from "./search.ts";
+import { VERSION } from "../version.ts";
 
 export interface FetchOptions {
   offline?: boolean | undefined;
@@ -21,7 +22,6 @@ export interface FetchOptions {
   now?: Date;
 }
 
-const VERSION = "0.1.0";
 
 async function reviewSource(sourceArg: string, opts: FetchOptions, acknowledged: string[] = []): Promise<{ review: ReviewResult; fromCache: boolean }> {
   const ref = parseSource(sourceArg);

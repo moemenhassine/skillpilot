@@ -1,0 +1,434 @@
+{
+  "title": "skillpilot scan --json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "command": {
+      "type": "string",
+      "const": "scan"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "partial",
+        "error"
+      ]
+    },
+    "data": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "projectRoot": {
+              "type": "string"
+            },
+            "detectedStack": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "type": "string",
+                    "enum": [
+                      "high",
+                      "medium",
+                      "low"
+                    ]
+                  },
+                  "evidenceCount": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "token",
+                  "confidence",
+                  "evidenceCount"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "effectiveStack": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "stackOrigin": {
+              "type": "string",
+              "enum": [
+                "cli",
+                "config",
+                "detected",
+                "none"
+              ]
+            },
+            "stackNotes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "goal": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "key": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "type": "string",
+                    "enum": [
+                      "high",
+                      "medium",
+                      "low"
+                    ]
+                  },
+                  "origin": {
+                    "type": "string",
+                    "enum": [
+                      "detected",
+                      "user-declared"
+                    ]
+                  }
+                },
+                "required": [
+                  "path",
+                  "key",
+                  "token",
+                  "confidence",
+                  "origin"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "monorepo": {
+              "type": "object",
+              "properties": {
+                "detected": {
+                  "type": "boolean"
+                },
+                "childPackages": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "detected",
+                "childPackages"
+              ],
+              "additionalProperties": false
+            },
+            "inventory": {
+              "type": "object",
+              "properties": {
+                "skills": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "agent": {
+                        "type": "string",
+                        "enum": [
+                          "claude-code",
+                          "codex"
+                        ]
+                      },
+                      "path": {
+                        "type": "string"
+                      },
+                      "directoryName": {
+                        "type": "string"
+                      },
+                      "symlink": {
+                        "type": "boolean"
+                      },
+                      "userLevelSameName": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "manifest": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "valid": {
+                                "type": "boolean",
+                                "const": true
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "nameMatchesDirectory": {
+                                "type": "boolean"
+                              }
+                            },
+                            "required": [
+                              "valid",
+                              "name",
+                              "description",
+                              "nameMatchesDirectory"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "valid": {
+                                "type": "boolean",
+                                "const": false
+                              },
+                              "problems": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "required": [
+                              "valid",
+                              "problems"
+                            ],
+                            "additionalProperties": false
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "agent",
+                      "path",
+                      "directoryName",
+                      "symlink",
+                      "userLevelSameName",
+                      "manifest"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "warnings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "skills",
+                "warnings"
+              ],
+              "additionalProperties": false
+            },
+            "scan": {
+              "type": "object",
+              "properties": {
+                "filesRead": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "bytesRead": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "entriesVisited": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "skipped": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "path": {
+                        "type": "string"
+                      },
+                      "reason": {
+                        "type": "string",
+                        "enum": [
+                          "secret",
+                          "symlink",
+                          "special-file",
+                          "unreadable"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "path",
+                      "reason"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "excludedDirs": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "ignoredCount": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "limitHits": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "unparsed": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "path": {
+                        "type": "string"
+                      },
+                      "reason": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "path",
+                      "reason"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "inspectedCategories": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "filesRead",
+                "bytesRead",
+                "entriesVisited",
+                "skipped",
+                "excludedDirs",
+                "ignoredCount",
+                "limitHits",
+                "unparsed",
+                "inspectedCategories"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "projectRoot",
+            "detectedStack",
+            "effectiveStack",
+            "stackOrigin",
+            "stackNotes",
+            "goal",
+            "evidence",
+            "monorepo",
+            "inventory",
+            "scan"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "INTERNAL_ERROR",
+              "INVALID_ARGUMENT",
+              "INVALID_SCHEMA",
+              "SOURCE_UNAVAILABLE",
+              "RATE_LIMITED",
+              "POLICY_BLOCKED",
+              "REVIEW_INCOMPLETE",
+              "APPROVAL_REQUIRED",
+              "APPROVAL_MISMATCH",
+              "APPROVAL_DECLINED",
+              "TARGET_CONFLICT",
+              "PLAN_STALE",
+              "PLAN_EXPIRED",
+              "IO_ERROR",
+              "MUTATION_LOCKED",
+              "RECOVERY_REQUIRED",
+              "CANCELLED"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "nextAction": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "nextAction"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "command",
+    "status",
+    "data",
+    "warnings",
+    "errors"
+  ],
+  "additionalProperties": false
+}

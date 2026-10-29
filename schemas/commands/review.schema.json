@@ -1,0 +1,390 @@
+{
+  "title": "skillpilot review --json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "command": {
+      "type": "string",
+      "const": "review"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "partial",
+        "error"
+      ]
+    },
+    "data": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "ruleSet": {
+              "type": "string",
+              "const": "rules-v1"
+            },
+            "policyVersion": {
+              "type": "string",
+              "const": "payload-v2"
+            },
+            "source": {
+              "type": "object",
+              "properties": {
+                "provider": {
+                  "type": "string",
+                  "const": "github"
+                },
+                "owner": {
+                  "type": "string"
+                },
+                "repository": {
+                  "type": "string"
+                },
+                "skillPath": {
+                  "type": "string"
+                },
+                "commit": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{40}$"
+                }
+              },
+              "required": [
+                "provider",
+                "owner",
+                "repository",
+                "skillPath",
+                "commit"
+              ],
+              "additionalProperties": false
+            },
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "description": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "payloadDigest": {
+              "type": "string"
+            },
+            "files": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "sourcePath": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "sha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  },
+                  "installedMode": {
+                    "type": "string",
+                    "const": "0644"
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": [
+                      "skill",
+                      "license",
+                      "notice"
+                    ]
+                  }
+                },
+                "required": [
+                  "path",
+                  "sourcePath",
+                  "size",
+                  "sha256",
+                  "installedMode",
+                  "role"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "coverage": {
+              "type": "string",
+              "enum": [
+                "complete",
+                "incomplete"
+              ]
+            },
+            "decision": {
+              "type": "string",
+              "enum": [
+                "eligible",
+                "requires-acknowledgment",
+                "blocked"
+              ]
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "ruleId": {
+                    "type": "string"
+                  },
+                  "severity": {
+                    "type": "string",
+                    "enum": [
+                      "info",
+                      "low",
+                      "medium",
+                      "high",
+                      "critical"
+                    ]
+                  },
+                  "confidence": {
+                    "type": "string",
+                    "enum": [
+                      "high",
+                      "medium",
+                      "low"
+                    ]
+                  },
+                  "file": {
+                    "type": "string"
+                  },
+                  "lineStart": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "lineEnd": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "occurrences": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "explanation": {
+                    "type": "string"
+                  },
+                  "remediation": {
+                    "type": "string"
+                  },
+                  "blocking": {
+                    "type": "boolean"
+                  },
+                  "context": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "ruleId",
+                  "severity",
+                  "confidence",
+                  "file",
+                  "occurrences",
+                  "explanation",
+                  "remediation",
+                  "blocking"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "acknowledged": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "license": {
+              "type": "object",
+              "properties": {
+                "spdx": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "files": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "manifestField": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "problem": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "spdx",
+                "files",
+                "manifestField",
+                "problem"
+              ],
+              "additionalProperties": false
+            },
+            "disclosures": {
+              "type": "object",
+              "properties": {
+                "scripts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "images": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "externalDomains": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "targetSpecificFrontmatter": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "compatibility": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "fileModeNormalization": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "scripts",
+                "images",
+                "externalDomains",
+                "targetSpecificFrontmatter",
+                "compatibility",
+                "fileModeNormalization"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "ruleSet",
+            "policyVersion",
+            "source",
+            "name",
+            "description",
+            "payloadDigest",
+            "files",
+            "coverage",
+            "decision",
+            "findings",
+            "acknowledged",
+            "license",
+            "disclosures"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "INTERNAL_ERROR",
+              "INVALID_ARGUMENT",
+              "INVALID_SCHEMA",
+              "SOURCE_UNAVAILABLE",
+              "RATE_LIMITED",
+              "POLICY_BLOCKED",
+              "REVIEW_INCOMPLETE",
+              "APPROVAL_REQUIRED",
+              "APPROVAL_MISMATCH",
+              "APPROVAL_DECLINED",
+              "TARGET_CONFLICT",
+              "PLAN_STALE",
+              "PLAN_EXPIRED",
+              "IO_ERROR",
+              "MUTATION_LOCKED",
+              "RECOVERY_REQUIRED",
+              "CANCELLED"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "nextAction": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "nextAction"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "command",
+    "status",
+    "data",
+    "warnings",
+    "errors"
+  ],
+  "additionalProperties": false
+}

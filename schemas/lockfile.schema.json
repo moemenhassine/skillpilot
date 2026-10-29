@@ -1,0 +1,210 @@
+{
+  "title": "SkillPilot provenance lockfile (.skillpilot/lock.json)",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sourceId": {
+            "type": "string"
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "provider": {
+                "type": "string",
+                "const": "github"
+              },
+              "owner": {
+                "type": "string"
+              },
+              "repository": {
+                "type": "string"
+              },
+              "skillPath": {
+                "type": "string"
+              },
+              "commit": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              }
+            },
+            "required": [
+              "provider",
+              "owner",
+              "repository",
+              "skillPath",
+              "commit"
+            ],
+            "additionalProperties": false
+          },
+          "name": {
+            "type": "string"
+          },
+          "agent": {
+            "type": "string",
+            "enum": [
+              "claude-code",
+              "codex"
+            ]
+          },
+          "installPath": {
+            "type": "string"
+          },
+          "license": {
+            "type": "object",
+            "properties": {
+              "spdx": {
+                "type": "string"
+              },
+              "files": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "spdx",
+              "files"
+            ],
+            "additionalProperties": false
+          },
+          "payloadDigest": {
+            "type": "string"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "sourcePath": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "installedMode": {
+                  "type": "string",
+                  "const": "0644"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "skill",
+                    "license",
+                    "notice"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "sourcePath",
+                "size",
+                "sha256",
+                "installedMode",
+                "role"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "ruleSet": {
+            "type": "string"
+          },
+          "findingsSummary": {
+            "type": "object",
+            "properties": {
+              "critical": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "high": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "medium": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "low": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "info": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "critical",
+              "high",
+              "medium",
+              "low",
+              "info"
+            ],
+            "additionalProperties": false
+          },
+          "acknowledged": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "planDigest": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "installedAt": {
+            "type": "string"
+          },
+          "toolVersion": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "sourceId",
+          "source",
+          "name",
+          "agent",
+          "installPath",
+          "license",
+          "payloadDigest",
+          "files",
+          "ruleSet",
+          "findingsSummary",
+          "acknowledged",
+          "planDigest",
+          "installedAt",
+          "toolVersion"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "entries"
+  ],
+  "additionalProperties": false
+}

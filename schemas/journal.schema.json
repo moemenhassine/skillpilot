@@ -1,0 +1,169 @@
+{
+  "title": "SkillPilot operation journal (.skillpilot/operations/<id>/journal.json)",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "operationId": {
+      "type": "string"
+    },
+    "operation": {
+      "type": "string",
+      "enum": [
+        "install",
+        "remove"
+      ]
+    },
+    "planDigest": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "prepared",
+        "committed"
+      ]
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "promote",
+              "demote"
+            ]
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "sourcePath": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "installedMode": {
+                  "type": "string",
+                  "const": "0644"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "skill",
+                    "license",
+                    "notice"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "sourcePath",
+                "size",
+                "sha256",
+                "installedMode",
+                "role"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "from",
+          "to",
+          "files"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "lockfile": {
+      "type": "object",
+      "properties": {
+        "before": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string",
+                  "const": "absent"
+                }
+              },
+              "required": [
+                "state"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string",
+                  "const": "present"
+                },
+                "sha256": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "state",
+                "sha256"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "after": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "sha256"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "before",
+        "after"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "operationId",
+    "operation",
+    "planDigest",
+    "state",
+    "steps",
+    "lockfile"
+  ],
+  "additionalProperties": false
+}

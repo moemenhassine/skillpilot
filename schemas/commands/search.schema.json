@@ -1,0 +1,239 @@
+{
+  "title": "skillpilot search --json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "command": {
+      "type": "string",
+      "const": "search"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "partial",
+        "error"
+      ]
+    },
+    "data": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string"
+            },
+            "queryTasks": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "accessibility",
+                  "ai-integration",
+                  "browser-testing",
+                  "build-tooling",
+                  "cloud-workers",
+                  "code-review",
+                  "concurrency",
+                  "data-analysis",
+                  "data-fetching",
+                  "database",
+                  "datasets",
+                  "debugging",
+                  "demo-ui",
+                  "deployment",
+                  "kotlin-migration",
+                  "mcp",
+                  "ml-training",
+                  "navigation",
+                  "performance",
+                  "property-testing",
+                  "python-tooling",
+                  "security",
+                  "testing",
+                  "ui-design",
+                  "upgrade"
+                ]
+              }
+            },
+            "queryStack": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "searched": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "matchedTasks": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "accessibility",
+                        "ai-integration",
+                        "browser-testing",
+                        "build-tooling",
+                        "cloud-workers",
+                        "code-review",
+                        "concurrency",
+                        "data-analysis",
+                        "data-fetching",
+                        "database",
+                        "datasets",
+                        "debugging",
+                        "demo-ui",
+                        "deployment",
+                        "kotlin-migration",
+                        "mcp",
+                        "ml-training",
+                        "navigation",
+                        "performance",
+                        "property-testing",
+                        "python-tooling",
+                        "security",
+                        "testing",
+                        "ui-design",
+                        "upgrade"
+                      ]
+                    }
+                  },
+                  "matchedStack": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "nameMatch": {
+                    "type": "boolean"
+                  },
+                  "license": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "discoveredVia": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "limitations": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "id",
+                  "name",
+                  "matchedTasks",
+                  "matchedStack",
+                  "nameMatch",
+                  "license",
+                  "discoveredVia",
+                  "limitations"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "query",
+            "queryTasks",
+            "queryStack",
+            "searched",
+            "results"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "INTERNAL_ERROR",
+              "INVALID_ARGUMENT",
+              "INVALID_SCHEMA",
+              "SOURCE_UNAVAILABLE",
+              "RATE_LIMITED",
+              "POLICY_BLOCKED",
+              "REVIEW_INCOMPLETE",
+              "APPROVAL_REQUIRED",
+              "APPROVAL_MISMATCH",
+              "APPROVAL_DECLINED",
+              "TARGET_CONFLICT",
+              "PLAN_STALE",
+              "PLAN_EXPIRED",
+              "IO_ERROR",
+              "MUTATION_LOCKED",
+              "RECOVERY_REQUIRED",
+              "CANCELLED"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "nextAction": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {}
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "nextAction"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "command",
+    "status",
+    "data",
+    "warnings",
+    "errors"
+  ],
+  "additionalProperties": false
+}
