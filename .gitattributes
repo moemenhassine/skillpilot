@@ -1,0 +1,6 @@
+# Byte-exact files on every OS: hashes, fixtures, and the skill package must not get CRLF on Windows.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.gif binary
+*.webp binary

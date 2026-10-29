@@ -139,7 +139,7 @@ describe("scan limits", () => {
     const a = await analyzeProject(root, { home: noHome });
     expect(a.scan.entriesVisited).toBe(5000);
     expect(a.scan.limitHits).toContain("maxEntries (5000)");
-  });
+  }, 30_000); // creating 5,100 files is slow on Windows runners
 
   it("honours config narrowing of depth and per-file size", async () => {
     const root = await tempProject();
