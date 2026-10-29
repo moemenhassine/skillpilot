@@ -16,13 +16,21 @@ Official sources checked **2026-10-28** (M0). Recheck before release.
 | `claude-code` | `.claude/skills/<name>/` | Path verified in docs. Real-agent discovery and declined-install smoke test: **passed** on Claude Code 2.1.302 (2026-10-29, below). |
 | `codex` | `.agents/skills/<name>/` | Path verified in docs. Real-agent discovery smoke test: **not run**. |
 
+## Operating systems (2026-10-29)
+
+| OS | Node | Result |
+| --- | --- | --- |
+| macOS 26 (Darwin 25.4), Apple M4 | 24.14.1 | All gates pass locally |
+| Debian-based `node:24` container (linuxkit kernel) | 24.22.2 | All gates pass from a fresh copy |
+| Windows | 24 | Not run; in the CI matrix, which has not run because no repository exists yet |
+
 ## Portable skill package (M5, 2026-10-29)
 
 | Check | Result | Evidence |
 | --- | --- | --- |
 | Frontmatter matches spec 15.1 exactly (`name`, `description`, `license`, `compatibility`, `metadata.version`); no `allowed-tools`, hooks, `!` interpolation, or provider variables | pass | `tests/unit/skill-package.test.ts` |
 | Main instructions under 200 lines; every relative reference resolves inside the package | pass | same |
-| SkillPilot's own `rules-v1` review of the package | coverage complete; only finding is `LIC-001` (no license text bundled yet, see D-028) | same |
+| SkillPilot's own `rules-v1` review of the package | eligible, no findings, MIT identified (D-028) | same |
 | Structural adapter: copied into `.claude/skills/skillpilot/` and `.agents/skills/skillpilot/`, `list` reports a valid, name-matching skill in both | pass | same |
 | Included in the `npm pack` tarball and the installed package | pass | `npm run test:package` |
 

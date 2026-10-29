@@ -86,8 +86,16 @@ Removal plans share the plan envelope (`operation: "remove"`) and the executor. 
 ## D-027 Published JSON contracts
 Command outputs are TypeScript interfaces, so `src/schemas/contracts.ts` defines a zod schema for each command's `data`, with a compile-time check that the schema and the interface are mutually assignable (optional keys normalized). `schemas/*.schema.json` is generated from these and from the existing persisted-format schemas by `npm run schemas` (`z.toJSONSchema`, draft 2020-12, output types). A test fails if the checked-in files differ, and another validates the real `--json` output of all ten commands. The schemas carry no `$id` until a canonical repository URL exists.
 
-## D-028 Skill package license file
+## D-028 Skill package license file — RESOLVED 2026-10-29
 The spec frontmatter declares `license: MIT`, but no license text ships with `skills/skillpilot/` (or the repository) yet: the copyright holder has not been named, and SkillPilot does not invent one. SkillPilot's own review therefore reports `LIC-001` for its package, and that finding is the only one the self-review test allows. The maintainer must name the copyright holder for the M6 LICENSE; the same text must then be copied into `skills/skillpilot/LICENSE`.
 
 ## D-029 Demo and package smoke tests
 `npm run demo` reuses the recorded-transport test helper to put a fixture skill in a temporary cache, then runs the real CLI offline in a temporary project. It is a development script and is not shipped. `npm run test:package` installs the packed tarball with `npm install --offline` from the local npm cache, so it needs the dependencies cached (true after `npm ci`) but no network. `npm run smoke:public-source` is the only network-dependent script and is never part of `npm test`.
+
+**Resolution (maintainer, 2026-10-29):** the holder is "SkillPilot contributors". `LICENSE` is MIT, "Copyright (c) 2026 SkillPilot contributors", and the same text ships as `skills/skillpilot/LICENSE`. SkillPilot's own review of its skill is now eligible with no findings (test).
+
+## D-030 Package smoke test installs with --prefer-offline
+On a fresh Linux checkout, `npm install --offline` of the tarball failed: `npm ci` caches dependency tarballs, but not the registry metadata that installing a tarball needs. `test:package` now uses `--prefer-offline`. Dependencies still come from the npm cache when possible, and a clean CI runner may fetch them from the registry. Ordinary `npm test` remains network-free. This supersedes the offline note in D-029.
+
+## D-031 Release infrastructure
+CI is GitHub Actions (maintainer choice): macOS, Ubuntu, and Windows on Node 24. It has read-only permissions, `persist-credentials: false`, and actions pinned to full commit SHAs (checkout v7.0.1 `3d3c42e5…`, setup-node v7.1.0 `949feb24…`, resolved 2026-10-29 with `git ls-remote`). A separate job runs `npm audit` in report-only mode. `THIRD_PARTY_NOTICES.md` is generated from the installed runtime dependencies' license files and checked in CI. The code of conduct adopts Contributor Covenant 2.1 by reference instead of copying its text. The security and conduct contacts are explicit placeholders, because no maintained address exists yet.

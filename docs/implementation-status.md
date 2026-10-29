@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated 2026-10-29 (M5). Evidence = commands run locally on macOS (Darwin 25.4), Node 24.14.1.
+Updated 2026-10-29 (M6). Evidence = commands run locally on macOS (Darwin 25.4), Node 24.14.1.
 
 ## Milestones
 
@@ -12,7 +12,7 @@ Updated 2026-10-29 (M5). Evidence = commands run locally on macOS (Darwin 25.4),
 | M3 Immutable review and planning | Done on macOS | `tests/unit/rules.test.ts`, `tests/unit/canonical.test.ts`, `tests/integration/review-plan.test.ts` (200 tests total); live review of 3 catalog skills + offline plan verification (below) |
 | M4 Approved lifecycle | Done on macOS; Linux/Windows runs pending (M6 CI) | `tests/integration/lifecycle.test.ts` (52 tests incl. crash injection at every journal transition), `tests/unit/lockfile.test.ts`; 254 tests total; real pseudo-TTY prompt smoke test (below) |
 | M5 Agent package and usability | Done on macOS. Claude Code smoke test passed (discovery, invocation, declined install); Codex not run (CLI not installed) | `skills/skillpilot/`, `schemas/`, `README.md`, `docs/cli.md`, `docs/architecture.md`; `tests/unit/skill-package.test.ts`, `tests/integration/contracts.test.ts`; `npm run test:package`, `npm run demo`, `npm run smoke:public-source` (live, below) |
-| M6 Release readiness | Not started | — |
+| M6 Release readiness | Done locally, except maintainer items and the first Windows CI run | `LICENSE`, `THIRD_PARTY_NOTICES.md`, `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `CHANGELOG.md`, `.github/`, `docs/release-checklist.md`; all gates green in a `node:24` Linux container; `npm run bench`; `npm run verify:catalog-sources` 28/28 |
 
 ## Requirements
 
@@ -60,14 +60,20 @@ Updated 2026-10-29 (M5). Evidence = commands run locally on macOS (Darwin 25.4),
 | FR-046 | Done | `list`: managed, modified (changed/missing/extra files), missing, unmanaged, agent-incompatible (test) |
 | FR-047 | Done | `remove <id> --agent --out` writes a removal plan; applied only through `install --plan` with approval; edited, added, or missing files block; unrelated skills and parent directories untouched (tests) |
 | FR-048 | Done | The executor only writes files, renames directories, and replaces the lockfile; scripts land as mode 0644 (test) |
-| NFR-001 | Partial | Recording-transport test: only `api.github.com/repos/<owner>/<repo>/…` requested; no project data in requests |
-| NFR-002 | Partial | Secret canaries in analyzer tests |
-| NFR-003 | Partial | Golden canonical-JSON/digest vectors in `tests/fixtures/golden/` (independently checked with `shasum`); deterministic plan digest test |
-| NFR-006 | Partial | 15 s request timeout, 90 s command deadline, ≤2 retries with backoff, rate-limit handling. Concurrency is 1 (sequential) |
-| NFR-009 | Partial | No color used; `--no-color`/`NO_COLOR` honoured trivially; terminal escaping tested |
+| NFR-001 | Done | Recording-transport tests: only `api.github.com/repos/<owner>/<repo>/…` is requested, with no project data, goal text, or paths; install has no network path |
+| NFR-002 | Done | Secret-canary fixtures never opened or echoed; `DAT-001` findings are redacted; no auth headers are ever sent |
+| NFR-003 | Done | Golden canonical-JSON/digest vectors in `tests/fixtures/golden/` (independently checked with `shasum`); deterministic plan digest and shuffled-input ranking tests |
+| NFR-006 | Done | 15 s request timeout, 90 s command deadline, at most 2 retries with backoff, rate-limit handling with coverage status. Request concurrency is 1, within the bound of 4 |
+| NFR-009 | Done | Statuses are spelled out in text, and no color is used; JSON has no ANSI (contract test); the prompt works with plain terminal input (pty smoke test) |
 | NFR-007 | Done | Scan, search, ranking, cached review and planning, and install run with `--offline` and no transport (tests, `npm run demo`, package smoke test) |
-| NFR-014 | Partial | README quickstart (`npm ci`, `npm run build`, `npm run demo`) verified from this checkout on macOS; states working features, deferred features, static-review limits, and unverified agent tests. Clean-checkout run on Linux/Windows pending CI |
-| Others | Not started | — |
+| NFR-014 | Done on macOS and Linux | The README quickstart (`npm ci`, `npm run build`, `npm run demo`) works from a fresh copy in a Linux container and on macOS. The README states working and deferred features, static-review limits, and the agent test matrix |
+| NFR-004 | Done (measured) | `npm run bench`, 20 runs after warm-up. macOS (Apple M4, 10 cores, 16 GiB): scan 5,000-entry fixture p95 17.6 ms; rank 1,000-entry catalog p95 2.6 ms. Linux container limited to 2 CPUs and 4 GiB: scan p95 25.0 ms, rank p95 2.0 ms. Target 3 s |
+| NFR-005 | Done (measured) | Peak RSS for the whole benchmark, including 21 reviews of a 200-file, 5 MiB payload: 220 MiB on macOS, 173 MiB on Linux (limit 256 MiB). The macOS margin is small; watch it if limits grow |
+| NFR-008 | Partial | macOS local and Linux (`node:24` container): all gates pass. Windows is in the CI matrix but has not run yet |
+| NFR-010 | Done | Pure `recommender` and `review` modules; strict TypeScript; versioned, generated schemas; rule and policy changes recorded in `docs/decisions.md` |
+| NFR-011 | Done | Crash injection after every durable transition for install and removal; corrupt plans, lockfiles, journals, and caches are rejected (tests) |
+| NFR-012 | Partial | `--verbose` prints GitHub request summaries to stderr. Operation IDs and recovery steps appear in error `details` and `doctor --recover` output, but `install --verbose` does not yet stream them |
+| NFR-013 | Done | Exact-pinned dependencies installed with `--ignore-scripts`; CI actions pinned to commit SHAs; generated, checked notices; `npm audit --audit-level=high` found 0 vulnerabilities (2026-10-29) and runs in CI, report only |
 
 ## Live evidence
 
@@ -82,11 +88,17 @@ Updated 2026-10-29 (M5). Evidence = commands run locally on macOS (Darwin 25.4),
 
 - 2026-10-29, `npm run smoke:public-source` through the production transport: `obra/superpowers@2ce8aa15…#skills/test-driven-development` reviewed (3 files, MIT, 0 findings, eligible), planned offline for Codex, installed with `--approve` into a temporary project, and `list` reported it `managed`.
 
+- 2026-10-29, `npm run verify:catalog-sources`: all 28 catalog entries (13 repositories) still resolve to public repositories with the same identity, and each pinned commit contains its `SKILL.md`.
+- 2026-10-29, Linux: a fresh copy (no `node_modules`) in `node:24` (Node 24.22.2) passed lint, typecheck, 157 unit and 110 integration tests, evaluation, catalog, schema and notice checks, build, and the package smoke test.
+- 2026-10-29: `npm view skillpilot` shows an unrelated published package (0.1.8), so the npm name is not available.
+
 ## Unresolved decisions
 
 - Evaluation labels need human maintainer review (D-013).
 
 - GitHub unauthenticated rate limit vs. 200-file payload cap (D-007): accepted for MVP and disclosed (D-020).
 - Codex real-agent smoke test (no Codex CLI available; `docs/compatibility.md`).
-- LICENSE copyright holder (D-028).
+- npm package name: `skillpilot` is taken (release checklist step 2).
+- Real `SECURITY.md` and code-of-conduct contacts (maintainer).
+- First Windows CI run.
 - Package name, LICENSE copyright holder, security reporting channel — user/maintainer (publication only).

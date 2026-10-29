@@ -1,5 +1,5 @@
-// Installed-package smoke test (spec 17.5): pack, install the tarball into a temporary project from the
-// local npm cache (no network), and run the installed binary with no repository-relative imports.
+// Installed-package smoke test (spec 17.5): pack, install the tarball into a temporary directory (dependencies
+// from the npm cache, falling back to the registry), and run the installed binary with no repository-relative imports.
 import { execFileSync, spawnSync } from "node:child_process";
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import os from "node:os";
@@ -13,11 +13,10 @@ const check = (ok: boolean, what: string) => { console.log(`${ok ? "PASS" : "FAI
 
 const packed = JSON.parse(execFileSync(npm, ["pack", "--json", "--pack-destination", work], { cwd: ROOT, encoding: "utf8", shell: process.platform === "win32" }))[0] as { filename: string; files: { path: string }[] };
 const contents = packed.files.map((f) => f.path);
-for (const required of ["dist/cli.js", "skills/skillpilot/SKILL.md", "skills/skillpilot/references/workflow.md", "skills/skillpilot/references/approval.md", "skills/skillpilot/references/troubleshooting.md", "catalog/skills.json", "schemas/plan.schema.json", "schemas/commands/install.schema.json", "README.md", "package.json"]) {
+for (const required of ["dist/cli.js", "skills/skillpilot/SKILL.md", "skills/skillpilot/references/workflow.md", "skills/skillpilot/references/approval.md", "skills/skillpilot/references/troubleshooting.md", "catalog/skills.json", "schemas/plan.schema.json", "schemas/commands/install.schema.json", "README.md", "LICENSE", "THIRD_PARTY_NOTICES.md", "skills/skillpilot/LICENSE", "package.json"]) {
   check(contents.includes(required), `tarball contains ${required}`);
 }
 check(!contents.some((p) => /^(src|tests|scripts|docs|node_modules)\/|(^|\/)\.env|\.skillpilot\//.test(p)), "tarball has no sources, tests, scripts, docs, env files, or local state");
-for (const missing of ["LICENSE", "THIRD_PARTY_NOTICES.md"]) if (!contents.includes(missing)) console.log(`NOTE ${missing} is not in the tarball yet (M6 release item)`);
 
 // The package is installed into its own directory; a copied fixture is the project it analyzes.
 const prefix = path.join(work, "install");
@@ -25,8 +24,8 @@ const project = path.join(work, "project");
 cpSync(path.join(ROOT, "tests/fixtures/projects/nextjs-ts"), project, { recursive: true });
 mkdirSync(prefix);
 writeFileSync(path.join(prefix, "package.json"), JSON.stringify({ name: "pkg-smoke", private: true }));
-const install = spawnSync(npm, ["install", "--offline", "--no-audit", "--no-fund", "--ignore-scripts", path.join(work, packed.filename)], { cwd: prefix, encoding: "utf8", shell: process.platform === "win32" });
-check(install.status === 0, "npm install of the tarball from the local cache (offline)");
+const install = spawnSync(npm, ["install", "--prefer-offline", "--no-audit", "--no-fund", "--ignore-scripts", path.join(work, packed.filename)], { cwd: prefix, encoding: "utf8", shell: process.platform === "win32" });
+check(install.status === 0, "npm install of the tarball (dependencies from the npm cache, registry as fallback)");
 if (install.status !== 0) console.error(install.stderr.slice(-2000));
 
 const home = path.join(work, "home");

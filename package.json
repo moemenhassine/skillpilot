@@ -32,7 +32,10 @@
     "smoke:public-source": "node scripts/smoke-public-source.ts",
     "schemas": "node scripts/generate-schemas.ts",
     "check:schemas": "node scripts/generate-schemas.ts --check",
-    "demo": "node scripts/demo.ts"
+    "demo": "node scripts/demo.ts",
+    "check:notices": "node scripts/generate-notices.ts --check",
+    "bench": "node scripts/bench.ts",
+    "verify:catalog-sources": "node scripts/verify-catalog-sources.ts"
   },
   "dependencies": {
     "commander": "15.0.0",

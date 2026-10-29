@@ -5,3 +5,10 @@
 .skillpilot/plans/
 .skillpilot/operations/
 .skillpilot/mutation.lock
+# Secrets and local environment files never belong in the repository or package
+.env
+.env.*
+*.tgz
+# Inert secret canaries used by the analyzer tests (fake values)
+!tests/fixtures/projects/**/.env
+!tests/fixtures/projects/**/.env.*

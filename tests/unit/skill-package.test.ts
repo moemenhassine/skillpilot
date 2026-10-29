@@ -41,19 +41,18 @@ describe("portable SkillPilot skill (spec 15.1, 15.2)", () => {
         expect(statSync(resolved).isFile(), `${f} → ${target}`).toBe(true);
       }
     }
-    expect(files(PKG)).toEqual(["SKILL.md", "references/approval.md", "references/troubleshooting.md", "references/workflow.md"]);
+    expect(files(PKG)).toEqual(["LICENSE", "SKILL.md", "references/approval.md", "references/troubleshooting.md", "references/workflow.md"]);
   });
 
-  it("passes SkillPilot's own review apart from the pending license file", () => {
+  it("passes SkillPilot's own review with no findings and identified MIT license text", () => {
     const bytes = new Map(files(PKG).map((f) => [f, readFileSync(path.join(PKG, f))]));
     const review = reviewPayload({
       schemaVersion: 1, fetchedAt: "", lastUsed: "", excluded: [], limitsExceeded: [],
       source: { provider: "github", owner: "skillpilot", repository: "skillpilot", skillPath: "skills/skillpilot", commit: "0".repeat(40) },
       files: [...bytes].map(([p, b]) => ({ path: p, sourcePath: `skills/skillpilot/${p}`, size: b.length, sha256: sha256Hex(b), installedMode: "0644" as const, role: "skill" as const })),
     }, bytes);
-    expect(review.coverage).toBe("complete");
-    // shortcut: no LICENSE text is bundled until the maintainer names the copyright holder (M6); LIC-001 is the only expected finding.
-    expect(review.findings.map((f) => f.ruleId)).toEqual(["LIC-001"]);
+    expect(review).toMatchObject({ coverage: "complete", decision: "eligible", findings: [], license: { spdx: "MIT", problem: null } });
+    expect(readFileSync(path.join(PKG, "LICENSE"), "utf8")).toBe(readFileSync(path.resolve(PKG, "../../LICENSE"), "utf8"));
   });
 });
 
@@ -74,7 +73,7 @@ describe("structural adapter check (AC-09)", () => {
 
 describe("documentation links", () => {
   const ROOT = path.resolve(PKG, "../..");
-  it.each(["README.md", "docs/cli.md", "docs/architecture.md", "docs/security-model.md", "catalog/README.md"])("relative links in %s resolve", (doc) => {
+  it.each(["README.md", "CONTRIBUTING.md", "SECURITY.md", "CODE_OF_CONDUCT.md", "docs/cli.md", "docs/architecture.md", "docs/security-model.md", "docs/release-checklist.md", "docs/compatibility.md", "catalog/README.md"])("relative links in %s resolve", (doc) => {
     const text = readFileSync(path.join(ROOT, doc), "utf8");
     for (const [, target] of text.matchAll(/\]\((?!https?:|#)([^)]+)\)/g)) {
       expect(statSync(path.resolve(ROOT, path.dirname(doc), target!.split("#")[0]!)), `${doc} → ${target}`).toBeTruthy();
